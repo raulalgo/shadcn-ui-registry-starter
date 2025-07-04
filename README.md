@@ -54,14 +54,14 @@ For example, it looks like this:
       "type": "registry:style",
       "cssVars": {
         "light": {
-          "primary": "oklch(0.52 0.13 144.17)",
-          "primary-foreground": "oklch(1.0 0 0)",
+          "key": "oklch(0.52 0.13 144.17)",
+          "key-foreground": "oklch(1.0 0 0)",
           "radius": "0.5rem",
           ...
         },
         "dark": {
-          "primary": "oklch(0.52 0.13 144.17)",
-          "primary-foreground": "oklch(1.0 0 0)",
+          "key": "oklch(0.52 0.13 144.17)",
+          "key-foreground": "oklch(1.0 0 0)",
           ...
         }
       },

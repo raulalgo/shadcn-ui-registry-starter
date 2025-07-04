@@ -6,7 +6,7 @@ export const avatar = {
     Default: (
       <Avatar>
         <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-        <AvatarFallback className="bg-primary text-primary-foreground">
+        <AvatarFallback className="bg-key text-key-foreground">
           <span className="text-xs">CN</span>
         </AvatarFallback>
       </Avatar>
@@ -14,7 +14,7 @@ export const avatar = {
     Fallback: (
       <Avatar>
         <AvatarImage src="https://github.com" alt="@shadcn" />
-        <AvatarFallback className="bg-primary text-primary-foreground">
+        <AvatarFallback className="bg-key text-key-foreground">
           <span className="text-xs">CN</span>
         </AvatarFallback>
       </Avatar>

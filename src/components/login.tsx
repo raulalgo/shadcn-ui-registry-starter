@@ -70,7 +70,7 @@ function LoginForm() {
                   <FormLabel>Password</FormLabel>
                   <Link
                     href="#forgot-password"
-                    className="text-muted-foreground text-xs hover:text-primary"
+                    className="text-muted-foreground text-xs hover:text-key"
                   >
                     Forgot password?
                   </Link>
@@ -110,7 +110,7 @@ function LoginForm() {
 
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}
-        <Link href="/signup" className="text-primary hover:underline">
+        <Link href="/signup" className="text-key hover:underline">
           Sign up
         </Link>
       </div>
@@ -154,14 +154,14 @@ export function Login() {
             By clicking continue, you agree to our{" "}
             <Link
               href="#terms"
-              className="underline underline-offset-4 hover:text-primary"
+              className="underline underline-offset-4 hover:text-key"
             >
               Terms of Service
             </Link>{" "}
             and{" "}
             <Link
               href="#privacy"
-              className="underline underline-offset-4 hover:text-primary"
+              className="underline underline-offset-4 hover:text-key"
             >
               Privacy Policy
             </Link>

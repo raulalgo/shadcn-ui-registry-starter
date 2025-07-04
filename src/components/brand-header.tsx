@@ -81,7 +81,7 @@ export function BrandHeader() {
           </Button>
 
           <Avatar className="size-8">
-            <AvatarFallback className="bg-primary text-primary-foreground">
+            <AvatarFallback className="bg-key text-key-foreground">
               <span className="text-xs">ME</span>
             </AvatarFallback>
           </Avatar>
@@ -92,7 +92,7 @@ export function BrandHeader() {
             <Search className="h-5 w-5" />
           </Button>
           <Avatar className="size-8">
-            <AvatarFallback className="bg-primary text-primary-foreground">
+            <AvatarFallback className="bg-key text-key-foreground">
               <span className="text-xs">ME</span>
             </AvatarFallback>
           </Avatar>

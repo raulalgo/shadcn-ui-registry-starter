@@ -23,21 +23,21 @@ export default function TokensPage() {
         </p>
       </div>
 
-      {/* Primary Theme */}
+      {/* Key Theme */}
       <section className="mb-12">
-        <h2 className="mb-4 font-semibold text-xl">Primary Theme</h2>
+        <h2 className="mb-4 font-semibold text-xl">Key Theme</h2>
         <p className="mb-6 text-muted-foreground">
-          The core colors that define the primary theme and overall look of the
+          The core colors that define the key theme and overall look of the
           interface.
         </p>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <ColorBlock name="Background" className="bg-background" />
           <ColorBlock name="Foreground" className="bg-foreground" />
-          <ColorBlock name="Primary" className="bg-primary" />
-          <ColorBlock
-            name="Primary Foreground"
-            className="bg-primary-foreground"
-          />
+          <ColorBlock name="Key" className="bg-key" />
+<ColorBlock
+name="Key Foreground"
+className="bg-key-foreground"
+/>
         </div>
       </section>
 
@@ -138,11 +138,11 @@ export default function TokensPage() {
             name="Sidebar Foreground"
             className="bg-sidebar-foreground"
           />
-          <ColorBlock name="Sidebar Primary" className="bg-sidebar-primary" />
-          <ColorBlock
-            name="Sidebar Primary Foreground"
-            className="bg-sidebar-primary-foreground"
-          />
+          <ColorBlock name="Sidebar Key" className="bg-sidebar-key" />
+<ColorBlock
+name="Sidebar Key Foreground"
+className="bg-sidebar-key-foreground"
+/>
           <ColorBlock name="Sidebar Accent" className="bg-sidebar-accent" />
           <ColorBlock
             name="Sidebar Accent Foreground"
