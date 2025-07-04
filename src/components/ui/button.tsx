@@ -9,17 +9,21 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
+        primary:
           "bg-key text-key-foreground shadow-sm hover:bg-key/90 border border-key-border",
         destructive:
           "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-        secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 border border-secondary-border border-opacity-10",
+        default:
+          "border bg-neutral-50 border-neutral-800/10 shadow-xs text-accent-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+        medium:
+          "bg-primary-600/5 text-primary-600 hover:bg-primary-600/10",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-key underline-offset-4 hover:underline",
+          "bg-transparent text-primary-600 hover:bg-primary-600/5",
+        // secondary:
+        //   "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 border border-secondary-border border-opacity-10",
+        // ghost:
+        //   "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+        // link: "text-key underline-offset-4 hover:underline",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
