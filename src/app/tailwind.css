@@ -5,31 +5,30 @@
 
 /* TAILWIND */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--color-neutral-50);
+  --color-foreground: var(--color-neutral-950);
 
-  --color-key: var(--key);
-  --color-key-foreground: var(--key-foreground);
+  --color-key: var(--color-primary-900);
+  --color-key-foreground: var(--color-primary-100);
 
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary-border: var(--secondary-border);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
+  --color-secondary: var(--color-neutral-50);
+  --color-secondary-foreground: var(--color-primary-600);
+  --color-accent: var(--color-primary-100);
+  --color-accent-foreground: var(--color-primary-600);
 
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--color-neutral-200);
+  --color-muted-foreground: var(--color-neutral-600);
+  --color-card: var(--color-neutral-50);
+  --color-card-foreground: var(--color-neutral-950);
+  --color-popover: var(--color-neutral-100);
+  --color-popover-foreground: var(--color-neutral-900);
 
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+  --color-border: var(--color-neutral-300);
+  --color-input: var(--color-neutral-50);
+  --color-ring: var(--color-primary-600);
 
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive: var(--color-pinkred-700);
+  --color-destructive-foreground: var(--color-pinkred-50);
 
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -37,16 +36,16 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-key: var(--sidebar-key);
-  --color-sidebar-key-foreground: var(--sidebar-key-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar: var(--color-primary-50);
+  --color-sidebar-foreground: var(--color-primary-900);
+  --color-sidebar-key: var(--color-primary-600);
+  --color-sidebar-key-foreground: var(--color-primary-100);
+  --color-sidebar-accent: var(--color-primary-900);
+  --color-sidebar-accent-foreground: var(--color-primary-50);
+  --color-sidebar-border: var(--color-primary-300);
+  --color-sidebar-ring: var(--color-primary-600);
 
-  /* Primary Color Scale */
+  /* Brand Color Scale */
   --color-primary-50: #F4F5FF;
   --color-primary-100: #F0F2FE;
   --color-primary-200: #EBEEFF;
@@ -58,6 +57,32 @@
   --color-primary-800: #171273;
   --color-primary-900: #15115E;
   --color-primary-950: #090642;
+
+  /* Neutral Color Scale */
+  --color-neutral-50: #FFFFFF;
+  --color-neutral-100: #F8F8F9;
+  --color-neutral-200: #F3F3F5;
+  --color-neutral-300: #EAEAEF;
+  --color-neutral-400: #BAB9C3;
+  --color-neutral-500: #A09FAA;
+  --color-neutral-600: #7C7B87;
+  --color-neutral-700: #605F6B;
+  --color-neutral-800: #52515E;
+  --color-neutral-900: #42414E;
+  --color-neutral-950: #131221;
+
+  /* PinkRed Color Scale */
+  --color-pinkred-50: #FFF4F6;
+  --color-pinkred-100: #FEE8EC;
+  --color-pinkred-200: #FCCAD3;
+  --color-pinkred-300: #F8A0B0;
+  --color-pinkred-400: #E67D90;
+  --color-pinkred-500: #E35770;
+  --color-pinkred-600: #E42E4F;
+  --color-pinkred-700: #BE1235;
+  --color-pinkred-800: #9F1234;
+  --color-pinkred-900: #881333;
+  --color-pinkred-950: #4C0516;
 
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
