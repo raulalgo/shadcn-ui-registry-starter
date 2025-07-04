@@ -13,6 +13,7 @@
 
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-border: var(--secondary-border);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
 
