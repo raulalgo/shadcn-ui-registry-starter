@@ -44,19 +44,48 @@ function Button({
   variant,
   size,
   asChild = false,
+  leftIcon,
+  rightIcon,
+  iconOnly = false,
+  children,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+    iconOnly?: boolean;
+    children?: React.ReactNode;
   }) {
   const Comp = asChild ? Slot : "button";
+
+  let contents;
+  if (iconOnly) {
+    // Prefer leftIcon, then rightIcon, fallback to children if it's a single icon
+    const icon = leftIcon || rightIcon || children;
+    contents = <span className="flex items-center justify-center w-full h-full">{icon}</span>;
+  } else {
+    contents = (
+      <>
+        {leftIcon && <span className="shrink-0 mr-1.5">{leftIcon}</span>}
+        {children}
+        {rightIcon && <span className="shrink-0 ml-1.5">{rightIcon}</span>}
+      </>
+    );
+  }
+
+  // Add a square aspect ratio for iconOnly
+  const iconOnlyClass = iconOnly ? "aspect-square p-0" : "";
 
   return (
     <Comp
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size, className }), iconOnlyClass)}
+      aria-label={iconOnly && typeof children === "string" ? children : undefined}
       {...props}
-    />
+    >
+      {asChild ? <span className="inline-flex items-center w-full h-full">{contents}</span> : contents}
+    </Comp>
   );
 }
 

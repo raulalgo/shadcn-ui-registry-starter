@@ -100,9 +100,9 @@ const config: Config = {
         "2xl": "var(--shadow-2xl)",
       },
       fontFamily: {
-        serif: ["var(--font-serif)", "sans-serif"],
-        sans: ["var(--font-sans)", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        sans: ["var(--font-sans)", "Inter", "sans-serif"],
+        serif: ["serif"],
+        mono: ["monospace"],
       },
       keyframes: {
         "fade-in-scale": {

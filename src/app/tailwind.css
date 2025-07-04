@@ -85,8 +85,8 @@
   --color-pinkred-950: #4C0516;
 
   --font-sans: var(--font-sans);
-  --font-serif: var(--font-serif);
-  --font-mono: var(--font-mono);
+  --font-serif: serif;
+  --font-mono: monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
