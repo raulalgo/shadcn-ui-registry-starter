@@ -4,10 +4,11 @@ import { MapPin, EllipsisVertical } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
+import { Chip } from "./chip";
 
 function DealCard({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <Card className="w-96 p-2">
+    <Card className="w-96 p-2 gap-0">
         <CardHeader className="p-0 flex items-center gap-2">
             <MapPin className="size-5" />
             <CardTitle className="p-0 grow">Deal Card</CardTitle>
@@ -15,8 +16,8 @@ function DealCard({ className, ...props }: React.ComponentProps<"div">) {
                 <EllipsisVertical className="size-5" />
             </Button>
         </CardHeader>
-        <CardContent>
-            <p>This is a deal card</p>
+        <CardContent className="p-0">
+            <Chip variant="include">Lisboa</Chip>
         </CardContent>
     </Card>
   );
