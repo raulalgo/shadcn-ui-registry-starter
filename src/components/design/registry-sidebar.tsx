@@ -50,6 +50,7 @@ export const componentItems = [
   { name: "Chart", path: "/components/chart" },
   { name: "Checkbox", path: "/components/checkbox" },
   { name: "Chip", path: "/components/chip" },
+  { name: "Deal Card", path: "/components/deal-card" },
   { name: "Date Picker", path: "/components/date-picker" },
   { name: "Data Table", path: "/components/data-table" },
   { name: "Dialog", path: "/components/dialog" },

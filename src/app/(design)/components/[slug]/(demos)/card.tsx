@@ -24,8 +24,8 @@ export const card = {
         </CardContent>
 
         <CardFooter className="flex justify-between">
-          <Button variant="outline">Cancel</Button>
-          <Button>Create</Button>
+          <Button variant="default">Cancel</Button>
+          <Button variant="primary">Create</Button>
         </CardFooter>
       </Card>
     ),
