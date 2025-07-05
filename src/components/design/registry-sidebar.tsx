@@ -49,6 +49,7 @@ export const componentItems = [
   { name: "Card", path: "/components/card" },
   { name: "Chart", path: "/components/chart" },
   { name: "Checkbox", path: "/components/checkbox" },
+  { name: "Chip", path: "/components/chip" },
   { name: "Date Picker", path: "/components/date-picker" },
   { name: "Data Table", path: "/components/data-table" },
   { name: "Dialog", path: "/components/dialog" },

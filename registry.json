@@ -473,6 +473,22 @@
       ]
     },
     {
+      "name": "chip",
+      "type": "registry:component",
+      "title": "Chip",
+      "description": "A small, interactive element for displaying information.",
+      "files": [
+        {
+          "path": "src/components/ui/chip.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/app/(design)/components/[slug]/(demos)/chip.tsx",
+          "type": "registry:demo"
+        }
+      ]
+    },
+    {
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data Table",

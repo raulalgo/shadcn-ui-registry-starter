@@ -26,6 +26,7 @@ import { table } from "@/app/(design)/components/[slug]/(demos)/table";
 import { tabs } from "@/app/(design)/components/[slug]/(demos)/tabs";
 import { toggleGroup } from "@/app/(design)/components/[slug]/(demos)/toggle-group";
 import { tooltip } from "@/app/(design)/components/[slug]/(demos)/tooltip";
+import { chip } from "@/app/(design)/components/[slug]/(demos)/chip";
 
 interface Demo {
   name: string; // this must match the `registry.json` name
@@ -45,6 +46,7 @@ export const demos: { [name: string]: Demo } = {
   card,
   chart,
   checkbox,
+  chip,
   dialog,
   "date-picker": datePicker,
   "data-table": dataTable,
