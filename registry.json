@@ -399,7 +399,7 @@
         {
           "path": "src/components/ui/button.tsx",
           "type": "registry:file",
-          "target": "components/button.tsx"
+          "target": "ui/button.tsx"
         }
       ]
     },
@@ -533,8 +533,7 @@
       "title": "Deal Card",
       "description": "Containers for displaying content and actions about a single subject.",
       "registryDependencies": [
-        "card",
-        "https://shadcn-ui-registry-starter-jto6kdnj4-raulalgos-projects.vercel.app/r/button.json"
+        "card"
       ],
       "files": [
         {
