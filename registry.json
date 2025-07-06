@@ -533,16 +533,9 @@
       "title": "Deal Card",
       "description": "Containers for displaying content and actions about a single subject.",
       "registryDependencies": [
-        "card",
-        "https://shadcn-ui-registry-starter-seven.vercel.app/r/button.json",
-        "https://shadcn-ui-registry-starter-seven.vercel.app/r/chip.json"
+        "card"
       ],
       "files": [
-        {
-          "path": "src/app/starters/(minimal)/v0-layout.tsx",
-          "type": "registry:file",
-          "target": "app/layout.tsx"
-        },
         {
           "path": "src/components/ui/deal-card.tsx",
           "type": "registry:file",
@@ -551,7 +544,7 @@
         {
           "path": "src/components/sample/deal-card.tsx",
           "type": "registry:file",
-          "target": "index.tsx"
+          "target": "app/index.tsx"
         }
       ]
     },
