@@ -391,14 +391,13 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Allows users to take actions with a single click or tap.",
+      "description": "Basic set of buttons in our app",
       "registryDependencies": [
-        "button",
-        "https://registry-starter.vercel.app/r/theme.json"
+        "button"
       ],
       "files": [
         {
-          "path": "src/app/starters/(minimal)/v0-layout.tsx",
+          "path": "src/components/ui/button.tsx",
           "type": "registry:file",
           "target": "app/layout.tsx"
         }
