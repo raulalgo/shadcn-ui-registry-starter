@@ -539,13 +539,13 @@
       "description": "Containers for displaying content and actions about a single subject.",
       "registryDependencies": [
         "card",
-        "https://registry-starter.vercel.app/r/theme.json"
+        "https://shadcn-ui-registry-starter-seven.vercel.app/r/button.json"
       ],
       "files": [
         {
-          "path": "src/app/starters/(minimal)/v0-layout.tsx",
+          "path": "src/components/ui/deal-card.tsx",
           "type": "registry:file",
-          "target": "app/layout.tsx"
+          "target": "components/ui/deal-card.tsx"
         }
       ]
     },
