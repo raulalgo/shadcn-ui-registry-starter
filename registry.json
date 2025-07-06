@@ -545,7 +545,12 @@
         {
           "path": "src/components/ui/deal-card.tsx",
           "type": "registry:file",
-          "target": "components/ui/deal-card.tsx"
+          "target": "components/deal-card.tsx"
+        },
+        {
+          "path": "src/components/sample/deal-card.tsx",
+          "type": "registry:file",
+          "target": "index.tsx"
         }
       ]
     },
