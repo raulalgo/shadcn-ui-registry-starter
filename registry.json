@@ -533,7 +533,9 @@
       "title": "Deal Card",
       "description": "Containers for displaying content and actions about a single subject.",
       "registryDependencies": [
-        "card"
+        "card",
+        "https://shadcn-ui-registry-starter-seven.vercel.app/r/button.json",
+        "https://shadcn-ui-registry-starter-seven.vercel.app/r/chip.json"
       ],
       "files": [
         {
