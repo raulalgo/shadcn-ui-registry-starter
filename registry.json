@@ -399,7 +399,7 @@
         {
           "path": "src/components/ui/button.tsx",
           "type": "registry:file",
-          "target": "app/layout.tsx"
+          "target": "components/button.tsx"
         }
       ]
     },
