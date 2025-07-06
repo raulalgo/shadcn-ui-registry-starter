@@ -208,7 +208,7 @@ export function FinanceDataTable() {
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="default" className="ml-auto">
               Columns <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
@@ -291,7 +291,7 @@ export function FinanceDataTable() {
         </div>
         <div className="space-x-2">
           <Button
-            variant="outline"
+            variant="default"
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
@@ -299,7 +299,7 @@ export function FinanceDataTable() {
             Previous
           </Button>
           <Button
-            variant="outline"
+            variant="default"
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}

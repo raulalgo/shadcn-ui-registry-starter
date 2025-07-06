@@ -13,7 +13,7 @@ export const tooltip = {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant="outline">Hover</Button>
+            <Button variant="default">Hover</Button>
           </TooltipTrigger>
           <TooltipContent>Add to library</TooltipContent>
         </Tooltip>

@@ -10,7 +10,7 @@ export function Sonner() {
 
 export function SuccessfulSonner() {
   return (
-    <Button variant="outline" onClick={() => toast.success("Successful")}>
+    <Button variant="default" onClick={() => toast.success("Successful")}>
       Successful Toast
     </Button>
   );
@@ -19,7 +19,7 @@ export function SuccessfulSonner() {
 export function WarningSonner() {
   return (
     <Button
-      variant="outline"
+      variant="default"
       onClick={() => toast.warning("This is a warning")}
     >
       Warning Toast
@@ -41,7 +41,7 @@ export function ErrorSonner() {
 export function ActionSonner() {
   return (
     <Button
-      variant="outline"
+      variant="default"
       onClick={() =>
         toast("Toast with an Action", {
           description: "A description with some more information",

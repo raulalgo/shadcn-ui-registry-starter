@@ -16,7 +16,7 @@ export const dealCard = {
         </DealCard>,
     Format: <DealCard icon={<Proportions className="size-5" />} title="Format">
             <Chip variant="include" >16:9</Chip>
-            <Chip variant="include" >Billboard</Chip>
+            <Chip variant="include" >Billboards</Chip>
             <Chip variant="include" >Bus shelter</Chip>
             <Chip variant="include" >Kiosk</Chip>
             <Chip variant="exclude" >MUPI</Chip>

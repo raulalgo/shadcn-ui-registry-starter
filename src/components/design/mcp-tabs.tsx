@@ -71,7 +71,7 @@ export function MCPTabs({ rootUrl }: { rootUrl: string }) {
 
           <Button
             size="sm"
-            variant="outline"
+            variant="default"
             onClick={() => {
               copyToClipboard(mcpServer);
               setHasCopied(true);

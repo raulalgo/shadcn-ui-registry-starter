@@ -22,7 +22,7 @@ export default function ProductGrid({
     <div className="space-y-6">
       <div className="flex flex-wrap gap-2">
         <Button
-          variant={selectedCategory === null ? "default" : "outline"}
+          variant={selectedCategory === null ? "default" : "default"}
           onClick={() => setSelectedCategory(null)}
           className="rounded-full"
         >
@@ -32,7 +32,7 @@ export default function ProductGrid({
         {categories.map((category) => (
           <Button
             key={category}
-            variant={selectedCategory === category ? "default" : "outline"}
+            variant={selectedCategory === category ? "default" : "default"}
             onClick={() => setSelectedCategory(category)}
             className="rounded-full"
           >
