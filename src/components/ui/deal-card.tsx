@@ -1,6 +1,6 @@
-import type * as React from "react";
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardAction } from "@/components/ui/card";
-import { MapPin, EllipsisVertical } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
@@ -15,21 +15,20 @@ function DealRow({className, children, ...props}: React.ComponentProps<"div">) {
     );
 }
 
-function DealCard({ className, ...props }: React.ComponentProps<"div">) {
+function DealCard({ className, title, icon, children, ...props }: React.ComponentProps<"div"> & { title: string; icon?: React.ReactNode }) {
   return (
     <Card className="w-96 p-2 gap-0">
         <CardHeader className="p-0 flex items-center gap-2">
-            <MapPin className="size-5" />
-            <CardTitle className="p-0 grow">Deal Card</CardTitle>
+            {icon}
+            <CardTitle className="p-0 grow">{title}</CardTitle>
             <Button variant="ghost" size="icon" className="p-0">
                 <EllipsisVertical className="size-5" />
             </Button>
         </CardHeader>
         <CardContent className="py-0 px-4">
-            <DealRow><Chip variant="include" label="Ciudad">Lisboa</Chip></DealRow>
-            <DealRow><Chip variant="exclude" >Porto</Chip></DealRow>
-            <DealRow><Chip variant="include" >Cascais</Chip></DealRow>
-            <DealRow><Chip variant="include" >Braga</Chip></DealRow>
+            {React.Children.map(children, (child) => (
+                <DealRow>{child}</DealRow>
+            ))}
         </CardContent>
     </Card>
   );
