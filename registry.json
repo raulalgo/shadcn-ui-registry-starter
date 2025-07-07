@@ -13,9 +13,19 @@
             "description": "Viooh themed styles using Tailwind and Shadcn/ui",
             "files": [
                 {
-                    "path": "src/app/tailwind.css",
+                    "path": "src/app/tokens.css",
                     "type": "registry:file",
-                    "target": "app/tailwind.css"
+                    "target": "app/tokens.css"
+                },
+                {
+                    "path": "src/app/globals.css",
+                    "type": "registry:file",
+                    "target": "app/globals.css"
+                },
+                {
+                    "path": "src/app/tailwind.config.ts",
+                    "type": "registry:file",
+                    "target": "tailwind.config.ts"
                 }
             ]
         },
