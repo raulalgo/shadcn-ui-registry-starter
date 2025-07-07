@@ -35,6 +35,42 @@
                     "target": "ui/button.tsx"
                 }
             ]
+        },
+        {
+            "name": "chip",
+            "type": "registry:ui",
+            "title": "Chip",
+            "description": "A small, interactive element that represents a tag or label",
+            "registryDependencies": [
+                "chip",
+                "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/chip.tsx",
+                    "type": "registry:file",
+                    "target": "ui/chip.tsx"
+                }
+            ]
+        },
+        {
+            "name": "deal-card",
+            "type": "registry:ui",
+            "title": "Deal Card",
+            "description": "A card component for displaying deal information with interactive elements",
+            "registryDependencies": [
+                "card",
+                "button",
+                "chip",
+                "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/deal-card.tsx",
+                    "type": "registry:file",
+                    "target": "ui/deal-card.tsx"
+                }
+            ]
         }
     ]
 }
