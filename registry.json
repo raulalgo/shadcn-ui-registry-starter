@@ -63,19 +63,19 @@
             ]
         },
         {
-            "name": "chip",
+            "name": "badge",
             "type": "registry:ui",
-            "title": "Chip",
+            "title": "Badge",
             "description": "A small, interactive element that represents a tag or label",
             "registryDependencies": [
-                "chip",
+                "badge",
                 "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
             ],
             "files": [
                 {
-                    "path": "src/components/ui/chip.tsx",
+                    "path": "src/components/ui/badge.tsx",
                     "type": "registry:file",
-                    "target": "ui/chip.tsx"
+                    "target": "ui/badge.tsx"
                 }
             ]
         },
@@ -87,7 +87,7 @@
             "registryDependencies": [
                 "card",
                 "button",
-                "chip",
+                "badge",
                 "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
             ],
             "files": [

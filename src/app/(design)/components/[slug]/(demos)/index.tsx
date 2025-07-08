@@ -1,7 +1,7 @@
 import type { ReactElement, ReactNode } from "react";
 
 import { button } from "@/app/(design)/components/[slug]/(demos)/button";
-import { chip } from "@/app/(design)/components/[slug]/(demos)/chip";
+import { badge } from "@/app/(design)/components/[slug]/(demos)/badge";
 import { dealCard } from "@/app/(design)/components/[slug]/(demos)/deal-card";
 
 interface Demo {
@@ -13,6 +13,6 @@ interface Demo {
 
 export const demos: { [name: string]: Demo } = {
   button,
-  chip,
+  badge,
   "deal-card": dealCard,
 };
