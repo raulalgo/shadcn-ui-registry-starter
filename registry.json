@@ -47,22 +47,6 @@
             ]
         },
         {
-            "name": "card",
-            "type": "registry:ui",
-            "title": "Card",
-            "description": "A container component for displaying content",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/card.tsx",
-                    "type": "registry:file",
-                    "target": "ui/card.tsx"
-                }
-            ]
-        },
-        {
             "name": "badge",
             "type": "registry:ui",
             "title": "Badge",
@@ -85,7 +69,6 @@
             "title": "Deal Card",
             "description": "A card component for displaying deal information with interactive elements",
             "registryDependencies": [
-                "card",
                 "https://shadcn-ui-registry-starter-seven.vercel.app/r/button.json",
                 "https://shadcn-ui-registry-starter-seven.vercel.app/r/badge.json",
                 "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
