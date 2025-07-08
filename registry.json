@@ -85,9 +85,9 @@
             "title": "Deal Card",
             "description": "A card component for displaying deal information with interactive elements",
             "registryDependencies": [
-                "card",
-                "button",
-                "badge",
+                "https://shadcn-ui-registry-starter-seven.vercel.app/r/card.json",
+                "https://shadcn-ui-registry-starter-seven.vercel.app/r/button.json",
+                "https://shadcn-ui-registry-starter-seven.vercel.app/r/badge.json",
                 "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
             ],
             "files": [
