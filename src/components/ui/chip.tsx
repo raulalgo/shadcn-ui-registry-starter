@@ -5,14 +5,14 @@ import type * as React from "react";
 import { cn } from "@/lib/utils";
 
 const chipVariants = cva(
-  "inline-flex items-center justify-center rounded-md border [&>#chip-content]:px-2 [&>#chip-content]:py-0.5 rounded-full [&>#chip-content]:rounded-full text-sm font-medium w-fit whitespace-nowrap shrink-0 [&>span>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
+  "inline-flex items-center justify-center rounded-md border [&>.chip-content]:px-2 [&>.chip-content]:py-0.5 rounded-full [&>.chip-content]:rounded-full text-sm font-medium w-fit whitespace-nowrap shrink-0 [&>span>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
   {
     variants: {
       variant: {
         include:
-          "bg-primary-600/5 text-primary-700 [&>#chip-content]:bg-primary-700 [&>#chip-content]:text-primary-50",
+          "bg-primary-600/5 text-primary-700 [&>.chip-content]:bg-primary-700 [&>.chip-content]:text-primary-50",
         exclude:
-          "bg-neutral-950/5 text-neutral-700 [&>#chip-content]:bg-neutral-700 [&>#chip-content]:text-neutral-50",
+          "bg-neutral-950/5 text-neutral-700 [&>.chip-content]:bg-neutral-700 [&>.chip-content]:text-neutral-50",
         
       },
     },
@@ -40,7 +40,7 @@ function Chip({
         {...props}
       >
         {label && <span className="pl-2">{label}</span>}
-        <span id="chip-content" className="flex items-center justify-center">
+        <span className="chip-content flex items-center justify-center">
             {children}
         </span>
       </Comp>
