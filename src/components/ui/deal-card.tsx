@@ -3,7 +3,6 @@ import { EllipsisVertical } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
-import { Badge } from "./badge";
 
 function DealRow({className, children, ...props}: React.ComponentProps<"div">) {
     return (
