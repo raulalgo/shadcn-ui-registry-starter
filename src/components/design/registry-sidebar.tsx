@@ -40,6 +40,7 @@ import type * as React from "react";
 
 export const componentItems = [
   { name: "Button", path: "/components/button" },
+  { name: "Badge", path: "/components/badge" },
 ];
 
 export const gettingStartedItems = [

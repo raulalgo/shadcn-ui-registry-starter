@@ -35,6 +35,23 @@
                     "target": "ui/button.tsx"
                 }
             ]
+        },
+        {
+            "name": "badge",
+            "type": "registry:ui",
+            "title": "Badge",
+            "description": "Basic set of badges in our app",
+            "registryDependencies": [
+                "badge",
+                "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/badge.tsx",
+                    "type": "registry:file",
+                    "target": "ui/badge.tsx"
+                }
+            ]
         }
     ]
 }

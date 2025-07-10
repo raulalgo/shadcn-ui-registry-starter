@@ -15,5 +15,6 @@ export const button = {
     SizeSmall: <Button variant="primary" size="sm">Small Size</Button>,
     SizeLarge: <Button variant="primary" size="lg">Large Size</Button>,
     SizeIcon: <Button variant="primary" size="icon" iconOnly leftIcon={<CheckCircle2 />} aria-label="Icon Button" />, 
+    Destructive: <Button variant="destructive" leftIcon={<XCircle />}>Destructive</Button>,
   },
 };

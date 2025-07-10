@@ -10,8 +10,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Colors are now defined in CSS @theme directives
-        // This keeps the TypeScript types working
         primary: {
           50: "#F4F5FF",
           100: "#F0F2FE",
@@ -24,6 +22,32 @@ const config: Config = {
           800: "#171273",
           900: "#15115E",
           950: "#090642",
+        },
+        neutral: {
+          50: "#FFFFFF",
+          100: "#F8F8F9",
+          200: "#F3F3F5",
+          300: "#EAEAEF",
+          400: "#BAB9C3",
+          500: "#A09FAA",
+          600: "#7C7B87",
+          700: "#605F6B",
+          800: "#52515E",
+          900: "#42414E",
+          950: "#131221",
+        },
+        pinkred: {
+          50: "#FFF4F6",
+          100: "#FEE8EC",
+          200: "#FCCAD3",
+          300: "#F8A0B0",
+          400: "#E67D90",
+          500: "#E35770",
+          600: "#E42E4F",
+          700: "#BE1235",
+          800: "#9F1234",
+          900: "#881333",
+          950: "#4C0516",
         },
       },
       borderRadius: {
