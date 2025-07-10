@@ -16,7 +16,7 @@
                     "path": "src/app/tokens.css",
                     "type": "registry:file",
                     "target": "app/tokens.css"
-                },
+                }
             ]
         },
         {
