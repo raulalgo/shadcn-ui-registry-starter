@@ -17,16 +17,6 @@
                     "type": "registry:file",
                     "target": "app/tokens.css"
                 },
-                {
-                    "path": "src/app/globals.css",
-                    "type": "registry:file",
-                    "target": "app/globals.css"
-                },
-                {
-                    "path": "src/app/tailwind.config.ts",
-                    "type": "registry:file",
-                    "target": "tailwind.config.ts"
-                }
             ]
         },
         {
@@ -35,7 +25,8 @@
             "title": "Button",
             "description": "Basic set of buttons in our app",
             "registryDependencies": [
-                "button"
+                "button",
+                "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
             ],
             "files": [
                 {
