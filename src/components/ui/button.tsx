@@ -47,7 +47,7 @@ function Button({
   leftIcon,
   rightIcon,
   iconOnly = false,
-  children,
+  children = "Button",
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {

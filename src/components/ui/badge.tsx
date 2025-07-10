@@ -22,8 +22,8 @@ function Badge({
   className,
   variant = "include",
   asChild = false,
-  label,
-  children,
+  label = "label",
+  children = "content",
   ...props
 }:React.ComponentProps<"span"> &
 VariantProps<typeof badgeVariants> & { asChild?: boolean; label?: string }) {
