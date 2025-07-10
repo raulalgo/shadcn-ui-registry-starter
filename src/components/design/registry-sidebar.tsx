@@ -40,8 +40,6 @@ import type * as React from "react";
 
 export const componentItems = [
   { name: "Button", path: "/components/button" },
-  { name: "Badge", path: "/components/badge" },
-  { name: "Deal Card", path: "/components/deal-card" },
 ];
 
 export const gettingStartedItems = [
