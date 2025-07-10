@@ -12,6 +12,19 @@ const config: Config = {
       colors: {
         // Colors are now defined in CSS @theme directives
         // This keeps the TypeScript types working
+        primary: {
+          50: "#F4F5FF",
+          100: "#F0F2FE",
+          200: "#EBEEFF",
+          300: "#CAD1FC",
+          400: "#A0ACF8",
+          500: "#7D8BE6",
+          600: "#2C24C3",
+          700: "#272199",
+          800: "#171273",
+          900: "#15115E",
+          950: "#090642",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
