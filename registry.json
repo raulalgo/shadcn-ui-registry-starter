@@ -59,7 +59,6 @@
             "title": "Basic",
             "description": "A simple basic component",
             "registryDependencies": [
-                "basic",
                 "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
