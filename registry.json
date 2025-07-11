@@ -20,6 +20,22 @@
             ]
         },
         {
+            "name": "deal-strip",
+            "type": "registry:block",
+            "title": "Deal Strip",
+            "description": "Deal strip component for displaying deals",
+            "registryDependencies": [
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/deal-strip.tsx",
+                    "type": "registry:file",
+                    "target": "ui/deal-strip.tsx"
+                }
+            ]
+        },
+        {
             "name": "button",
             "type": "registry:ui",
             "title": "Button",
@@ -60,7 +76,6 @@
             "description": "Deal card component for displaying deals",
             "registryDependencies": [
                 "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/badge.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json",
                 "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
