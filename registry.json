@@ -52,6 +52,22 @@
                     "target": "ui/badge.tsx"
                 }
             ]
+        },
+        {
+            "name": "deal-card",
+            "type": "registry:ui",
+            "title": "Deal Card",
+            "description": "Deal card component for displaying deals",
+            "registryDependencies": [
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/deal-card.tsx",
+                    "type": "registry:file",
+                    "target": "ui/deal-card.tsx"
+                }
+            ]
         }
     ]
 }
