@@ -54,13 +54,12 @@
             ]
         },
         {
-            "name": "deal-card",
+            "name": "dealcard",
             "type": "registry:ui",
             "title": "Deal Card",
             "description": "Modern deal card component for displaying offers and promotions",
             "registryDependencies": [
-                "deal-card",
-                "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
+                "dealcard"
             ],
             "files": [
                 {
