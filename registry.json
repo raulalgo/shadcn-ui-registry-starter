@@ -52,22 +52,6 @@
                     "target": "ui/badge.tsx"
                 }
             ]
-        },
-        {
-            "name": "deal-card",
-            "type": "registry:ui",
-            "title": "Deal Card",
-            "description": "Modern deal card component for displaying offers and promotions",
-            "registryDependencies": [
-                "deal-card"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/deal-card.tsx",
-                    "type": "registry:file",
-                    "target": "ui/deal-card.tsx"
-                }
-            ]
         }
     ]
 }
