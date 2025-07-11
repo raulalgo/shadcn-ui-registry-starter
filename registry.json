@@ -60,8 +60,6 @@
             "description": "Modern deal card component for displaying offers and promotions",
             "registryDependencies": [
                 "deal-card",
-                "https://shadcn-ui-registry-starter-seven.vercel.app/r/badge.json",
-                "https://shadcn-ui-registry-starter-seven.vercel.app/r/button.json",
                 "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
             ],
             "files": [
