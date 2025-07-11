@@ -18,7 +18,7 @@ const badgeVariants = cva(
   }
 )
 
-function Badge({
+function Basic({
   className,
   variant = "include",
   asChild = false,
@@ -41,4 +41,4 @@ VariantProps<typeof badgeVariants> & { asChild?: boolean; label?: string }) {
   );
 }
 
-export { Badge };
+export { Basic };
