@@ -64,7 +64,7 @@
             ],
             "files": [
                 {
-                    "path": "src/components/ui/badge.tsx",
+                    "path": "src/components/ui/basic.tsx",
                     "type": "registry:file",
                     "target": "ui/basic.tsx"
                 }
