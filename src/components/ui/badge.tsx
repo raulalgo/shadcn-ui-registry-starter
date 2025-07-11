@@ -22,7 +22,7 @@ function Badge({
   className,
   variant = "include",
   asChild = false,
-  label = "label",
+  label,
   children = "content",
   ...props
 }:React.ComponentProps<"span"> &
