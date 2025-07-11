@@ -27,7 +27,8 @@
             "registryDependencies": [
                 "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
                 "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/deal-card.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/badge.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/badge.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
             ],
             "files": [
                 {
