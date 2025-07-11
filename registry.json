@@ -54,12 +54,12 @@
             ]
         },
         {
-            "name": "dealcard",
+            "name": "deal-card",
             "type": "registry:ui",
             "title": "Deal Card",
             "description": "Modern deal card component for displaying offers and promotions",
             "registryDependencies": [
-                "dealcard"
+                "deal-card"
             ],
             "files": [
                 {

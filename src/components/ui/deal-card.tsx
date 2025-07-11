@@ -3,7 +3,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 
-function DealCard({ className, title="Location", icon, children, ...props }: React.ComponentProps<"div"> & { title: string; icon?: React.ReactNode }) {
+function DealCard() {
   return (
     <>Deal Card</>
   );
