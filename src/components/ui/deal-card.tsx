@@ -26,7 +26,7 @@ const defaultChildren = [
 
 function DealCard({ title = "Location", icon, children = defaultChildren }: { title?: string, icon?: React.ReactNode, children?: React.ReactNode }) {
   return (
-    <div className="flex flex-col rounded-xl border border-card-border bg-card text-card-foreground shadow-sm w-96 p-2 gap-2">
+    <div className="flex flex-col rounded-xl border border-neutral-900/10 bg-neutral-50 text-neutral-900 shadow-sm w-96 p-2 gap-2">
         <div className="flex flex-row gap-2 items-center">
             {icon || <MapPin className="h-4 w-4" />}
             <div className="font-semibold leading-none p-0 grow">{title}</div>
