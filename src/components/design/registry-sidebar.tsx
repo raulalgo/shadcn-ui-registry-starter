@@ -44,6 +44,10 @@ export const componentItems = [
   { name: "Deal Card", path: "/components/deal-card" },
 ];
 
+export const blockItems = [
+  { name: "Deal Strip", path: "/blocks/deal-strip" },
+];
+
 export const gettingStartedItems = [
   { name: "Home", path: "/" },
   { name: "Design Tokens", path: "/tokens" },
@@ -69,6 +73,7 @@ export function RegistrySidebar() {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredComponents, setFilteredComponents] = useState(componentItems);
+  const [filteredBlocks, setFilteredBlocks] = useState(blockItems);
 
   useEffect(() => {
     if (searchTerm) {
@@ -77,8 +82,14 @@ export function RegistrySidebar() {
           item.name.toLowerCase().includes(searchTerm.toLowerCase()),
         ),
       );
+      setFilteredBlocks(
+        blockItems.filter((item) =>
+          item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+        ),
+      );
     } else {
       setFilteredComponents(componentItems);
+      setFilteredBlocks(blockItems);
     }
   }, [searchTerm]);
 
@@ -169,6 +180,43 @@ export function RegistrySidebar() {
                 <SidebarGroupContent>
                   <SidebarMenu>
                     {filteredComponents.map((item) => (
+                      <SidebarMenuItem key={item.path}>
+                        <SidebarMenuButton
+                          asChild
+                          isActive={pathname === item.path}
+                        >
+                          <Link
+                            onClick={() => setOpenMobile(false)}
+                            href={item.path}
+                          >
+                            {item.name}
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    ))}
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </CollapsibleContent>
+            </SidebarGroup>
+          </Collapsible>
+          <Collapsible defaultOpen={true} className="group/collapsible">
+            <SidebarGroup>
+              <CollapsibleTrigger className="w-full">
+                <SidebarGroupLabel className="flex cursor-pointer items-center justify-between">
+                  <div className="flex min-w-0 items-center">
+                    <Blocks className="size-4 flex-shrink-0" />
+                    <span className="ml-2 transition-all duration-200">
+                      Blocks
+                    </span>
+                  </div>
+                  <ChevronDown className="size-4 flex-shrink-0 transition-all duration-200 group-data-[state=open]/collapsible:rotate-180" />
+                </SidebarGroupLabel>
+              </CollapsibleTrigger>
+
+              <CollapsibleContent>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    {filteredBlocks.map((item) => (
                       <SidebarMenuItem key={item.path}>
                         <SidebarMenuButton
                           asChild
