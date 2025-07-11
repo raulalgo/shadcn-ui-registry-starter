@@ -25,7 +25,9 @@
             "title": "Deal Strip",
             "description": "Deal strip component for displaying deals",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/deal-card.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/badge.json"
             ],
             "files": [
                 {
