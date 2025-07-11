@@ -52,22 +52,6 @@
                     "target": "ui/badge.tsx"
                 }
             ]
-        },
-        {
-            "name": "basic",
-            "type": "registry:ui",
-            "title": "Basic",
-            "description": "A simple basic component",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/basic.tsx",
-                    "type": "registry:file",
-                    "target": "ui/basic.tsx"
-                }
-            ]
         }
     ]
 }
