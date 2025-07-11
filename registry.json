@@ -1,5 +1,5 @@
 { "name": "Registry Starter",
-  "homepage": "https://shadcn-ui-registry-starter-seven.vercel.app/",
+  "homepage": "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/",
   "items": [
         {
         "name": "registry",
@@ -26,7 +26,7 @@
             "description": "Basic set of buttons in our app",
             "registryDependencies": [
                 "button",
-                "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
                 {
@@ -43,7 +43,7 @@
             "description": "Basic set of badges in our app",
             "registryDependencies": [
                 "badge",
-                "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
                 {
@@ -60,7 +60,7 @@
             "description": "A simple basic component",
             "registryDependencies": [
                 "basic",
-                "https://shadcn-ui-registry-starter-seven.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
                 {
