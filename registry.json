@@ -20,12 +20,29 @@
             ]
         },
         {
+            "name": "navigation-item",
+            "type": "registry:ui",
+            "title": "Navigation Item",
+            "description": "Navigation item component for navigation menus",
+            "registryDependencies": [
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/navigation-item.tsx",
+                    "type": "registry:file",
+                    "target": "ui/navigation-item.tsx"
+                }
+            ]
+        },
+        {
             "name": "global-nav",
             "type": "registry:block",
             "title": "Global Navigation",
             "description": "Global navigation bar with four icons and selection indicator",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/navigation-item.json"
             ],
             "files": [
                 {
