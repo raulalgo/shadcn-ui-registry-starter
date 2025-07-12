@@ -7,9 +7,9 @@ import { Badge } from "./badge";
 
 function DealRow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-full flex flex-row-reverse justify-between items-center gap-2 hover:[&>button]:block hover:bg-primary-50 min-h-8 rounded-sm [&>.objective-button]:hidden hover:[&>.objective-button]:block">
+    <div className="w-full flex flex-row-reverse justify-between items-center gap-2 hover:[&>button]:block hover:bg-primary-50 min-h-8 rounded-sm [&>.objective-button]:hidden hover:[&>.objective-button]:visible">
       {children}
-      <Button variant="medium" size="sm" className="objective-button" >Add Objective</Button>
+      <Button variant="medium" size="sm" className="objective-button block" >Add Objective</Button>
     </div>
   );
 }
