@@ -20,6 +20,22 @@
             ]
         },
         {
+            "name": "global-nav",
+            "type": "registry:block",
+            "title": "Global Navigation",
+            "description": "Global navigation bar with four icons and selection indicator",
+            "registryDependencies": [
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/global-nav.tsx",
+                    "type": "registry:file",
+                    "target": "ui/global-nav.tsx"
+                }
+            ]
+        },
+        {
             "name": "deal-strip",
             "type": "registry:block",
             "title": "Deal Strip",

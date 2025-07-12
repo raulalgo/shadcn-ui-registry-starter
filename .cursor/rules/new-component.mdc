@@ -6,5 +6,12 @@ When I ask you to create the scaffolding of a new component it should meet four 
 1. Component file created in the folder /components/ui with the code that defines the component look and behavior
 2. Another file with the same name as the component file in the folder /app/(design)/components/[slug]/(demos) with some samples of how the component can be used
 3. Add the component to shadcn's registry in registry.json
-4. Import the new component to /app/(design)/components/[slug]/(demos)/index.tsx
-5. Update registry-sidebar.tsx with the new component so it is accesible through the navigation
+4. Import and add the new component to /app/(design)/components/[slug]/(demos)/index.tsx
+5. Update registry-sidebar.tsx with the new component so it is accesible through the navigation under the section "components"
+
+When I tell you that the component is a block these are the steps:
+1. same as 1. above
+2. same as 2. above
+3. add the component to registry.json as a block
+4. Import and add the new component to /app/(design)/blocks/[slug]/(demos)/index.tsx
+5. Update the registry-sidebar with the new component so it is accesible through the navigation under the section "Blocks"

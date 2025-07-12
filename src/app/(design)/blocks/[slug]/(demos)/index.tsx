@@ -1,5 +1,6 @@
 import type { ReactElement, ReactNode } from "react";
 import { dealStrip } from "./deal-strip";
+import { globalNav } from "./global-nav";
 
 
 interface Block {
@@ -11,4 +12,5 @@ interface Block {
 
 export const demos: { [name: string]: Block } = {
   "deal-strip": dealStrip,
+  "global-nav": globalNav,
 };
