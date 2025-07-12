@@ -1,11 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, Paperclip } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavigationItemProps {
-  icon: LucideIcon;
+  icon?: LucideIcon;
   label: string;
   isSelected?: boolean;
   onClick?: () => void;
@@ -13,7 +13,7 @@ interface NavigationItemProps {
 }
 
 function NavigationItem({ 
-  icon: Icon, 
+  icon: Icon = Paperclip, 
   label, 
   isSelected = false, 
   onClick,
@@ -37,7 +37,7 @@ function NavigationItem({
       
       {/* Selection indicator - half yellow dot on right edge */}
       {isSelected && (
-        <div className="absolute -right-1 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-yellow-400 rounded-full" />
+        <div className="absolute -right-3 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-yellow-400 rounded-full" />
       )}
     </div>
   );

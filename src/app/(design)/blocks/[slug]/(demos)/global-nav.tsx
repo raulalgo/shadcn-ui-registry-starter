@@ -4,8 +4,10 @@ export const globalNav = {
   name: "global-nav",
   components: {
     Default: <GlobalNav />,
-    "Search Selected": <GlobalNav selectedPage="search" />,
-    "Settings Selected": <GlobalNav selectedPage="settings" />,
-    "Profile Selected": <GlobalNav selectedPage="profile" />,
+    "Campaigns Selected": <GlobalNav selectedPage="campaigns" />,
+    "Creative Management Selected": <GlobalNav selectedPage="creative" />,
+    "Administration Selected": <GlobalNav selectedPage="administration" />,
+    "Inventory Management Selected": <GlobalNav selectedPage="inventory" />,
+    "Users Selected": <GlobalNav selectedPage="users" />,
   },
 }; 
