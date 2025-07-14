@@ -141,7 +141,7 @@
                 {
                     "path": "src/app/starters/(minimal)/blank/page.tsx",
                     "type": "registry:page",
-                    "target": "starters/blank/page.tsx"
+                    "target": "app/page.tsx"
                 }
             ]
         },
@@ -163,7 +163,7 @@
                 {
                     "path": "src/app/starters/(minimal)/basic/page.tsx",
                     "type": "registry:page",
-                    "target": "starters/basic/page.tsx"
+                    "target": "app/page.tsx"
                 }
             ]
         }
