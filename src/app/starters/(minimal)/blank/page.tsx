@@ -1,9 +1,10 @@
+import { GlobalNav } from "@/components/ui/global-nav";
+
 export default function Page() {
   return (
-    <div className="flex flex-col items-center justify-center gap-4 rounded-md py-96">
-      <div className="text-muted-foreground">
-        Start prompting to use your component!
-      </div>
+    <div className="flex flex-row bg-primary-900 min-h-full">
+      <GlobalNav />
+      <div className="w-full h-screen bg-neutral-50"></div>
     </div>
   );
 }
