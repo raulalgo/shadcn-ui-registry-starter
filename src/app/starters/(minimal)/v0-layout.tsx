@@ -3,9 +3,6 @@ import React, { type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
-import "@/app/tokens.css";
-import "@/app/globals.css";
-
 const GeistSans = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
