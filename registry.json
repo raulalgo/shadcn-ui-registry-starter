@@ -48,7 +48,7 @@
                 {
                     "path": "src/components/ui/global-nav.tsx",
                     "type": "registry:file",
-                    "target": "ui/global-nav.tsx"
+                    "target": "components/ui/global-nav.tsx"
                 }
             ]
         },
