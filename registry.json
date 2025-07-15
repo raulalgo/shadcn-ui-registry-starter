@@ -67,7 +67,7 @@
                 {
                     "path": "src/components/ui/deal-strip.tsx",
                     "type": "registry:file",
-                    "target": "ui/deal-strip.tsx"
+                    "target": "components/ui/deal-strip.tsx"
                 }
             ]
         },
@@ -84,7 +84,7 @@
                 {
                     "path": "src/components/ui/button.tsx",
                     "type": "registry:file",
-                    "target": "ui/button.tsx"
+                    "target": "components/ui/button.tsx"
                 }
             ]
         },
@@ -101,7 +101,7 @@
                 {
                     "path": "src/components/ui/badge.tsx",
                     "type": "registry:file",
-                    "target": "ui/badge.tsx"
+                    "target": "components/ui/badge.tsx"
                 }
             ]
         },
@@ -119,7 +119,7 @@
                 {
                     "path": "src/components/ui/deal-card.tsx",
                     "type": "registry:file",
-                    "target": "ui/deal-card.tsx"
+                    "target": "components/ui/deal-card.tsx"
                 }
             ]
         },
