@@ -31,7 +31,7 @@
                 {
                     "path": "src/components/ui/navigation-item.tsx",
                     "type": "registry:file",
-                    "target": "ui/navigation-item.tsx"
+                    "target": "components/ui/navigation-item.tsx"
                 }
             ]
         },
