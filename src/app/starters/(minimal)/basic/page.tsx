@@ -1,3 +1,4 @@
+import ProductGrid from "@/components/product-grid";
 import { GlobalNav } from "@/components/ui/global-nav";
 
 export default async function Basic() {

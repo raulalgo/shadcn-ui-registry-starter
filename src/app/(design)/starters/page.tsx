@@ -15,6 +15,11 @@ const starters = [
     name: "basic",
     url: "/starters/basic",
   },
+  {
+    title: "Map View",
+    name: "map-view",
+    url: "/starters/map_view",
+  },
 ];
 
 export default function StartPage() {

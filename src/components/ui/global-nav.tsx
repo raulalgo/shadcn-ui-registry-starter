@@ -31,7 +31,7 @@ function GlobalNav({ selectedPage = "insights", className, onPageChange, onLogou
   ], []);
 
   return (
-    <div className={cn("h-full w-16 bg-primary-900 flex flex-col items-center overflow-hidden", className)}>
+    <div className={cn("h-screen w-16 bg-primary-900 flex flex-col items-center overflow-hidden", className)}>
       {/* Company Logo */}
       <div className="w-full py-6 border-b border-neutral-100/20 flex justify-center">
         <svg width="26" height="32" viewBox="0 0 26 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +41,7 @@ function GlobalNav({ selectedPage = "insights", className, onPageChange, onLogou
       </div>
 
       {/* Navigation Icons */}
-      <div className="flex flex-col items-center gap-3 py-6 flex-1">
+      <div className="flex flex-col items-center gap-3 py-6 flex-1 h-full">
         {navItems.map((item) => (
           <NavigationItem
             key={item.id}
