@@ -1,10 +1,7 @@
 import ProductGrid from "@/components/product-grid";
-import { getCategories, getProducts } from "@/lib/products";
 import { GlobalNav } from "@/components/ui/global-nav";
 
 export default async function Basic() {
-  const products = await getProducts();
-  const categories = await getCategories();
 
   return (
     <div className="flex min-h-screen flex-row bg-primary-900">
