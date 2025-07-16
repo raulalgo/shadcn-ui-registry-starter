@@ -7,7 +7,7 @@ import { Badge } from "./badge";
 import { cva } from "class-variance-authority";
 
 const cardVariants = cva(
-  "flex flex-col rounded-xl border w-96 p-2 gap-2 ",
+  "flex flex-col rounded-xl border w-full max-w-lg p-2 gap-2 ",
   {
     variants: {
       variant: {
