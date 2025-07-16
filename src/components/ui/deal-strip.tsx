@@ -6,7 +6,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 
 function DealStrip() {
   return (
-    <div className="p-2 bg-neutral-200 gap-2 flex flex-col w-sm border-r border-neutral-900/10">
+    <div className="p-2 bg-neutral-200 gap-2 flex flex-col w-96 border-r border-neutral-900/10">
       <Accordion type="multiple" defaultValue={["deal-line-info", "filters"]} className="w-full">
         <AccordionItem value="deal-line-info">
           <AccordionTrigger>Deal Line Info</AccordionTrigger>
