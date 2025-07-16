@@ -43,6 +43,7 @@ export const componentItems = [
   { name: "Badge", path: "/components/badge" },
   { name: "Deal Card", path: "/components/deal-card" },
   { name: "Navigation Item", path: "/components/navigation-item" },
+  { name: "Map", path: "/components/map" },
 ];
 
 export const blockItems = [

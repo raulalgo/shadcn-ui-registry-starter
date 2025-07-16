@@ -36,6 +36,22 @@
             ]
         },
         {
+            "name": "map",
+            "type": "registry:ui",
+            "title": "Map",
+            "description": "Map component for displaying deals",
+            "registryDependencies": [
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/map.tsx",
+                    "type": "registry:file",
+                    "target": "components/ui/map.tsx"
+                }
+            ]
+        },
+        {
             "name": "global-nav",
             "type": "registry:block",
             "title": "Global Navigation",

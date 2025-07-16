@@ -1,5 +1,5 @@
 import { DealCard } from "@/components/ui/deal-card";
-import { LaptopMinimal } from "lucide-react";
+import { Calendar, LaptopMinimal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export const dealCard = {
@@ -12,5 +12,7 @@ export const dealCard = {
         <Badge>16:9</Badge>
         <Badge>Bus shelter</Badge>
       </DealCard>,
+      Placeholder: <DealCard variant="default" title="Tags" />,
+      Required: <DealCard variant="required" title="Schedule" icon={<Calendar className="h-4 w-4" />}   />,
   },
 }; 
