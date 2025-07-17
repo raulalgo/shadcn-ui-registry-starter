@@ -192,7 +192,8 @@
             "registryDependencies": [
                 "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
                 "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/deal-strip.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/deal-strip.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/header-planner.json"
             ],
             "files": [
                 {
@@ -212,11 +213,33 @@
             "type": "registry:ui",
             "title": "Header Planner",
             "description": "A header component for the planner view.",
+            "registryDependencies": [
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/tabs.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+            ],
             "files": [
                 {
                     "path": "src/components/ui/planner-header.tsx",
                     "type": "registry:file",
                     "target": "ui/planner-header.tsx"
+                }
+            ]
+        },
+        {
+            "name": "tabs",
+            "type": "registry:ui",
+            "title": "Tabs",
+            "description": "Tabs component for displaying tabs",
+            "registryDependencies": [
+                "tabs",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/tabs.tsx",
+                    "type": "registry:file",
+                    "target": "ui/tabs.tsx"
                 }
             ]
         }

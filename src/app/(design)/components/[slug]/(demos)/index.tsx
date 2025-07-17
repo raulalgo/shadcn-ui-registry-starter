@@ -7,6 +7,7 @@ import { navigationItem } from "@/app/(design)/components/[slug]/(demos)/navigat
 import { globalNav } from "@/app/(design)/blocks/[slug]/(demos)/global-nav";
 import { map } from "@/app/(design)/components/[slug]/(demos)/map";
 import { headerPlanner } from "@/app/(design)/components/[slug]/(demos)/planner-header";
+import { tabs } from "@/app/(design)/components/[slug]/(demos)/tabs";
 
 interface Demo {
   name: string; // this must match the `registry.json` name
@@ -23,4 +24,5 @@ export const demos: { [name: string]: Demo } = {
   "global-nav": globalNav,
   map,
   "header-planner": headerPlanner,
+  "tabs": tabs,
 };
