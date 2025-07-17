@@ -222,7 +222,7 @@
                 {
                     "path": "src/components/ui/planner-header.tsx",
                     "type": "registry:file",
-                    "target": "ui/planner-header.tsx"
+                    "target": "components/ui/planner-header.tsx"
                 }
             ]
         },
@@ -239,7 +239,7 @@
                 {
                     "path": "src/components/ui/tabs.tsx",
                     "type": "registry:file",
-                    "target": "ui/tabs.tsx"
+                    "target": "components/ui/tabs.tsx"
                 }
             ]
         }
