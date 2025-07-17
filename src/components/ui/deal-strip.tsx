@@ -3,10 +3,11 @@ import { DealCard } from "./deal-card";
 import { Badge } from "./badge";
 import { Building2, Calendar, Flag, LaptopMinimal, ListChecks, MapPin, Tag } from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { cn } from "@/lib/utils";
 
-function DealStrip() {
+function DealStrip({ className }: { className?: string }) {
   return (
-    <div className="p-2 bg-neutral-200 gap-2 flex flex-col w-96 border-r border-neutral-900/10">
+    <div className={cn("p-2 bg-neutral-200 gap-2 flex flex-col w-96 border-r border-neutral-900/10", className)}>
       <Accordion type="multiple" defaultValue={["deal-line-info", "filters"]} className="w-full">
         <AccordionItem value="deal-line-info">
           <AccordionTrigger>Deal Line Info</AccordionTrigger>
