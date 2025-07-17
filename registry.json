@@ -242,6 +242,24 @@
                     "target": "components/ui/tabs.tsx"
                 }
             ]
+        },
+        {
+            "name": "daypart-panel",
+            "type": "registry:block",
+            "title": "Daypart Panel",
+            "description": "A block for selecting dayparts in a schedule grid.",
+            "registryDependencies": [
+                "select",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/daypart-panel.tsx",
+                    "type": "registry:file",
+                    "target": "components/ui/daypart-panel.tsx"
+                }
+            ]
         }
     ]
 }
