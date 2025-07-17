@@ -1,6 +1,5 @@
 import React from "react";
 import { Tabs, TabsList, TabsTrigger } from "./tabs";
-import { ChartColumnIncreasing, Grid2x2Plus, Map, Plus } from "lucide-react";
 import { Button } from "./button";
 
 const HeaderPlanner = () => {
@@ -14,15 +13,15 @@ const HeaderPlanner = () => {
                 </TabsList>
             </Tabs>
             <Button variant="ghost" size="xs">
-              <Plus /> Add Deal Line
+              + Add Deal Line
             </Button>
           </div>
           <div className="px-2">
             <Tabs>  
                 <TabsList>
-                    <TabsTrigger value="tab1"> <Map />Map</TabsTrigger>
-                    <TabsTrigger value="tab2"> <Grid2x2Plus />Overview</TabsTrigger>
-                    <TabsTrigger value="tab3"> <ChartColumnIncreasing />Review</TabsTrigger>
+                    <TabsTrigger value="tab1">Map</TabsTrigger>
+                    <TabsTrigger value="tab2">Overview</TabsTrigger>
+                    <TabsTrigger value="tab3">Review</TabsTrigger>
                 </TabsList>
             </Tabs>
           </div>
