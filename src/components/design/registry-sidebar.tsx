@@ -44,6 +44,7 @@ export const componentItems = [
   { name: "Deal Card", path: "/components/deal-card" },
   { name: "Navigation Item", path: "/components/navigation-item" },
   { name: "Map", path: "/components/map" },
+  { name: "Header Planner", path: "/components/header-planner" },
 ];
 
 export const blockItems = [

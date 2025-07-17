@@ -4,9 +4,20 @@ alwaysApply: true
 
 When I ask you to create the scaffolding of a new component it should meet four criteria:
 1. Component file created in the folder /components/ui with the code that defines the component look and behavior
-2. Another file with the same name as the component file in the folder /app/(design)/components/[slug]/(demos) with some samples of how the component can be used
+2. Another file with the same name as the component file in the folder /app/(design)/components/[slug]/(demos)/{name-of-component}.tsx. Reference a single instance labeled as default and that uses the component without providing any props. See the example for reference of the syntax:
+```
+import { new-component } from "@/components/ui/new-component";
+
+export const new-component = {
+  name: "header-planner",
+  components: {
+    Default: <new-component />,
+  },
+};
+```
+
+4. Add the new component to the exports in /app/(design)/components/[slug]/(demos)/index.tsx. Don't forget to import it first.
 3. Add the component to shadcn's registry in registry.json
-4. Import and add the new component to /app/(design)/components/[slug]/(demos)/index.tsx
 5. Update registry-sidebar.tsx with the new component so it is accesible through the navigation under the section "components"
 
 When I tell you that the component is a block these are the steps:

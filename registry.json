@@ -206,6 +206,19 @@
                     "target": "app/page.tsx"
                 }
             ]
+        },
+        {
+            "name": "header-planner",
+            "type": "registry:ui",
+            "title": "Header Planner",
+            "description": "A header component for the planner view.",
+            "files": [
+                {
+                    "path": "src/components/ui/planner-header.tsx",
+                    "type": "registry:file",
+                    "target": "ui/planner-header.tsx"
+                }
+            ]
         }
     ]
 }
