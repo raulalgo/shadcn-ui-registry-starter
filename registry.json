@@ -260,6 +260,23 @@
                     "target": "components/ui/daypart-panel-deprecated.tsx"
                 }
             ]
+        },
+        {
+            "name": "action-panel",
+            "type": "registry:block",
+            "title": "Action Panel",
+            "description": "A panel for displaying actions",
+            "registryDependencies": [
+                "card",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/action-panel.tsx",
+                    "type": "registry:file",
+                    "target": "components/ui/action-panel.tsx"
+                }
+            ]
         }
     ]
 }
