@@ -277,6 +277,39 @@
                     "target": "components/ui/action-panel.tsx"
                 }
             ]
+        },
+        {
+            "name": "daypart-action-panel",
+            "type": "registry:block",
+            "title": "Daypart Action Panel",
+            "description": "A panel for daypart selection actions",
+            "registryDependencies": [
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/action-panel.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/daypart-action-panel.tsx",
+                    "type": "registry:file",
+                    "target": "components/ui/daypart-action-panel.tsx"
+                }
+            ]
+        },
+        {
+            "name": "daypart-picker",
+            "type": "registry:block",
+            "title": "Daypart Picker",
+            "description": "A picker for daypart selection",
+            "registryDependencies": [
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/daypart-picker.tsx",
+                    "type": "registry:file",
+                    "target": "components/ui/daypart-picker.tsx"
+                }
+            ]
         }
     ]
 }
