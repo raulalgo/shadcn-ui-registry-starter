@@ -17,6 +17,10 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
   const [selectedCells, setSelectedCells] = React.useState<Set<string>>(new Set());
   const [isCustomDaypart, setIsCustomDaypart] = React.useState(false);
   const [lastClickedCell, setLastClickedCell] = React.useState<string | null>(null);
+  const [lastClickedHeader, setLastClickedHeader] = React.useState<{
+    type: 'day' | 'hour';
+    value: string;
+  } | null>(null);
 
   const days = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
   const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, "0")}:00`);
@@ -87,28 +91,50 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
     setSelectedCells(new Set());
   };
 
-  const handleDayClick = (day: string) => {
+  const handleDayClick = (day: string, event?: React.MouseEvent) => {
     const newSelected = new Set(selectedCells);
-    const dayColumnCells = hours.map((hour) => `${day}-${hour}`);
-    const allSelected = dayColumnCells.every((cellId) => newSelected.has(cellId));
-    if (allSelected) {
-      dayColumnCells.forEach((cellId) => newSelected.delete(cellId));
+    if (event?.shiftKey && lastClickedHeader && lastClickedHeader.type === 'day') {
+      // Range select columns
+      const startIdx = Math.min(days.indexOf(day), days.indexOf(lastClickedHeader.value));
+      const endIdx = Math.max(days.indexOf(day), days.indexOf(lastClickedHeader.value));
+      for (let d = startIdx; d <= endIdx; d++) {
+        const dayColumnCells = hours.map((hour) => `${days[d]}-${hour}`);
+        dayColumnCells.forEach((cellId) => newSelected.add(cellId));
+      }
     } else {
-      dayColumnCells.forEach((cellId) => newSelected.add(cellId));
+      const dayColumnCells = hours.map((hour) => `${day}-${hour}`);
+      const allSelected = dayColumnCells.every((cellId) => newSelected.has(cellId));
+      if (allSelected) {
+        dayColumnCells.forEach((cellId) => newSelected.delete(cellId));
+      } else {
+        dayColumnCells.forEach((cellId) => newSelected.add(cellId));
+      }
     }
     setSelectedCells(newSelected);
+    setLastClickedHeader({ type: 'day', value: day });
   };
 
-  const handleHourClick = (hour: string) => {
+  const handleHourClick = (hour: string, event?: React.MouseEvent) => {
     const newSelected = new Set(selectedCells);
-    const hourRowCells = days.map((day) => `${day}-${hour}`);
-    const allSelected = hourRowCells.every((cellId) => newSelected.has(cellId));
-    if (allSelected) {
-      hourRowCells.forEach((cellId) => newSelected.delete(cellId));
+    if (event?.shiftKey && lastClickedHeader && lastClickedHeader.type === 'hour') {
+      // Range select rows
+      const startIdx = Math.min(hours.indexOf(hour), hours.indexOf(lastClickedHeader.value));
+      const endIdx = Math.max(hours.indexOf(hour), hours.indexOf(lastClickedHeader.value));
+      for (let h = startIdx; h <= endIdx; h++) {
+        const hourRowCells = days.map((day) => `${day}-${hours[h]}`);
+        hourRowCells.forEach((cellId) => newSelected.add(cellId));
+      }
     } else {
-      hourRowCells.forEach((cellId) => newSelected.add(cellId));
+      const hourRowCells = days.map((day) => `${day}-${hour}`);
+      const allSelected = hourRowCells.every((cellId) => newSelected.has(cellId));
+      if (allSelected) {
+        hourRowCells.forEach((cellId) => newSelected.delete(cellId));
+      } else {
+        hourRowCells.forEach((cellId) => newSelected.add(cellId));
+      }
     }
     setSelectedCells(newSelected);
+    setLastClickedHeader({ type: 'hour', value: hour });
   };
 
   const handleCellKeyDown = (day: string, hour: string, event: React.KeyboardEvent) => {
@@ -212,7 +238,7 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                 <button
                   key={day}
                   className="text-center font-medium text-xs py-1 text-neutral-600 hover:bg-neutral-200 rounded-sm cursor-pointer transition-colors"
-                  onClick={() => handleDayClick(day)}
+                  onClick={(e) => handleDayClick(day, e)}
                 >
                   {day}
                 </button>
@@ -224,7 +250,7 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                 <div key={hour} className="grid grid-cols-8 gap-1">
                   <button
                     className="w-12 text-xs text-neutral-600 py-1 text-right pr-2 pt-0 pb-0 hover:bg-neutral-200 rounded-sm cursor-pointer transition-colors"
-                    onClick={() => handleHourClick(hour)}
+                    onClick={(e) => handleHourClick(hour, e)}
                   >
                     {hour}
                   </button>
