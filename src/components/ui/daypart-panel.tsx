@@ -21,6 +21,13 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
     type: 'day' | 'hour';
     value: string;
   } | null>(null);
+  const [previewCells, setPreviewCells] = React.useState<Set<string>>(new Set());
+  const [isSelecting, setIsSelecting] = React.useState(false);
+  const [selectionStart, setSelectionStart] = React.useState<{
+    type: 'cell' | 'day' | 'hour';
+    day?: string;
+    hour?: string;
+  } | null>(null);
 
   const days = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
   const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, "0")}:00`);
@@ -144,6 +151,116 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
     }
   };
 
+  // Helper to get range between two cells
+  const getCellRange = (start: {day: string, hour: string}, end: {day: string, hour: string}) => {
+    const startDayIdx = days.indexOf(start.day);
+    const endDayIdx = days.indexOf(end.day);
+    const startHourIdx = hours.indexOf(start.hour);
+    const endHourIdx = hours.indexOf(end.hour);
+    const range = new Set<string>();
+    for (let d = Math.min(startDayIdx, endDayIdx); d <= Math.max(startDayIdx, endDayIdx); d++) {
+      for (let h = Math.min(startHourIdx, endHourIdx); h <= Math.max(startHourIdx, endHourIdx); h++) {
+        range.add(`${days[d]}-${hours[h]}`);
+      }
+    }
+    return range;
+  };
+
+  const getDayRange = (startDay: string, endDay: string) => {
+    const startIdx = days.indexOf(startDay);
+    const endIdx = days.indexOf(endDay);
+    const range = new Set<string>();
+    for (let d = Math.min(startIdx, endIdx); d <= Math.max(startIdx, endIdx); d++) {
+      hours.forEach(hour => range.add(`${days[d]}-${hour}`));
+    }
+    return range;
+  };
+
+  const getHourRange = (startHour: string, endHour: string) => {
+    const startIdx = hours.indexOf(startHour);
+    const endIdx = hours.indexOf(endHour);
+    const range = new Set<string>();
+    for (let h = Math.min(startIdx, endIdx); h <= Math.max(startIdx, endIdx); h++) {
+      days.forEach(day => range.add(`${day}-${hours[h]}`));
+    }
+    return range;
+  };
+
+  const handleCellMouseDown = (day: string, hour: string) => {
+    setIsSelecting(true);
+    setSelectionStart({ type: 'cell', day, hour });
+    setPreviewCells(new Set([`${day}-${hour}`]));
+  };
+
+  const handleCellMouseEnter = (day: string, hour: string) => {
+    if (isSelecting && selectionStart && selectionStart.type === 'cell') {
+      setPreviewCells(getCellRange({ day: selectionStart.day!, hour: selectionStart.hour! }, { day, hour }));
+    }
+  };
+
+  const handleCellMouseUp = (day: string, hour: string) => {
+    if (isSelecting && selectionStart && selectionStart.type === 'cell') {
+      const final = getCellRange({ day: selectionStart.day!, hour: selectionStart.hour! }, { day, hour });
+      const newSelected = new Set(selectedCells);
+      final.forEach(cell => newSelected.add(cell));
+      setSelectedCells(newSelected);
+      setPreviewCells(new Set());
+      setIsSelecting(false);
+      setSelectionStart(null);
+      setLastClickedCell(`${day}-${hour}`);
+    }
+  };
+
+  const handleDayMouseDown = (day: string) => {
+    setIsSelecting(true);
+    setSelectionStart({ type: 'day', day });
+    setPreviewCells(new Set(hours.map(hour => `${day}-${hour}`)));
+  };
+
+  const handleDayMouseEnter = (day: string) => {
+    if (isSelecting && selectionStart && selectionStart.type === 'day') {
+      setPreviewCells(getDayRange(selectionStart.day!, day));
+    }
+  };
+
+  const handleDayMouseUp = (day: string) => {
+    if (isSelecting && selectionStart && selectionStart.type === 'day') {
+      const final = getDayRange(selectionStart.day!, day);
+      const newSelected = new Set(selectedCells);
+      final.forEach(cell => newSelected.add(cell));
+      setSelectedCells(newSelected);
+      setPreviewCells(new Set());
+      setIsSelecting(false);
+      setSelectionStart(null);
+      setLastClickedHeader({ type: 'day', value: day });
+    }
+  };
+
+  const handleHourMouseDown = (hour: string) => {
+    setIsSelecting(true);
+    setSelectionStart({ type: 'hour', hour });
+    setPreviewCells(new Set(days.map(day => `${day}-${hour}`)));
+  };
+
+  const handleHourMouseEnter = (hour: string) => {
+    if (isSelecting && selectionStart && selectionStart.type === 'hour') {
+      setPreviewCells(getHourRange(selectionStart.hour!, hour));
+    }
+  };
+
+  const handleHourMouseUp = (hour: string) => {
+    if (isSelecting && selectionStart && selectionStart.type === 'hour') {
+      const final = getHourRange(selectionStart.hour!, hour);
+      const newSelected = new Set(selectedCells);
+      final.forEach(cell => newSelected.add(cell));
+      setSelectedCells(newSelected);
+      setPreviewCells(new Set());
+      setIsSelecting(false);
+      setSelectionStart(null);
+      setLastClickedHeader({ type: 'hour', value: hour });
+    }
+  };
+
   return (
     <div className="flex flex-col h-full bg-neutral-50 max-w-96 border border-neutral-900/10 rounded-lg shadow">
       {/* Header */}
@@ -239,6 +356,9 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                   key={day}
                   className="text-center font-medium text-xs py-1 text-neutral-600 hover:bg-neutral-200 rounded-sm cursor-pointer transition-colors"
                   onClick={(e) => handleDayClick(day, e)}
+                  onMouseDown={() => handleDayMouseDown(day)}
+                  onMouseEnter={() => handleDayMouseEnter(day)}
+                  onMouseUp={() => handleDayMouseUp(day)}
                 >
                   {day}
                 </button>
@@ -251,6 +371,9 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                   <button
                     className="w-12 text-xs text-neutral-600 py-1 text-right pr-2 pt-0 pb-0 hover:bg-neutral-200 rounded-sm cursor-pointer transition-colors"
                     onClick={(e) => handleHourClick(hour, e)}
+                    onMouseDown={() => handleHourMouseDown(hour)}
+                    onMouseEnter={() => handleHourMouseEnter(hour)}
+                    onMouseUp={() => handleHourMouseUp(hour)}
                   >
                     {hour}
                   </button>
@@ -265,10 +388,14 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                           "w-full transition-all hover:opacity-80 hover:scale-105 rounded-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-1 box-border",
                           getCellColor(intensity),
                           isSelected ? "border-2 border-primary-600" : "border border-neutral-300",
+                          previewCells.has(cellId) && !isSelected ? "opacity-40" : ""
                         )}
                         style={{ height: "20px" }}
                         onClick={(e) => handleCellClick(day, hour, e)}
                         onKeyDown={(e) => handleCellKeyDown(day, hour, e)}
+                        onMouseDown={() => handleCellMouseDown(day, hour)}
+                        onMouseEnter={() => handleCellMouseEnter(day, hour)}
+                        onMouseUp={() => handleCellMouseUp(day, hour)}
                         tabIndex={0}
                         aria-label={`Select ${day} at ${hour}`}
                       />
