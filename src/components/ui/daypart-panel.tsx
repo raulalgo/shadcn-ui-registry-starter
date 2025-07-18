@@ -198,19 +198,6 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
     }
   };
 
-  const handleCellMouseUp = (day: string, hour: string) => {
-    if (isSelecting && selectionStart && selectionStart.type === 'cell') {
-      const final = getCellRange({ day: selectionStart.day!, hour: selectionStart.hour! }, { day, hour });
-      const newSelected = new Set(selectedCells);
-      final.forEach(cell => newSelected.add(cell));
-      setSelectedCells(newSelected);
-      setPreviewCells(new Set());
-      setIsSelecting(false);
-      setSelectionStart(null);
-      setLastClickedCell(`${day}-${hour}`);
-    }
-  };
-
   const handleDayMouseDown = (day: string) => {
     setIsSelecting(true);
     setSelectionStart({ type: 'day', day });
@@ -220,19 +207,6 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
   const handleDayMouseEnter = (day: string) => {
     if (isSelecting && selectionStart && selectionStart.type === 'day') {
       setPreviewCells(getDayRange(selectionStart.day!, day));
-    }
-  };
-
-  const handleDayMouseUp = (day: string) => {
-    if (isSelecting && selectionStart && selectionStart.type === 'day') {
-      const final = getDayRange(selectionStart.day!, day);
-      const newSelected = new Set(selectedCells);
-      final.forEach(cell => newSelected.add(cell));
-      setSelectedCells(newSelected);
-      setPreviewCells(new Set());
-      setIsSelecting(false);
-      setSelectionStart(null);
-      setLastClickedHeader({ type: 'day', value: day });
     }
   };
 
@@ -248,18 +222,22 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
     }
   };
 
-  const handleHourMouseUp = (hour: string) => {
-    if (isSelecting && selectionStart && selectionStart.type === 'hour') {
-      const final = getHourRange(selectionStart.hour!, hour);
-      const newSelected = new Set(selectedCells);
-      final.forEach(cell => newSelected.add(cell));
-      setSelectedCells(newSelected);
+  // Add useEffect for global mouseup
+  React.useEffect(() => {
+    if (!isSelecting) return;
+    const handleGlobalMouseUp = () => {
+      if (previewCells.size > 0) {
+        const newSelected = new Set(selectedCells);
+        previewCells.forEach(cell => newSelected.add(cell));
+        setSelectedCells(newSelected);
+      }
       setPreviewCells(new Set());
       setIsSelecting(false);
       setSelectionStart(null);
-      setLastClickedHeader({ type: 'hour', value: hour });
-    }
-  };
+    };
+    window.addEventListener('mouseup', handleGlobalMouseUp);
+    return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
+  }, [isSelecting, previewCells, selectedCells]);
 
   return (
     <div className="flex flex-col h-full bg-neutral-50 max-w-96 border border-neutral-900/10 rounded-lg shadow">
@@ -358,7 +336,6 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                   onClick={(e) => handleDayClick(day, e)}
                   onMouseDown={() => handleDayMouseDown(day)}
                   onMouseEnter={() => handleDayMouseEnter(day)}
-                  onMouseUp={() => handleDayMouseUp(day)}
                 >
                   {day}
                 </button>
@@ -373,7 +350,6 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                     onClick={(e) => handleHourClick(hour, e)}
                     onMouseDown={() => handleHourMouseDown(hour)}
                     onMouseEnter={() => handleHourMouseEnter(hour)}
-                    onMouseUp={() => handleHourMouseUp(hour)}
                   >
                     {hour}
                   </button>
@@ -395,7 +371,6 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                         onKeyDown={(e) => handleCellKeyDown(day, hour, e)}
                         onMouseDown={() => handleCellMouseDown(day, hour)}
                         onMouseEnter={() => handleCellMouseEnter(day, hour)}
-                        onMouseUp={() => handleCellMouseUp(day, hour)}
                         tabIndex={0}
                         aria-label={`Select ${day} at ${hour}`}
                       />
