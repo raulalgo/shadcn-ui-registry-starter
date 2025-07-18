@@ -244,7 +244,7 @@
             ]
         },
         {
-            "name": "daypart-panel",
+            "name": "daypart-panel-deprecated",
             "type": "registry:block",
             "title": "Daypart Panel",
             "description": "A block for selecting dayparts in a schedule grid.",
@@ -255,9 +255,9 @@
             ],
             "files": [
                 {
-                    "path": "src/components/ui/daypart-panel.tsx",
+                    "path": "src/components/ui/daypart-panel-deprecated.tsx",
                     "type": "registry:file",
-                    "target": "components/ui/daypart-panel.tsx"
+                    "target": "components/ui/daypart-panel-deprecated.tsx"
                 }
             ]
         }

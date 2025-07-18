@@ -51,7 +51,7 @@ export const componentItems = [
 export const blockItems = [
   { name: "Deal Strip", path: "/blocks/deal-strip" },
   { name: "Global Navigation", path: "/blocks/global-nav" },
-  { name: "Daypart Panel", path: "/blocks/daypart-panel" },
+  { name: "Daypart Panel (Deprecated)", path: "/blocks/daypart-panel-deprecated" },
 ];
 
 export const gettingStartedItems = [
