@@ -56,6 +56,14 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
   const days = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
   const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, "0")}:00`);
 
+  // State for header hover effects
+  const [hoveredDay, setHoveredDay] = React.useState<string | null>(null);
+  const [hoveredHour, setHoveredHour] = React.useState<string | null>(null);
+  
+  // State for header active effects
+  const [activeDay, setActiveDay] = React.useState<string | null>(null);
+  const [activeHour, setActiveHour] = React.useState<string | null>(null);
+
   const getCellIntensity = (day: string, hour: string) => {
     const hourNum = Number.parseInt(hour.split(":")[0]);
     const dayIndex = days.indexOf(day);
@@ -67,6 +75,38 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
     return 0;
   };
 
+  const handleDayHeaderMouseEnter = (day: string) => {
+    setHoveredDay(day);
+  };
+
+  const handleDayHeaderMouseLeave = () => {
+    setHoveredDay(null);
+  };
+
+  const handleHourHeaderMouseEnter = (hour: string) => {
+    setHoveredHour(hour);
+  };
+
+  const handleHourHeaderMouseLeave = () => {
+    setHoveredHour(null);
+  };
+
+  const handleDayHeaderMouseDown = (day: string) => {
+    setActiveDay(day);
+  };
+
+  const handleDayHeaderMouseUp = () => {
+    setActiveDay(null);
+  };
+
+  const handleHourHeaderMouseDown = (hour: string) => {
+    setActiveHour(hour);
+  };
+
+  const handleHourHeaderMouseUp = () => {
+    setActiveHour(null);
+  };
+
   return (
     <div className={cn("flex-1 overflow-auto", className)}>
       <div className="min-w-full">
@@ -76,7 +116,15 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
           {days.map((day) => (
             <div
               key={day}
-              className="text-center font-medium text-xs py-1 text-neutral-600"
+              className={cn(
+                "text-center font-medium text-xs py-1 text-neutral-600 rounded-sm transition-colors cursor-pointer",
+                "hover:bg-neutral-200",
+                activeDay === day && "bg-neutral-100"
+              )}
+              onMouseEnter={() => handleDayHeaderMouseEnter(day)}
+              onMouseLeave={handleDayHeaderMouseLeave}
+              onMouseDown={() => handleDayHeaderMouseDown(day)}
+              onMouseUp={handleDayHeaderMouseUp}
             >
               {day}
             </div>
@@ -86,17 +134,33 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
         <div className="space-y-1">
           {hours.map((hour) => (
             <div key={hour} className="grid grid-cols-8 gap-1">
-              <div className="w-12 text-xs text-neutral-600 py-1 text-right pr-2 pt-0 pb-0">
+              <div 
+                className={cn(
+                  "w-12 text-xs text-neutral-600 py-1 text-right pr-2 pt-0 pb-0 rounded-sm transition-colors cursor-pointer",
+                  "hover:bg-neutral-200",
+                  activeHour === hour && "bg-neutral-100"
+                )}
+                onMouseEnter={() => handleHourHeaderMouseEnter(hour)}
+                onMouseLeave={handleHourHeaderMouseLeave}
+                onMouseDown={() => handleHourHeaderMouseDown(hour)}
+                onMouseUp={handleHourHeaderMouseUp}
+              >
                 {hour}
               </div>
               {days.map((day) => {
                 const cellId = `${day}-${hour}`;
+                const isHovered = hoveredDay === day || hoveredHour === hour;
+                const isActive = activeDay === day || activeHour === hour;
                 return (
                   <DaypartPickerCell
                     key={cellId}
                     day={day}
                     hour={hour}
                     variant="default"
+                    className={cn(
+                      isHovered && "opacity-40",
+                      isActive && "opacity-20"
+                    )}
                   />
                 );
               })}
