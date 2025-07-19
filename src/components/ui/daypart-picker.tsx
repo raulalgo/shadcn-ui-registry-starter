@@ -64,6 +64,9 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
   const [activeDay, setActiveDay] = React.useState<string | null>(null);
   const [activeHour, setActiveHour] = React.useState<string | null>(null);
 
+  // State for cell selection
+  const [selectedCells, setSelectedCells] = React.useState<Set<string>>(new Set());
+
   const getCellIntensity = (day: string, hour: string) => {
     const hourNum = Number.parseInt(hour.split(":")[0]);
     const dayIndex = days.indexOf(day);
@@ -73,6 +76,19 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
     if (hourNum >= 20 && hourNum <= 21) return 2;
     if (hourNum >= 22 && hourNum <= 23 && dayIndex >= 4) return 2;
     return 0;
+  };
+
+  const handleCellMouseUp = (day: string, hour: string) => {
+    const cellId = `${day}-${hour}`;
+    setSelectedCells(prev => {
+      const next = new Set(prev);
+      if (next.has(cellId)) {
+        next.delete(cellId);
+      } else {
+        next.add(cellId);
+      }
+      return next;
+    });
   };
 
   const handleDayHeaderMouseEnter = (day: string) => {
@@ -151,16 +167,18 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
                 const cellId = `${day}-${hour}`;
                 const isHovered = hoveredDay === day || hoveredHour === hour;
                 const isActive = activeDay === day || activeHour === hour;
+                const isSelected = selectedCells.has(cellId);
                 return (
                   <DaypartPickerCell
                     key={cellId}
                     day={day}
                     hour={hour}
-                    variant="default"
+                    variant={isSelected ? "selected" : "default"}
                     className={cn(
                       isHovered && "opacity-40",
                       isActive && "opacity-20"
                     )}
+                    onMouseUp={() => handleCellMouseUp(day, hour)}
                   />
                 );
               })}
