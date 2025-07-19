@@ -67,6 +67,11 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
   // State for cell selection
   const [selectedCells, setSelectedCells] = React.useState<Set<string>>(new Set());
 
+  // State for mouse drag range selection
+  const [dragAnchor, setDragAnchor] = React.useState<{ day: string; hour: string } | null>(null);
+  const [dragPreview, setDragPreview] = React.useState<Set<string>>(new Set());
+  const [isDragging, setIsDragging] = React.useState(false);
+
   const getCellIntensity = (day: string, hour: string) => {
     const hourNum = Number.parseInt(hour.split(":")[0]);
     const dayIndex = days.indexOf(day);
@@ -78,17 +83,76 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
     return 0;
   };
 
-  const handleCellMouseUp = (day: string, hour: string) => {
-    const cellId = `${day}-${hour}`;
-    setSelectedCells(prev => {
-      const next = new Set(prev);
-      if (next.has(cellId)) {
-        next.delete(cellId);
-      } else {
-        next.add(cellId);
+  const getCellRange = (start: { day: string; hour: string }, end: { day: string; hour: string }) => {
+    const startDayIdx = days.indexOf(start.day);
+    const endDayIdx = days.indexOf(end.day);
+    const startHourIdx = hours.indexOf(start.hour);
+    const endHourIdx = hours.indexOf(end.hour);
+    
+    const range = new Set<string>();
+    for (let d = Math.min(startDayIdx, endDayIdx); d <= Math.max(startDayIdx, endDayIdx); d++) {
+      for (let h = Math.min(startHourIdx, endHourIdx); h <= Math.max(startHourIdx, endHourIdx); h++) {
+        range.add(`${days[d]}-${hours[h]}`);
       }
-      return next;
-    });
+    }
+    return range;
+  };
+
+  const handleCellMouseDown = (day: string, hour: string) => {
+    setDragAnchor({ day, hour });
+    setIsDragging(true);
+    setDragPreview(new Set([`${day}-${hour}`]));
+  };
+
+  const handleCellMouseEnter = (day: string, hour: string) => {
+    if (isDragging && dragAnchor) {
+      const range = getCellRange(dragAnchor, { day, hour });
+      setDragPreview(range);
+    }
+  };
+
+  const handleCellMouseUp = (day: string, hour: string) => {
+    if (isDragging && dragAnchor) {
+      // Check if this is a single cell selection (same cell)
+      if (dragAnchor.day === day && dragAnchor.hour === hour) {
+        // Single cell toggle
+        const cellId = `${day}-${hour}`;
+        setSelectedCells(prev => {
+          const next = new Set(prev);
+          if (next.has(cellId)) {
+            next.delete(cellId);
+          } else {
+            next.add(cellId);
+          }
+          return next;
+        });
+      } else {
+        // Range selection
+        const range = getCellRange(dragAnchor, { day, hour });
+        setSelectedCells(prev => {
+          const next = new Set(prev);
+          range.forEach(cellId => next.add(cellId));
+          return next;
+        });
+      }
+      
+      // Clear drag state
+      setDragAnchor(null);
+      setDragPreview(new Set());
+      setIsDragging(false);
+    } else {
+      // Individual cell toggle (existing logic)
+      const cellId = `${day}-${hour}`;
+      setSelectedCells(prev => {
+        const next = new Set(prev);
+        if (next.has(cellId)) {
+          next.delete(cellId);
+        } else {
+          next.add(cellId);
+        }
+        return next;
+      });
+    }
   };
 
   const handleDayHeaderMouseEnter = (day: string) => {
@@ -155,6 +219,20 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
     });
   };
 
+  // Global mouse up handler to cancel drag if mouse up happens outside cells
+  React.useEffect(() => {
+    if (!isDragging) return;
+    
+    const handleGlobalMouseUp = () => {
+      setDragAnchor(null);
+      setDragPreview(new Set());
+      setIsDragging(false);
+    };
+    
+    window.addEventListener('mouseup', handleGlobalMouseUp);
+    return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
+  }, [isDragging]);
+
   return (
     <div className={cn("flex-1 overflow-auto", className)}>
       <div className="min-w-full">
@@ -200,6 +278,7 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
                 const isHovered = hoveredDay === day || hoveredHour === hour;
                 const isActive = activeDay === day || activeHour === hour;
                 const isSelected = selectedCells.has(cellId);
+                const isInDragPreview = dragPreview.has(cellId);
                 return (
                   <DaypartPickerCell
                     key={cellId}
@@ -208,8 +287,11 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
                     variant={isSelected ? "selected" : "default"}
                     className={cn(
                       isHovered && "opacity-40",
-                      isActive && "opacity-20"
+                      isActive && "opacity-20",
+                      isInDragPreview && !isSelected && "opacity-60"
                     )}
+                    onMouseDown={() => handleCellMouseDown(day, hour)}
+                    onMouseEnter={() => handleCellMouseEnter(day, hour)}
                     onMouseUp={() => handleCellMouseUp(day, hour)}
                   />
                 );
