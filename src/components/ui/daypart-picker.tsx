@@ -1,8 +1,55 @@
+"use client";
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 
 export interface DaypartPickerProps {
   className?: string;
+}
+
+const daypartPickerCellVariants = cva(
+  "w-full h-5 rounded-sm bg-primary-200 transition-all hover:opacity-40 active:opacity-20",
+  {
+    variants: {
+        variant: {
+        default: "",
+        selected: "bg-primary-800",
+      }
+    }
+  }
+);
+
+interface DaypartPickerCellProps extends VariantProps<typeof daypartPickerCellVariants> {
+  day: string;
+  hour: string;
+  variant: "default" | "selected";
+  className?: string;
+  onMouseEnter?: (e: React.MouseEvent) => void;
+  onMouseDown?: (e: React.MouseEvent) => void;
+  onMouseUp?: (e: React.MouseEvent) => void;
+}
+
+function DaypartPickerCell({ 
+  day, 
+  hour, 
+  variant,
+  className,
+  onMouseEnter,
+  onMouseDown,
+  onMouseUp 
+}: DaypartPickerCellProps) {
+  return (
+    <button
+      type="button"
+      className={cn(
+        daypartPickerCellVariants({variant, className})
+      )}
+      onMouseEnter={onMouseEnter}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+      tabIndex={0}
+    />
+  );
 }
 
 export function DaypartPicker({ className }: DaypartPickerProps) {
@@ -18,21 +65,6 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
     if (hourNum >= 20 && hourNum <= 21) return 2;
     if (hourNum >= 22 && hourNum <= 23 && dayIndex >= 4) return 2;
     return 0;
-  };
-
-  const getCellColor = (intensity: number) => {
-    switch (intensity) {
-      case 0:
-        return "bg-yellow-200";
-      case 1:
-        return "bg-yellow-200 border-2 border-primary-600";
-      case 2:
-        return "bg-yellow-400";
-      case 3:
-        return "bg-yellow-600";
-      default:
-        return "bg-yellow-200";
-    }
   };
 
   return (
@@ -59,16 +91,12 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
               </div>
               {days.map((day) => {
                 const cellId = `${day}-${hour}`;
-                const intensity = getCellIntensity(day, hour);
                 return (
-                  <div
+                  <DaypartPickerCell
                     key={cellId}
-                    className={cn(
-                      "w-full transition-all rounded-sm box-border",
-                      getCellColor(intensity),
-                      "border border-neutral-300"
-                    )}
-                    style={{ height: "20px" }}
+                    day={day}
+                    hour={hour}
+                    variant="default"
                   />
                 );
               })}
@@ -78,4 +106,57 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
       </div>
     </div>
   );
-} 
+}
+
+export { daypartPickerCellVariants }; 
+
+/*
+
+intensity: {
+        0: "bg-yellow-200",
+        1: "bg-yellow-200 border-2 border-primary-600",
+        2: "bg-yellow-400",
+        3: "bg-yellow-600",
+      },
+
+
+
+ variants: {
+      mode: {
+        default: "",
+        intensity: "",
+      },
+      
+      selected: {
+        true: "bg-primary-800",
+        false: "bg-primary-300",
+      },
+      hovered: {
+        true: "opacity-80",
+        false: "",
+      },
+      active: {
+        true: "opacity-60",
+        false: "",
+      },
+    },
+    compoundVariants: [
+      // When in intensity mode, ignore selected state
+      {
+        mode: "intensity",
+        selected: true,
+        className: "",
+      },
+      {
+        mode: "intensity",
+        selected: false,
+        className: "",
+      },
+    ],
+    defaultVariants: {
+      mode: "default",
+      selected: false,
+      hovered: false,
+      active: false,
+    },     
+      */
