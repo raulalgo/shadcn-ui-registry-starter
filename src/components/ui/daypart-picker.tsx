@@ -111,16 +111,48 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
     setActiveDay(day);
   };
 
-  const handleDayHeaderMouseUp = () => {
+  const handleDayHeaderMouseUp = (day: string) => {
     setActiveDay(null);
+    
+    // Toggle selection for all cells in this row
+    const dayCells = hours.map(hour => `${day}-${hour}`);
+    const allSelected = dayCells.every(cellId => selectedCells.has(cellId));
+    
+    setSelectedCells(prev => {
+      const next = new Set(prev);
+      if (allSelected) {
+        // If all cells are selected, deselect all
+        dayCells.forEach(cellId => next.delete(cellId));
+      } else {
+        // If not all cells are selected, select all
+        dayCells.forEach(cellId => next.add(cellId));
+      }
+      return next;
+    });
   };
 
   const handleHourHeaderMouseDown = (hour: string) => {
     setActiveHour(hour);
   };
 
-  const handleHourHeaderMouseUp = () => {
+  const handleHourHeaderMouseUp = (hour: string) => {
     setActiveHour(null);
+    
+    // Toggle selection for all cells in this column
+    const hourCells = days.map(day => `${day}-${hour}`);
+    const allSelected = hourCells.every(cellId => selectedCells.has(cellId));
+    
+    setSelectedCells(prev => {
+      const next = new Set(prev);
+      if (allSelected) {
+        // If all cells are selected, deselect all
+        hourCells.forEach(cellId => next.delete(cellId));
+      } else {
+        // If not all cells are selected, select all
+        hourCells.forEach(cellId => next.add(cellId));
+      }
+      return next;
+    });
   };
 
   return (
@@ -140,7 +172,7 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
               onMouseEnter={() => handleDayHeaderMouseEnter(day)}
               onMouseLeave={handleDayHeaderMouseLeave}
               onMouseDown={() => handleDayHeaderMouseDown(day)}
-              onMouseUp={handleDayHeaderMouseUp}
+              onMouseUp={(e) => handleDayHeaderMouseUp(day)}
             >
               {day}
             </div>
@@ -159,7 +191,7 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
                 onMouseEnter={() => handleHourHeaderMouseEnter(hour)}
                 onMouseLeave={handleHourHeaderMouseLeave}
                 onMouseDown={() => handleHourHeaderMouseDown(hour)}
-                onMouseUp={handleHourHeaderMouseUp}
+                onMouseUp={(e) => handleHourHeaderMouseUp(hour)}
               >
                 {hour}
               </div>
