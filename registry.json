@@ -285,7 +285,9 @@
             "description": "A panel for daypart selection actions",
             "registryDependencies": [
                 "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/action-panel.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/action-panel.json", 
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/daypart-picker.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
             ],
             "files": [
                 {
