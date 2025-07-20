@@ -77,6 +77,11 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
   const [headerDragPreview, setHeaderDragPreview] = React.useState<Set<string>>(new Set());
   const [isHeaderDragging, setIsHeaderDragging] = React.useState(false);
 
+  // State for shift+click range selection
+  const [shiftAnchor, setShiftAnchor] = React.useState<{ type: 'cell' | 'header', day?: string, hour?: string, headerType?: 'day' | 'hour', headerValue?: string } | null>(null);
+  const [shiftPreview, setShiftPreview] = React.useState<Set<string>>(new Set());
+  const [shiftHeld, setShiftHeld] = React.useState(false);
+
   const getCellIntensity = (day: string, hour: string) => {
     const hourNum = Number.parseInt(hour.split(":")[0]);
     const dayIndex = days.indexOf(day);
@@ -114,9 +119,34 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
       const range = getCellRange(dragAnchor, { day, hour });
       setDragPreview(range);
     }
+    // Shift+click preview
+    if (shiftHeld && shiftAnchor && shiftAnchor.type === 'cell') {
+      const range = getCellRange({ day: shiftAnchor.day!, hour: shiftAnchor.hour! }, { day, hour });
+      setShiftPreview(range);
+    }
   };
 
   const handleCellMouseUp = (day: string, hour: string) => {
+    if (shiftHeld) {
+      // Shift+click range selection
+      if (!shiftAnchor) {
+        // First shift+click: set anchor
+        setShiftAnchor({ type: 'cell', day, hour });
+        setShiftPreview(new Set([`${day}-${hour}`]));
+      } else if (shiftAnchor.type === 'cell') {
+        // Second shift+click: confirm range
+        const range = getCellRange({ day: shiftAnchor.day!, hour: shiftAnchor.hour! }, { day, hour });
+        setSelectedCells(prev => {
+          const next = new Set(prev);
+          range.forEach(cellId => next.add(cellId));
+          return next;
+        });
+        setShiftAnchor(null);
+        setShiftPreview(new Set());
+      }
+      return;
+    }
+
     if (isDragging && dragAnchor) {
       // Check if this is a single cell selection (same cell)
       if (dragAnchor.day === day && dragAnchor.hour === hour) {
@@ -171,6 +201,16 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
       }
       setHeaderDragPreview(range);
     }
+    // Shift+click preview for headers
+    if (shiftHeld && shiftAnchor && shiftAnchor.type === 'header' && shiftAnchor.headerType === 'day') {
+      const startIdx = Math.min(days.indexOf(shiftAnchor.headerValue!), days.indexOf(day));
+      const endIdx = Math.max(days.indexOf(shiftAnchor.headerValue!), days.indexOf(day));
+      const range = new Set<string>();
+      for (let d = startIdx; d <= endIdx; d++) {
+        hours.forEach(hour => range.add(`${days[d]}-${hour}`));
+      }
+      setShiftPreview(range);
+    }
   };
 
   const handleDayHeaderMouseLeave = () => {
@@ -188,6 +228,16 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
       }
       setHeaderDragPreview(range);
     }
+    // Shift+click preview for headers
+    if (shiftHeld && shiftAnchor && shiftAnchor.type === 'header' && shiftAnchor.headerType === 'hour') {
+      const startIdx = Math.min(hours.indexOf(shiftAnchor.headerValue!), hours.indexOf(hour));
+      const endIdx = Math.max(hours.indexOf(shiftAnchor.headerValue!), hours.indexOf(hour));
+      const range = new Set<string>();
+      for (let h = startIdx; h <= endIdx; h++) {
+        days.forEach(day => range.add(`${day}-${hours[h]}`));
+      }
+      setShiftPreview(range);
+    }
   };
 
   const handleHourHeaderMouseLeave = () => {
@@ -204,6 +254,32 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
 
   const handleDayHeaderMouseUp = (day: string) => {
     setActiveDay(null);
+    
+    if (shiftHeld) {
+      // Shift+click range selection for headers
+      if (!shiftAnchor) {
+        // First shift+click: set anchor
+        setShiftAnchor({ type: 'header', headerType: 'day', headerValue: day });
+        const dayCells = hours.map(hour => `${day}-${hour}`);
+        setShiftPreview(new Set(dayCells));
+      } else if (shiftAnchor.type === 'header' && shiftAnchor.headerType === 'day') {
+        // Second shift+click: confirm range
+        const startIdx = Math.min(days.indexOf(shiftAnchor.headerValue!), days.indexOf(day));
+        const endIdx = Math.max(days.indexOf(shiftAnchor.headerValue!), days.indexOf(day));
+        const range = new Set<string>();
+        for (let d = startIdx; d <= endIdx; d++) {
+          hours.forEach(hour => range.add(`${days[d]}-${hour}`));
+        }
+        setSelectedCells(prev => {
+          const next = new Set(prev);
+          range.forEach(cellId => next.add(cellId));
+          return next;
+        });
+        setShiftAnchor(null);
+        setShiftPreview(new Set());
+      }
+      return;
+    }
     
     if (isHeaderDragging && headerDragAnchor && headerDragAnchor.type === 'day') {
       // Check if this is a single row selection (same header)
@@ -253,6 +329,32 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
 
   const handleHourHeaderMouseUp = (hour: string) => {
     setActiveHour(null);
+    
+    if (shiftHeld) {
+      // Shift+click range selection for headers
+      if (!shiftAnchor) {
+        // First shift+click: set anchor
+        setShiftAnchor({ type: 'header', headerType: 'hour', headerValue: hour });
+        const hourCells = days.map(day => `${day}-${hour}`);
+        setShiftPreview(new Set(hourCells));
+      } else if (shiftAnchor.type === 'header' && shiftAnchor.headerType === 'hour') {
+        // Second shift+click: confirm range
+        const startIdx = Math.min(hours.indexOf(shiftAnchor.headerValue!), hours.indexOf(hour));
+        const endIdx = Math.max(hours.indexOf(shiftAnchor.headerValue!), hours.indexOf(hour));
+        const range = new Set<string>();
+        for (let h = startIdx; h <= endIdx; h++) {
+          days.forEach(day => range.add(`${day}-${hours[h]}`));
+        }
+        setSelectedCells(prev => {
+          const next = new Set(prev);
+          range.forEach(cellId => next.add(cellId));
+          return next;
+        });
+        setShiftAnchor(null);
+        setShiftPreview(new Set());
+      }
+      return;
+    }
     
     if (isHeaderDragging && headerDragAnchor && headerDragAnchor.type === 'hour') {
       // Check if this is a single column selection (same header)
@@ -309,6 +411,25 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
     return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
   }, [isDragging, isHeaderDragging]);
 
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Shift") setShiftHeld(true);
+    };
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === "Shift") {
+        setShiftHeld(false);
+        setShiftAnchor(null);
+        setShiftPreview(new Set());
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+
   return (
     <div className={cn("flex-1 overflow-auto", className)}>
       <div className="min-w-full">
@@ -356,6 +477,7 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
                 const isSelected = selectedCells.has(cellId);
                 const isInDragPreview = dragPreview.has(cellId);
                 const isInHeaderDragPreview = headerDragPreview.has(cellId);
+                const isInShiftPreview = shiftPreview.has(cellId);
                 return (
                   <DaypartPickerCell
                     key={cellId}
@@ -366,7 +488,8 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
                       isHovered && "opacity-40",
                       isActive && "opacity-20",
                       isInDragPreview && !isSelected && "opacity-60",
-                      isInHeaderDragPreview && !isSelected && "opacity-60"
+                      isInHeaderDragPreview && !isSelected && "opacity-60",
+                      isInShiftPreview && !isSelected && "opacity-60"
                     )}
                     onMouseDown={() => handleCellMouseDown(day, hour)}
                     onMouseEnter={() => handleCellMouseEnter(day, hour)}
