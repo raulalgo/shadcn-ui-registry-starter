@@ -319,7 +319,7 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
             <div
               key={day}
               className={cn(
-                "text-center font-medium text-xs py-1 text-neutral-600 rounded-sm transition-colors cursor-pointer",
+                "text-center font-medium text-xs py-1 text-neutral-600 rounded-sm transition-colors cursor-pointer select-none",
                 "hover:bg-neutral-200",
                 activeDay === day && "bg-neutral-100"
               )}
@@ -338,7 +338,7 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
             <div key={hour} className="grid grid-cols-8 gap-1">
               <div 
                 className={cn(
-                  "w-12 text-xs text-neutral-600 py-1 text-right pr-2 pt-0 pb-0 rounded-sm transition-colors cursor-pointer",
+                  "w-12 text-xs text-neutral-600 py-1 text-right pr-2 pt-0 pb-0 rounded-sm transition-colors cursor-pointer select-none",
                   "hover:bg-neutral-200",
                   activeHour === hour && "bg-neutral-100"
                 )}
