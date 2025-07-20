@@ -72,6 +72,11 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
   const [dragPreview, setDragPreview] = React.useState<Set<string>>(new Set());
   const [isDragging, setIsDragging] = React.useState(false);
 
+  // State for header drag range selection
+  const [headerDragAnchor, setHeaderDragAnchor] = React.useState<{ type: 'day' | 'hour', value: string } | null>(null);
+  const [headerDragPreview, setHeaderDragPreview] = React.useState<Set<string>>(new Set());
+  const [isHeaderDragging, setIsHeaderDragging] = React.useState(false);
+
   const getCellIntensity = (day: string, hour: string) => {
     const hourNum = Number.parseInt(hour.split(":")[0]);
     const dayIndex = days.indexOf(day);
@@ -157,6 +162,15 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
 
   const handleDayHeaderMouseEnter = (day: string) => {
     setHoveredDay(day);
+    if (isHeaderDragging && headerDragAnchor && headerDragAnchor.type === 'day') {
+      const startIdx = Math.min(days.indexOf(headerDragAnchor.value), days.indexOf(day));
+      const endIdx = Math.max(days.indexOf(headerDragAnchor.value), days.indexOf(day));
+      const range = new Set<string>();
+      for (let d = startIdx; d <= endIdx; d++) {
+        hours.forEach(hour => range.add(`${days[d]}-${hour}`));
+      }
+      setHeaderDragPreview(range);
+    }
   };
 
   const handleDayHeaderMouseLeave = () => {
@@ -165,6 +179,15 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
 
   const handleHourHeaderMouseEnter = (hour: string) => {
     setHoveredHour(hour);
+    if (isHeaderDragging && headerDragAnchor && headerDragAnchor.type === 'hour') {
+      const startIdx = Math.min(hours.indexOf(headerDragAnchor.value), hours.indexOf(hour));
+      const endIdx = Math.max(hours.indexOf(headerDragAnchor.value), hours.indexOf(hour));
+      const range = new Set<string>();
+      for (let h = startIdx; h <= endIdx; h++) {
+        days.forEach(day => range.add(`${day}-${hours[h]}`));
+      }
+      setHeaderDragPreview(range);
+    }
   };
 
   const handleHourHeaderMouseLeave = () => {
@@ -173,65 +196,118 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
 
   const handleDayHeaderMouseDown = (day: string) => {
     setActiveDay(day);
+    setHeaderDragAnchor({ type: 'day', value: day });
+    setIsHeaderDragging(true);
+    const dayCells = hours.map(hour => `${day}-${hour}`);
+    setHeaderDragPreview(new Set(dayCells));
   };
 
   const handleDayHeaderMouseUp = (day: string) => {
     setActiveDay(null);
     
-    // Toggle selection for all cells in this row
-    const dayCells = hours.map(hour => `${day}-${hour}`);
-    const allSelected = dayCells.every(cellId => selectedCells.has(cellId));
-    
-    setSelectedCells(prev => {
-      const next = new Set(prev);
-      if (allSelected) {
-        // If all cells are selected, deselect all
-        dayCells.forEach(cellId => next.delete(cellId));
+    if (isHeaderDragging && headerDragAnchor && headerDragAnchor.type === 'day') {
+      // Check if this is a single row selection (same header)
+      if (headerDragAnchor.value === day) {
+        // Single row toggle
+        const dayCells = hours.map(hour => `${day}-${hour}`);
+        const allSelected = dayCells.every(cellId => selectedCells.has(cellId));
+        
+        setSelectedCells(prev => {
+          const next = new Set(prev);
+          if (allSelected) {
+            dayCells.forEach(cellId => next.delete(cellId));
+          } else {
+            dayCells.forEach(cellId => next.add(cellId));
+          }
+          return next;
+        });
       } else {
-        // If not all cells are selected, select all
-        dayCells.forEach(cellId => next.add(cellId));
+        // Range selection
+        const startIdx = Math.min(days.indexOf(headerDragAnchor.value), days.indexOf(day));
+        const endIdx = Math.max(days.indexOf(headerDragAnchor.value), days.indexOf(day));
+        const range = new Set<string>();
+        for (let d = startIdx; d <= endIdx; d++) {
+          hours.forEach(hour => range.add(`${days[d]}-${hour}`));
+        }
+        setSelectedCells(prev => {
+          const next = new Set(prev);
+          range.forEach(cellId => next.add(cellId));
+          return next;
+        });
       }
-      return next;
-    });
+      
+      // Clear header drag state
+      setHeaderDragAnchor(null);
+      setHeaderDragPreview(new Set());
+      setIsHeaderDragging(false);
+    }
   };
 
   const handleHourHeaderMouseDown = (hour: string) => {
     setActiveHour(hour);
+    setHeaderDragAnchor({ type: 'hour', value: hour });
+    setIsHeaderDragging(true);
+    const hourCells = days.map(day => `${day}-${hour}`);
+    setHeaderDragPreview(new Set(hourCells));
   };
 
   const handleHourHeaderMouseUp = (hour: string) => {
     setActiveHour(null);
     
-    // Toggle selection for all cells in this column
-    const hourCells = days.map(day => `${day}-${hour}`);
-    const allSelected = hourCells.every(cellId => selectedCells.has(cellId));
-    
-    setSelectedCells(prev => {
-      const next = new Set(prev);
-      if (allSelected) {
-        // If all cells are selected, deselect all
-        hourCells.forEach(cellId => next.delete(cellId));
+    if (isHeaderDragging && headerDragAnchor && headerDragAnchor.type === 'hour') {
+      // Check if this is a single column selection (same header)
+      if (headerDragAnchor.value === hour) {
+        // Single column toggle
+        const hourCells = days.map(day => `${day}-${hour}`);
+        const allSelected = hourCells.every(cellId => selectedCells.has(cellId));
+        
+        setSelectedCells(prev => {
+          const next = new Set(prev);
+          if (allSelected) {
+            hourCells.forEach(cellId => next.delete(cellId));
+          } else {
+            hourCells.forEach(cellId => next.add(cellId));
+          }
+          return next;
+        });
       } else {
-        // If not all cells are selected, select all
-        hourCells.forEach(cellId => next.add(cellId));
+        // Range selection
+        const startIdx = Math.min(hours.indexOf(headerDragAnchor.value), hours.indexOf(hour));
+        const endIdx = Math.max(hours.indexOf(headerDragAnchor.value), hours.indexOf(hour));
+        const range = new Set<string>();
+        for (let h = startIdx; h <= endIdx; h++) {
+          days.forEach(day => range.add(`${day}-${hours[h]}`));
+        }
+        setSelectedCells(prev => {
+          const next = new Set(prev);
+          range.forEach(cellId => next.add(cellId));
+          return next;
+        });
       }
-      return next;
-    });
+      
+      // Clear header drag state
+      setHeaderDragAnchor(null);
+      setHeaderDragPreview(new Set());
+      setIsHeaderDragging(false);
+    }
   };
 
   // Global mouse up handler to cancel drag if mouse up happens outside cells
   React.useEffect(() => {
-    if (!isDragging) return;
+    if (!isDragging && !isHeaderDragging) return;
     
     const handleGlobalMouseUp = () => {
       setDragAnchor(null);
       setDragPreview(new Set());
       setIsDragging(false);
+      setHeaderDragAnchor(null);
+      setHeaderDragPreview(new Set());
+      setIsHeaderDragging(false);
     };
     
     window.addEventListener('mouseup', handleGlobalMouseUp);
     return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
-  }, [isDragging]);
+  }, [isDragging, isHeaderDragging]);
 
   return (
     <div className={cn("flex-1 overflow-auto", className)}>
@@ -279,6 +355,7 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
                 const isActive = activeDay === day || activeHour === hour;
                 const isSelected = selectedCells.has(cellId);
                 const isInDragPreview = dragPreview.has(cellId);
+                const isInHeaderDragPreview = headerDragPreview.has(cellId);
                 return (
                   <DaypartPickerCell
                     key={cellId}
@@ -288,7 +365,8 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
                     className={cn(
                       isHovered && "opacity-40",
                       isActive && "opacity-20",
-                      isInDragPreview && !isSelected && "opacity-60"
+                      isInDragPreview && !isSelected && "opacity-60",
+                      isInHeaderDragPreview && !isSelected && "opacity-60"
                     )}
                     onMouseDown={() => handleCellMouseDown(day, hour)}
                     onMouseEnter={() => handleCellMouseEnter(day, hour)}
