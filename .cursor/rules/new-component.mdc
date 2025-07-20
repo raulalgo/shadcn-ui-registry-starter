@@ -4,7 +4,7 @@ alwaysApply: true
 
 When I ask you to create the scaffolding of a new component it should meet four criteria:
 1. Component file created in the folder /components/ui with the code that defines the component look and behavior
-2. Another file with the same name as the component file in the folder /app/(design)/components/[slug]/(demos)/{name-of-component}.tsx. Reference a single instance labeled as default and that uses the component without providing any props. See the example for reference of the syntax:
+2. Another file with the same name as the component file in the folder /app/(design)/components/[slug]/(demos)/{name-of-component}.tsx. Reference a single instance labeled as default and that uses the component without providing any props. See the example for reference of the syntax. Do only this, and no other traditional react component structure
 ```
 import { new-component } from "@/components/ui/new-component";
 
@@ -15,7 +15,7 @@ export const new-component = {
   },
 };
 ```
-
+3. Don't create any folder or index.tsx in the (demos) folder other than the single one specified in point 2.
 4. Add the new component to the exports in /app/(design)/components/[slug]/(demos)/index.tsx. Don't forget to import it first.
 3. Add the component to shadcn's registry in registry.json
 5. Update registry-sidebar.tsx with the new component so it is accesible through the navigation under the section "components"

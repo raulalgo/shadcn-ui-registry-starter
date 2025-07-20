@@ -28,6 +28,13 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
     day?: string;
     hour?: string;
   } | null>(null);
+  const [isShiftPreview, setIsShiftPreview] = React.useState(false);
+  const [shiftPreviewCells, setShiftPreviewCells] = React.useState<Set<string>>(new Set());
+  const [shiftPreviewStart, setShiftPreviewStart] = React.useState<{
+    type: 'cell' | 'day' | 'hour',
+    day?: string,
+    hour?: string
+  } | null>(null);
 
   const days = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
   const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, "0")}:00`);
@@ -64,31 +71,55 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
     }
   };
 
+  // Listen for shift key up/down to manage preview state
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Shift') setIsShiftPreview(true);
+    };
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === 'Shift') {
+        setIsShiftPreview(false);
+        setShiftPreviewCells(new Set());
+        setShiftPreviewStart(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
+  const handleCellMouseOver = (day: string, hour: string, event?: React.MouseEvent) => {
+    if (isShiftPreview && shiftPreviewStart && shiftPreviewStart.type === 'cell') {
+      setShiftPreviewCells(getCellRange({ day: shiftPreviewStart.day!, hour: shiftPreviewStart.hour! }, { day, hour }));
+    }
+  };
+
   const handleCellClick = (day: string, hour: string, event?: React.MouseEvent) => {
+    if (event?.shiftKey) {
+      if (!shiftPreviewStart) {
+        setShiftPreviewStart({ type: 'cell', day, hour });
+        setShiftPreviewCells(new Set([`${day}-${hour}`]));
+      } else {
+        const range = getCellRange({ day: shiftPreviewStart.day!, hour: shiftPreviewStart.hour! }, { day, hour });
+        const newSelected = new Set(selectedCells);
+        range.forEach(cell => newSelected.add(cell));
+        setSelectedCells(newSelected);
+        setShiftPreviewCells(new Set());
+        setShiftPreviewStart(null);
+      }
+      setLastClickedCell(`${day}-${hour}`);
+      return;
+    }
+    // Single click: toggle cell
     const cellId = `${day}-${hour}`;
     const newSelected = new Set(selectedCells);
-    if (event?.shiftKey && lastClickedCell) {
-      const [lastDay, lastHour] = lastClickedCell.split("-");
-      const dayIndex = days.indexOf(day);
-      const lastDayIndex = days.indexOf(lastDay);
-      const hourIndex = hours.indexOf(hour);
-      const lastHourIndex = hours.indexOf(lastHour);
-      const startDay = Math.min(dayIndex, lastDayIndex);
-      const endDay = Math.max(dayIndex, lastDayIndex);
-      const startHour = Math.min(hourIndex, lastHourIndex);
-      const endHour = Math.max(hourIndex, lastHourIndex);
-      for (let d = startDay; d <= endDay; d++) {
-        for (let h = startHour; h <= endHour; h++) {
-          const rangeCell = `${days[d]}-${hours[h]}`;
-          newSelected.add(rangeCell);
-        }
-      }
+    if (newSelected.has(cellId)) {
+      newSelected.delete(cellId);
     } else {
-      if (newSelected.has(cellId)) {
-        newSelected.delete(cellId);
-      } else {
-        newSelected.add(cellId);
-      }
+      newSelected.add(cellId);
     }
     setSelectedCells(newSelected);
     setLastClickedCell(cellId);
@@ -98,47 +129,71 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
     setSelectedCells(new Set());
   };
 
+  const handleDayMouseOver = (day: string, event?: React.MouseEvent) => {
+    if (isShiftPreview && shiftPreviewStart && shiftPreviewStart.type === 'day') {
+      setShiftPreviewCells(getDayRange(shiftPreviewStart.day!, day));
+    }
+  };
+
   const handleDayClick = (day: string, event?: React.MouseEvent) => {
+    if (event?.shiftKey) {
+      if (!shiftPreviewStart) {
+        setShiftPreviewStart({ type: 'day', day });
+        setShiftPreviewCells(new Set(hours.map(hour => `${day}-${hour}`)));
+      } else if (shiftPreviewStart.type === 'day') {
+        const range = getDayRange(shiftPreviewStart.day!, day);
+        const newSelected = new Set(selectedCells);
+        range.forEach(cell => newSelected.add(cell));
+        setSelectedCells(newSelected);
+        setShiftPreviewCells(new Set());
+        setShiftPreviewStart(null);
+      }
+      setLastClickedHeader({ type: 'day', value: day });
+      return;
+    }
+    // Single click: toggle all or none for day column
+    const dayColumnCells = hours.map((hour) => `${day}-${hour}`);
     const newSelected = new Set(selectedCells);
-    if (event?.shiftKey && lastClickedHeader && lastClickedHeader.type === 'day') {
-      // Range select columns
-      const startIdx = Math.min(days.indexOf(day), days.indexOf(lastClickedHeader.value));
-      const endIdx = Math.max(days.indexOf(day), days.indexOf(lastClickedHeader.value));
-      for (let d = startIdx; d <= endIdx; d++) {
-        const dayColumnCells = hours.map((hour) => `${days[d]}-${hour}`);
-        dayColumnCells.forEach((cellId) => newSelected.add(cellId));
-      }
+    const allSelected = dayColumnCells.every((cellId) => newSelected.has(cellId));
+    if (allSelected) {
+      dayColumnCells.forEach((cellId) => newSelected.delete(cellId));
     } else {
-      const dayColumnCells = hours.map((hour) => `${day}-${hour}`);
-      const allSelected = dayColumnCells.every((cellId) => newSelected.has(cellId));
-      if (allSelected) {
-        dayColumnCells.forEach((cellId) => newSelected.delete(cellId));
-      } else {
-        dayColumnCells.forEach((cellId) => newSelected.add(cellId));
-      }
+      dayColumnCells.forEach((cellId) => newSelected.add(cellId));
     }
     setSelectedCells(newSelected);
     setLastClickedHeader({ type: 'day', value: day });
   };
 
+  const handleHourMouseOver = (hour: string, event?: React.MouseEvent) => {
+    if (isShiftPreview && shiftPreviewStart && shiftPreviewStart.type === 'hour') {
+      setShiftPreviewCells(getHourRange(shiftPreviewStart.hour!, hour));
+    }
+  };
+
   const handleHourClick = (hour: string, event?: React.MouseEvent) => {
+    if (event?.shiftKey) {
+      if (!shiftPreviewStart) {
+        setShiftPreviewStart({ type: 'hour', hour });
+        setShiftPreviewCells(new Set(days.map(day => `${day}-${hour}`)));
+      } else if (shiftPreviewStart.type === 'hour') {
+        const range = getHourRange(shiftPreviewStart.hour!, hour);
+        const newSelected = new Set(selectedCells);
+        range.forEach(cell => newSelected.add(cell));
+        setSelectedCells(newSelected);
+        setShiftPreviewCells(new Set());
+        setShiftPreviewStart(null);
+      }
+      setLastClickedHeader({ type: 'hour', value: hour });
+      return;
+    }
+    // Single click: toggle all or none for hour row
+    const hourRowCells = days.map((day) => `${day}-${hour}`);
     const newSelected = new Set(selectedCells);
-    if (event?.shiftKey && lastClickedHeader && lastClickedHeader.type === 'hour') {
-      // Range select rows
-      const startIdx = Math.min(hours.indexOf(hour), hours.indexOf(lastClickedHeader.value));
-      const endIdx = Math.max(hours.indexOf(hour), hours.indexOf(lastClickedHeader.value));
-      for (let h = startIdx; h <= endIdx; h++) {
-        const hourRowCells = days.map((day) => `${day}-${hours[h]}`);
-        hourRowCells.forEach((cellId) => newSelected.add(cellId));
-      }
+    const allSelected = hourRowCells.every((cellId) => newSelected.has(cellId));
+    if (allSelected) {
+      hourRowCells.forEach((cellId) => newSelected.delete(cellId));
     } else {
-      const hourRowCells = days.map((day) => `${day}-${hour}`);
-      const allSelected = hourRowCells.every((cellId) => newSelected.has(cellId));
-      if (allSelected) {
-        hourRowCells.forEach((cellId) => newSelected.delete(cellId));
-      } else {
-        hourRowCells.forEach((cellId) => newSelected.add(cellId));
-      }
+      hourRowCells.forEach((cellId) => newSelected.add(cellId));
     }
     setSelectedCells(newSelected);
     setLastClickedHeader({ type: 'hour', value: hour });
@@ -336,6 +391,7 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                   onClick={(e) => handleDayClick(day, e)}
                   onMouseDown={() => handleDayMouseDown(day)}
                   onMouseEnter={() => handleDayMouseEnter(day)}
+                  onMouseOver={(e) => handleDayMouseOver(day, e)}
                 >
                   {day}
                 </button>
@@ -350,6 +406,7 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                     onClick={(e) => handleHourClick(hour, e)}
                     onMouseDown={() => handleHourMouseDown(hour)}
                     onMouseEnter={() => handleHourMouseEnter(hour)}
+                    onMouseOver={(e) => handleHourMouseOver(hour, e)}
                   >
                     {hour}
                   </button>
@@ -364,13 +421,15 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                           "w-full transition-all hover:opacity-80 hover:scale-105 rounded-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-1 box-border",
                           getCellColor(intensity),
                           isSelected ? "border-2 border-primary-600" : "border border-neutral-300",
-                          previewCells.has(cellId) && !isSelected ? "opacity-40" : ""
+                          previewCells.has(cellId) && !isSelected ? "opacity-40" : "",
+                          shiftPreviewCells.has(cellId) && !isSelected ? "opacity-40" : ""
                         )}
                         style={{ height: "20px" }}
                         onClick={(e) => handleCellClick(day, hour, e)}
                         onKeyDown={(e) => handleCellKeyDown(day, hour, e)}
                         onMouseDown={() => handleCellMouseDown(day, hour)}
                         onMouseEnter={() => handleCellMouseEnter(day, hour)}
+                        onMouseOver={(e) => handleCellMouseOver(day, hour, e)}
                         tabIndex={0}
                         aria-label={`Select ${day} at ${hour}`}
                       />
