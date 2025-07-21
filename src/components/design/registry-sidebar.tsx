@@ -46,6 +46,7 @@ export const componentItems = [
   { name: "Map", path: "/components/map" },
   { name: "Header Planner", path: "/components/header-planner" },
   { name: "Tabs", path: "/components/tabs" },
+  { name: "Dropdown Menu", path: "/components/dropdown-menu" },
 ];
 
 export const blockItems = [

@@ -302,13 +302,33 @@
             "title": "Daypart Picker",
             "description": "A picker for daypart selection",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/dropdown-menu.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/tabs.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
             ],
             "files": [
                 {
                     "path": "src/components/ui/daypart-picker.tsx",
                     "type": "registry:file",
                     "target": "components/ui/daypart-picker.tsx"
+                }
+            ]
+        },
+        {
+            "name": "dropdown-menu",
+            "type": "registry:ui",
+            "title": "Dropdown Menu",
+            "description": "Dropdown menu component for displaying menu options",
+            "registryDependencies": [
+                "dropdown-menu",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/dropdown-menu.tsx",
+                    "type": "registry:file",
+                    "target": "components/ui/dropdown-menu.tsx"
                 }
             ]
         }

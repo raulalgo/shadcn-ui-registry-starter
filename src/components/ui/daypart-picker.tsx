@@ -2,6 +2,10 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import * as DropdownMenu from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 export interface DaypartPickerProps {
   className?: string;
@@ -53,7 +57,6 @@ function DaypartPickerCell({
 }
 
 export function DaypartPicker({ className }: DaypartPickerProps) {
-  const days = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
   const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, "0")}:00`);
 
   // State for header hover effects
@@ -85,6 +88,25 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
   // State for shift+click range selection
   const [shiftPreview, setShiftPreview] = React.useState<Set<string>>(new Set());
   const [shiftHeld, setShiftHeld] = React.useState(false);
+
+  // Add state for tab selection and no-repeat dropdown
+  const [tab, setTab] = React.useState<string>("1week");
+  const weekOptions = [
+    "Apr 29 – May 5, 2024",
+    "May 6 – May 12, 2024",
+    "May 13 – May 19, 2024",
+  ];
+  const [noRepeatWeek, setNoRepeatWeek] = React.useState<string>(weekOptions[0]);
+
+  // For 2 weeks, double the days array
+  const days1 = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
+  // For 2 weeks, create unique day keys (MO-1, MO-2, ...)
+  const days = tab === "2week"
+    ? days1.map((d, i) => `${d}-1`).concat(days1.map((d, i) => `${d}-2`))
+    : days1;
+
+  // Remove fixed cell width, use only grid for sizing
+  const cellWidth = "";
 
   const getCellIntensity = (day: string, hour: string) => {
     const hourNum = Number.parseInt(hour.split(":")[0]);
@@ -453,36 +475,91 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
     };
   }, []);
 
+  // Clear handler
+  const handleClear = () => setSelectedCells(new Set());
+
   return (
     <div className={cn("flex-1 overflow-auto", className)}>
+      {/* Tabs and Clear button row */}
+      <div className="flex items-center justify-between mb-4">
+        <Tabs value={tab} onValueChange={setTab} className="">
+          <TabsList>
+            <TabsTrigger value="1week">1 week</TabsTrigger>
+            <TabsTrigger value="2week">2 weeks</TabsTrigger>
+            <TabsTrigger value="norepeat">No repeat</TabsTrigger>
+          </TabsList>
+        </Tabs>
+        <Button variant="medium" size="default" onClick={handleClear}>
+          Clear
+        </Button>
+      </div>
+      {/* No repeat dropdown */}
+      {tab === "norepeat" && (
+        <div className="flex justify-end mb-2">
+          <DropdownMenu.DropdownMenu>
+            <DropdownMenu.DropdownMenuTrigger asChild>
+              <Button variant="default" size="sm" className="w-full min-w-[250px] text-left justify-between pr-3">
+                <span>{noRepeatWeek}</span>
+                <ChevronDown className="ml-2 w-4 h-4 text-muted-foreground" />
+              </Button>
+            </DropdownMenu.DropdownMenuTrigger>
+            <DropdownMenu.DropdownMenuContent align="end" className="w-full min-w-[250px]">
+              {weekOptions.map((option) => (
+                <DropdownMenu.DropdownMenuItem
+                  key={option}
+                  onSelect={() => setNoRepeatWeek(option)}
+                >
+                  {option}
+                </DropdownMenu.DropdownMenuItem>
+              ))}
+            </DropdownMenu.DropdownMenuContent>
+          </DropdownMenu.DropdownMenu>
+        </div>
+      )}
+      {/* Picker grid */}
       <div className="min-w-full">
         {/* Header Row */}
-        <div className="grid grid-cols-8 gap-1 mb-2">
-          <div className="w-12"></div>
-          {days.map((day) => (
-            <div
-              key={day}
-              className={cn(
-                "text-center font-medium text-xs py-1 text-neutral-600 rounded-sm transition-colors cursor-pointer select-none",
-                "hover:bg-neutral-200",
-                activeDay === day && "bg-neutral-100"
-              )}
-              onMouseEnter={() => handleDayHeaderMouseEnter(day)}
-              onMouseLeave={handleDayHeaderMouseLeave}
-              onMouseDown={() => handleDayHeaderMouseDown(day)}
-              onMouseUp={(e) => handleDayHeaderMouseUp(day)}
-            >
-              {day}
-            </div>
-          ))}
+        <div
+          className={"grid gap-1 mb-2"}
+          style={{ gridTemplateColumns: `minmax(2.5rem,auto) repeat(${days.length}, minmax(0,1fr))` }}
+        >
+          <div></div>
+          {days.map((day, i) => {
+            // For 2 weeks, show just the day label (MO, TU, ...)
+            const label = tab === "2week" ? day.split("-")[0] : day;
+            // Unique hover/active logic per column
+            const isHovered = hoveredDay === day;
+            const isActive = activeDay === day;
+            return (
+              <div
+                key={day}
+                className={cn(
+                  `text-center font-medium text-xs py-1 text-neutral-600 rounded-sm transition-colors cursor-pointer select-none ${cellWidth}`,
+                  "hover:bg-neutral-200",
+                  isActive && "bg-neutral-100",
+                  isHovered && "opacity-40"
+                )}
+                onMouseEnter={() => handleDayHeaderMouseEnter(day)}
+                onMouseLeave={handleDayHeaderMouseLeave}
+                onMouseDown={() => handleDayHeaderMouseDown(day)}
+                onMouseUp={(e) => handleDayHeaderMouseUp(day)}
+              >
+                {label}
+              </div>
+            );
+          })}
         </div>
         {/* Time Rows */}
         <div className="space-y-1">
           {hours.map((hour) => (
-            <div key={hour} className="grid grid-cols-8 gap-1">
-              <div 
+            <div
+              key={hour}
+              className={"grid gap-1"}
+              style={{ gridTemplateColumns: `minmax(2.5rem,auto) repeat(${days.length}, minmax(0,1fr))` }}
+            >
+              <div
                 className={cn(
-                  "w-12 text-xs text-neutral-600 py-1 text-right pr-2 pt-0 pb-0 rounded-sm transition-colors cursor-pointer select-none",
+                  `text-xs text-neutral-600 py-1 text-right pr-2 pt-0 pb-0 rounded-sm transition-colors cursor-pointer select-none ${cellWidth}`,
                   "hover:bg-neutral-200",
                   activeHour === hour && "bg-neutral-100"
                 )}
@@ -494,6 +571,7 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
                 {hour}
               </div>
               {days.map((day) => {
+                // Unique hover/active logic per cell
                 const cellId = `${day}-${hour}`;
                 const isHovered = hoveredDay === day || hoveredHour === hour;
                 const isActive = activeDay === day || activeHour === hour;
@@ -508,8 +586,9 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
                     hour={hour}
                     variant={isSelected ? "selected" : "default"}
                     className={cn(
-                      isHovered && "opacity-40",
-                      isActive && "opacity-20",
+                      cellWidth,
+                      (hoveredDay === day || hoveredHour === hour) && "opacity-40",
+                      (activeDay === day || activeHour === hour) && "opacity-20",
                       isInDragPreview && !isSelected && "opacity-60",
                       isInHeaderDragPreview && !isSelected && "opacity-60",
                       isInShiftPreview && !isSelected && "opacity-60"
