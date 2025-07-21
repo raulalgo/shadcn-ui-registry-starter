@@ -521,9 +521,9 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
         {/* Header Row */}
         <div
           className={"grid gap-1 mb-2"}
-          style={{ gridTemplateColumns: `minmax(2.5rem,auto) repeat(${days.length}, minmax(0,1fr))` }}
+          style={{ gridTemplateColumns: `3.5rem repeat(${days.length}, 1fr)` }}
         >
-          <div></div>
+          <div style={{ width: "3.5rem" }}></div>
           {days.map((day, i) => {
             // For 2 weeks, show just the day label (MO, TU, ...)
             const label = tab === "2week" ? day.split("-")[0] : day;
@@ -555,9 +555,10 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
             <div
               key={hour}
               className={"grid gap-1"}
-              style={{ gridTemplateColumns: `minmax(2.5rem,auto) repeat(${days.length}, minmax(0,1fr))` }}
+              style={{ gridTemplateColumns: `3.5rem repeat(${days.length}, 1fr)` }}
             >
               <div
+                style={{ width: "3.5rem" }}
                 className={cn(
                   `text-xs text-neutral-600 py-1 text-right pr-2 pt-0 pb-0 rounded-sm transition-colors cursor-pointer select-none ${cellWidth}`,
                   "hover:bg-neutral-200",
