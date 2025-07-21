@@ -41,6 +41,7 @@ export function OpenInV0Button({
             "Open in v0 does not work in development mode, please deploy first.",
         });
       } else {
+        console.log("[OpenInV0Button] Opening V0 URL:", url);
         window.open(url, "_blank", "noopener,noreferrer");
       }
     },
