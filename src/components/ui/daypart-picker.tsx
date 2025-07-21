@@ -77,8 +77,12 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
   const [headerDragPreview, setHeaderDragPreview] = React.useState<Set<string>>(new Set());
   const [isHeaderDragging, setIsHeaderDragging] = React.useState(false);
 
+  // Add state for last clicked cell/header
+  const [lastClickedCell, setLastClickedCell] = React.useState<{ day: string; hour: string } | null>(null);
+  const [lastClickedDay, setLastClickedDay] = React.useState<string | null>(null);
+  const [lastClickedHour, setLastClickedHour] = React.useState<string | null>(null);
+
   // State for shift+click range selection
-  const [shiftAnchor, setShiftAnchor] = React.useState<{ type: 'cell' | 'header', day?: string, hour?: string, headerType?: 'day' | 'hour', headerValue?: string } | null>(null);
   const [shiftPreview, setShiftPreview] = React.useState<Set<string>>(new Set());
   const [shiftHeld, setShiftHeld] = React.useState(false);
 
@@ -109,9 +113,15 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
   };
 
   const handleCellMouseDown = (day: string, hour: string) => {
-    setDragAnchor({ day, hour });
-    setIsDragging(true);
-    setDragPreview(new Set([`${day}-${hour}`]));
+    if (shiftHeld && lastClickedCell) {
+      // Preview the range
+      const range = getCellRange(lastClickedCell, { day, hour });
+      setShiftPreview(range);
+    } else {
+      setDragAnchor({ day, hour });
+      setIsDragging(true);
+      setDragPreview(new Set([`${day}-${hour}`]));
+    }
   };
 
   const handleCellMouseEnter = (day: string, hour: string) => {
@@ -119,38 +129,37 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
       const range = getCellRange(dragAnchor, { day, hour });
       setDragPreview(range);
     }
-    // Shift+click preview
-    if (shiftHeld && shiftAnchor && shiftAnchor.type === 'cell') {
-      const range = getCellRange({ day: shiftAnchor.day!, hour: shiftAnchor.hour! }, { day, hour });
+    // Shift+hover preview
+    if (shiftHeld && lastClickedCell) {
+      const range = getCellRange(lastClickedCell, { day, hour });
       setShiftPreview(range);
     }
   };
 
   const handleCellMouseUp = (day: string, hour: string) => {
-    if (shiftHeld) {
-      // Shift+click range selection
-      if (!shiftAnchor) {
-        // First shift+click: set anchor
-        setShiftAnchor({ type: 'cell', day, hour });
-        setShiftPreview(new Set([`${day}-${hour}`]));
-      } else if (shiftAnchor.type === 'cell') {
-        // Second shift+click: confirm range
-        const range = getCellRange({ day: shiftAnchor.day!, hour: shiftAnchor.hour! }, { day, hour });
-        setSelectedCells(prev => {
-          const next = new Set(prev);
-          range.forEach(cellId => next.add(cellId));
-          return next;
+    if (shiftHeld && lastClickedCell) {
+      // Confirm the range selection (toggle all in range)
+      const range = getCellRange(lastClickedCell, { day, hour });
+      setSelectedCells(prev => {
+        const next = new Set(prev);
+        let allSelected = true;
+        range.forEach(cellId => { if (!next.has(cellId)) allSelected = false; });
+        range.forEach(cellId => {
+          if (allSelected) {
+            next.delete(cellId);
+          } else {
+            next.add(cellId);
+          }
         });
-        setShiftAnchor(null);
-        setShiftPreview(new Set());
-      }
+        return next;
+      });
+      setShiftPreview(new Set());
+      setLastClickedCell({ day, hour });
       return;
     }
-
+    // Normal click/drag logic
     if (isDragging && dragAnchor) {
-      // Check if this is a single cell selection (same cell)
       if (dragAnchor.day === day && dragAnchor.hour === hour) {
-        // Single cell toggle
         const cellId = `${day}-${hour}`;
         setSelectedCells(prev => {
           const next = new Set(prev);
@@ -162,7 +171,6 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
           return next;
         });
       } else {
-        // Range selection
         const range = getCellRange(dragAnchor, { day, hour });
         setSelectedCells(prev => {
           const next = new Set(prev);
@@ -170,13 +178,12 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
           return next;
         });
       }
-      
-      // Clear drag state
       setDragAnchor(null);
       setDragPreview(new Set());
       setIsDragging(false);
+      setLastClickedCell({ day, hour });
     } else {
-      // Individual cell toggle (existing logic)
+      // Individual cell toggle
       const cellId = `${day}-${hour}`;
       setSelectedCells(prev => {
         const next = new Set(prev);
@@ -187,6 +194,7 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
         }
         return next;
       });
+      setLastClickedCell({ day, hour });
     }
   };
 
@@ -201,10 +209,10 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
       }
       setHeaderDragPreview(range);
     }
-    // Shift+click preview for headers
-    if (shiftHeld && shiftAnchor && shiftAnchor.type === 'header' && shiftAnchor.headerType === 'day') {
-      const startIdx = Math.min(days.indexOf(shiftAnchor.headerValue!), days.indexOf(day));
-      const endIdx = Math.max(days.indexOf(shiftAnchor.headerValue!), days.indexOf(day));
+    // Shift+hover preview for headers
+    if (shiftHeld && lastClickedDay) {
+      const startIdx = Math.min(days.indexOf(lastClickedDay), days.indexOf(day));
+      const endIdx = Math.max(days.indexOf(lastClickedDay), days.indexOf(day));
       const range = new Set<string>();
       for (let d = startIdx; d <= endIdx; d++) {
         hours.forEach(hour => range.add(`${days[d]}-${hour}`));
@@ -228,10 +236,10 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
       }
       setHeaderDragPreview(range);
     }
-    // Shift+click preview for headers
-    if (shiftHeld && shiftAnchor && shiftAnchor.type === 'header' && shiftAnchor.headerType === 'hour') {
-      const startIdx = Math.min(hours.indexOf(shiftAnchor.headerValue!), hours.indexOf(hour));
-      const endIdx = Math.max(hours.indexOf(shiftAnchor.headerValue!), hours.indexOf(hour));
+    // Shift+hover preview for headers
+    if (shiftHeld && lastClickedHour) {
+      const startIdx = Math.min(hours.indexOf(lastClickedHour), hours.indexOf(hour));
+      const endIdx = Math.max(hours.indexOf(lastClickedHour), hours.indexOf(hour));
       const range = new Set<string>();
       for (let h = startIdx; h <= endIdx; h++) {
         days.forEach(day => range.add(`${day}-${hours[h]}`));
@@ -245,49 +253,56 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
   };
 
   const handleDayHeaderMouseDown = (day: string) => {
-    setActiveDay(day);
-    setHeaderDragAnchor({ type: 'day', value: day });
-    setIsHeaderDragging(true);
-    const dayCells = hours.map(hour => `${day}-${hour}`);
-    setHeaderDragPreview(new Set(dayCells));
+    if (shiftHeld && lastClickedDay) {
+      // Preview the range
+      const startIdx = Math.min(days.indexOf(lastClickedDay), days.indexOf(day));
+      const endIdx = Math.max(days.indexOf(lastClickedDay), days.indexOf(day));
+      const range = new Set<string>();
+      for (let d = startIdx; d <= endIdx; d++) {
+        hours.forEach(hour => range.add(`${days[d]}-${hour}`));
+      }
+      setShiftPreview(range);
+    } else {
+      setActiveDay(day);
+      setHeaderDragAnchor({ type: 'day', value: day });
+      setIsHeaderDragging(true);
+      const dayCells = hours.map(hour => `${day}-${hour}`);
+      setHeaderDragPreview(new Set(dayCells));
+    }
   };
 
   const handleDayHeaderMouseUp = (day: string) => {
     setActiveDay(null);
-    
-    if (shiftHeld) {
-      // Shift+click range selection for headers
-      if (!shiftAnchor) {
-        // First shift+click: set anchor
-        setShiftAnchor({ type: 'header', headerType: 'day', headerValue: day });
-        const dayCells = hours.map(hour => `${day}-${hour}`);
-        setShiftPreview(new Set(dayCells));
-      } else if (shiftAnchor.type === 'header' && shiftAnchor.headerType === 'day') {
-        // Second shift+click: confirm range
-        const startIdx = Math.min(days.indexOf(shiftAnchor.headerValue!), days.indexOf(day));
-        const endIdx = Math.max(days.indexOf(shiftAnchor.headerValue!), days.indexOf(day));
-        const range = new Set<string>();
-        for (let d = startIdx; d <= endIdx; d++) {
-          hours.forEach(hour => range.add(`${days[d]}-${hour}`));
-        }
-        setSelectedCells(prev => {
-          const next = new Set(prev);
-          range.forEach(cellId => next.add(cellId));
-          return next;
-        });
-        setShiftAnchor(null);
-        setShiftPreview(new Set());
+    if (shiftHeld && lastClickedDay) {
+      // Confirm the range selection (toggle all in range)
+      const startIdx = Math.min(days.indexOf(lastClickedDay), days.indexOf(day));
+      const endIdx = Math.max(days.indexOf(lastClickedDay), days.indexOf(day));
+      const range = new Set<string>();
+      for (let d = startIdx; d <= endIdx; d++) {
+        hours.forEach(hour => range.add(`${days[d]}-${hour}`));
       }
+      setSelectedCells(prev => {
+        const next = new Set(prev);
+        let allSelected = true;
+        range.forEach(cellId => { if (!next.has(cellId)) allSelected = false; });
+        range.forEach(cellId => {
+          if (allSelected) {
+            next.delete(cellId);
+          } else {
+            next.add(cellId);
+          }
+        });
+        return next;
+      });
+      setShiftPreview(new Set());
+      setLastClickedDay(day);
       return;
     }
-    
+    // Normal header logic
     if (isHeaderDragging && headerDragAnchor && headerDragAnchor.type === 'day') {
-      // Check if this is a single row selection (same header)
       if (headerDragAnchor.value === day) {
-        // Single row toggle
         const dayCells = hours.map(hour => `${day}-${hour}`);
         const allSelected = dayCells.every(cellId => selectedCells.has(cellId));
-        
         setSelectedCells(prev => {
           const next = new Set(prev);
           if (allSelected) {
@@ -298,7 +313,6 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
           return next;
         });
       } else {
-        // Range selection
         const startIdx = Math.min(days.indexOf(headerDragAnchor.value), days.indexOf(day));
         const endIdx = Math.max(days.indexOf(headerDragAnchor.value), days.indexOf(day));
         const range = new Set<string>();
@@ -311,58 +325,67 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
           return next;
         });
       }
-      
-      // Clear header drag state
       setHeaderDragAnchor(null);
       setHeaderDragPreview(new Set());
       setIsHeaderDragging(false);
+      setLastClickedDay(day);
+    } else {
+      // Single header click
+      setLastClickedDay(day);
     }
   };
 
   const handleHourHeaderMouseDown = (hour: string) => {
-    setActiveHour(hour);
-    setHeaderDragAnchor({ type: 'hour', value: hour });
-    setIsHeaderDragging(true);
-    const hourCells = days.map(day => `${day}-${hour}`);
-    setHeaderDragPreview(new Set(hourCells));
+    if (shiftHeld && lastClickedHour) {
+      // Preview the range
+      const startIdx = Math.min(hours.indexOf(lastClickedHour), hours.indexOf(hour));
+      const endIdx = Math.max(hours.indexOf(lastClickedHour), hours.indexOf(hour));
+      const range = new Set<string>();
+      for (let h = startIdx; h <= endIdx; h++) {
+        days.forEach(day => range.add(`${day}-${hours[h]}`));
+      }
+      setShiftPreview(range);
+    } else {
+      setActiveHour(hour);
+      setHeaderDragAnchor({ type: 'hour', value: hour });
+      setIsHeaderDragging(true);
+      const hourCells = days.map(day => `${day}-${hour}`);
+      setHeaderDragPreview(new Set(hourCells));
+    }
   };
 
   const handleHourHeaderMouseUp = (hour: string) => {
     setActiveHour(null);
-    
-    if (shiftHeld) {
-      // Shift+click range selection for headers
-      if (!shiftAnchor) {
-        // First shift+click: set anchor
-        setShiftAnchor({ type: 'header', headerType: 'hour', headerValue: hour });
-        const hourCells = days.map(day => `${day}-${hour}`);
-        setShiftPreview(new Set(hourCells));
-      } else if (shiftAnchor.type === 'header' && shiftAnchor.headerType === 'hour') {
-        // Second shift+click: confirm range
-        const startIdx = Math.min(hours.indexOf(shiftAnchor.headerValue!), hours.indexOf(hour));
-        const endIdx = Math.max(hours.indexOf(shiftAnchor.headerValue!), hours.indexOf(hour));
-        const range = new Set<string>();
-        for (let h = startIdx; h <= endIdx; h++) {
-          days.forEach(day => range.add(`${day}-${hours[h]}`));
-        }
-        setSelectedCells(prev => {
-          const next = new Set(prev);
-          range.forEach(cellId => next.add(cellId));
-          return next;
-        });
-        setShiftAnchor(null);
-        setShiftPreview(new Set());
+    if (shiftHeld && lastClickedHour) {
+      // Confirm the range selection (toggle all in range)
+      const startIdx = Math.min(hours.indexOf(lastClickedHour), hours.indexOf(hour));
+      const endIdx = Math.max(hours.indexOf(lastClickedHour), hours.indexOf(hour));
+      const range = new Set<string>();
+      for (let h = startIdx; h <= endIdx; h++) {
+        days.forEach(day => range.add(`${day}-${hours[h]}`));
       }
+      setSelectedCells(prev => {
+        const next = new Set(prev);
+        let allSelected = true;
+        range.forEach(cellId => { if (!next.has(cellId)) allSelected = false; });
+        range.forEach(cellId => {
+          if (allSelected) {
+            next.delete(cellId);
+          } else {
+            next.add(cellId);
+          }
+        });
+        return next;
+      });
+      setShiftPreview(new Set());
+      setLastClickedHour(hour);
       return;
     }
-    
+    // Normal header logic
     if (isHeaderDragging && headerDragAnchor && headerDragAnchor.type === 'hour') {
-      // Check if this is a single column selection (same header)
       if (headerDragAnchor.value === hour) {
-        // Single column toggle
         const hourCells = days.map(day => `${day}-${hour}`);
         const allSelected = hourCells.every(cellId => selectedCells.has(cellId));
-        
         setSelectedCells(prev => {
           const next = new Set(prev);
           if (allSelected) {
@@ -373,7 +396,6 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
           return next;
         });
       } else {
-        // Range selection
         const startIdx = Math.min(hours.indexOf(headerDragAnchor.value), hours.indexOf(hour));
         const endIdx = Math.max(hours.indexOf(headerDragAnchor.value), hours.indexOf(hour));
         const range = new Set<string>();
@@ -386,11 +408,13 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
           return next;
         });
       }
-      
-      // Clear header drag state
       setHeaderDragAnchor(null);
       setHeaderDragPreview(new Set());
       setIsHeaderDragging(false);
+      setLastClickedHour(hour);
+    } else {
+      // Single header click
+      setLastClickedHour(hour);
     }
   };
 
@@ -418,7 +442,6 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
     const handleKeyUp = (e: KeyboardEvent) => {
       if (e.key === "Shift") {
         setShiftHeld(false);
-        setShiftAnchor(null);
         setShiftPreview(new Set());
       }
     };
