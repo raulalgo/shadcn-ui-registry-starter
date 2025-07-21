@@ -5,6 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import * as DropdownMenu from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 export interface DaypartPickerProps {
   className?: string;
@@ -90,7 +91,12 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
 
   // Add state for tab selection and no-repeat dropdown
   const [tab, setTab] = React.useState<string>("1week");
-  const [noRepeatWeek, setNoRepeatWeek] = React.useState<string>("Week 1");
+  const weekOptions = [
+    "Apr 29 – May 5, 2024",
+    "May 6 – May 12, 2024",
+    "May 13 – May 19, 2024",
+  ];
+  const [noRepeatWeek, setNoRepeatWeek] = React.useState<string>(weekOptions[0]);
 
   // For 2 weeks, double the days array
   const days1 = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
@@ -472,9 +478,6 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
   // Clear handler
   const handleClear = () => setSelectedCells(new Set());
 
-  // Week options for No repeat
-  const weekOptions = ["Week 1", "Week 2", "Week 3"];
-
   return (
     <div className={cn("flex-1 overflow-auto", className)}>
       {/* Tabs and Clear button row */}
@@ -495,11 +498,12 @@ export function DaypartPicker({ className }: DaypartPickerProps) {
         <div className="flex justify-end mb-2">
           <DropdownMenu.DropdownMenu>
             <DropdownMenu.DropdownMenuTrigger asChild>
-              <Button variant="default" size="sm">
-                {noRepeatWeek}
+              <Button variant="default" size="sm" className="w-full min-w-[250px] text-left justify-between pr-3">
+                <span>{noRepeatWeek}</span>
+                <ChevronDown className="ml-2 w-4 h-4 text-muted-foreground" />
               </Button>
             </DropdownMenu.DropdownMenuTrigger>
-            <DropdownMenu.DropdownMenuContent align="end">
+            <DropdownMenu.DropdownMenuContent align="end" className="w-full min-w-[250px]">
               {weekOptions.map((option) => (
                 <DropdownMenu.DropdownMenuItem
                   key={option}
