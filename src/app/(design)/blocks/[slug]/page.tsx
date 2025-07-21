@@ -47,6 +47,7 @@ export default async function BlockPage({
         title="Block Preview"
         promptTitle={`${block.title} Block Kit`}
         components={components}
+        type="block"
       />
     </div>
   );

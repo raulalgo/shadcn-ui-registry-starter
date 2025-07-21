@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 
 import "@/app/tokens.css";
 import "@/app/tailwind.css";
+import { CartProvider } from "@/components/design/add-to-cursor";
+import { CartSidebar } from "@/components/design/cart-sidebar";
 
 export const metadata: Metadata = {
   title: "Registry Starter",
@@ -38,7 +40,10 @@ export default function RootLayout({
         content="noindex, nofollow, noarchive, nosnippet, noimageindex"
       />
       <body className="flex grow">
-        {children}
+        <CartProvider>
+          {children}
+          <CartSidebar />
+        </CartProvider>
         <Analytics />
         <SpeedInsights />
       </body>

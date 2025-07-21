@@ -46,6 +46,7 @@ export default function StartPage() {
             title={starter.title}
             promptTitle={`${starter.title} Starter Kit`}
             previewUrl={starter.url}
+            type="starter"
           />
         ))}
       </div>

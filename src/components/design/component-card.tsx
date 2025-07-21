@@ -19,6 +19,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { getComponent, getPrompt } from "@/lib/utils";
+import { useCart } from "@/components/design/add-to-cursor";
 
 interface ComponentCardProps {
   name: string;
@@ -31,6 +32,7 @@ interface ComponentCardProps {
   components?: {
     [name: string]: ReactNode | ReactElement;
   };
+  type?: "component" | "block" | "starter";
 }
 
 export function ComponentCard({
@@ -42,9 +44,12 @@ export function ComponentCard({
   baseUrl,
   previewUrl,
   components,
+  type = "component",
 }: ComponentCardProps) {
   const [copied, setCopied] = useState(false);
   const [prompt, setPrompt] = useState(propPrompt);
+  const { items, addItem } = useCart();
+  const inCart = items.some(i => i.name === name && i.type === type);
 
   useEffect(() => {
     if (!propPrompt) {
@@ -109,6 +114,16 @@ export function ComponentCard({
                     </TooltipTrigger>
                   </Tooltip>
                 </TooltipProvider>
+
+                <Button
+                  variant="default"
+                  className="p-4"
+                  aria-label="Add to cart"
+                  onClick={() => addItem({ name, type })}
+                  disabled={inCart}
+                >
+                  {inCart ? "In cart" : "Add to cart"}
+                </Button>
 
                 <OpenInV0Button
                   registryUrl={registryUrl}
