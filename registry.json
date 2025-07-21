@@ -1,4 +1,3 @@
-// BRANCH-SPECIFIC: All registryDependencies URLs point to the shoppingcart branch. Revert to main URL when merging back to main.
 { "name": "Registry Starter",
   "homepage": "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/",
   "items": [
