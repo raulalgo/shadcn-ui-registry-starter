@@ -26,7 +26,7 @@ export function ActionPanel({
   return (
     <Card
       className={cn(
-        "flex flex-col h-full bg-neutral-50 max-w-96 border border-neutral-900/10 rounded-lg shadow min-h-[512px] p-0 gap-0"
+        "flex flex-col h-full bg-neutral-50 w-96 border border-neutral-900/10 rounded-lg shadow min-h-[512px] p-0 gap-0"
       )}
     >
       {/* Header */}
