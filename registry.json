@@ -1,6 +1,6 @@
 // BRANCH-SPECIFIC: All registryDependencies URLs point to the shoppingcart branch. Revert to main URL when merging back to main.
 { "name": "Registry Starter",
-  "homepage": "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/",
+  "homepage": "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/",
   "items": [
         {
         "name": "registry",
@@ -26,7 +26,7 @@
             "title": "Navigation Item",
             "description": "Navigation item component for navigation menus",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
                 {
@@ -42,7 +42,7 @@
             "title": "Map",
             "description": "Map component for displaying deals",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
                 {
@@ -58,8 +58,8 @@
             "title": "Global Navigation",
             "description": "Global navigation bar with four icons and selection indicator",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/navigation-item.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/navigation-item.json"
             ],
             "files": [
                 {
@@ -76,10 +76,10 @@
             "description": "Deal strip component for displaying deals",
             "registryDependencies": [
                 "accordion",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/deal-card.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/badge.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/button.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/deal-card.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/badge.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
             ],
             "files": [
                 {
@@ -96,7 +96,7 @@
             "description": "Basic set of buttons in our app",
             "registryDependencies": [
                 "button",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
                 {
@@ -113,7 +113,7 @@
             "description": "Basic set of badges in our app",
             "registryDependencies": [
                 "badge",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
                 {
@@ -129,9 +129,9 @@
             "title": "Deal Card",
             "description": "Deal card component for displaying deals",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/badge.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/button.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/badge.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
                 {
@@ -147,8 +147,8 @@
             "title": "Blank",
             "description": "Blank component for displaying deals",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/global-nav.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json"
             ],
             "files": [
                 {
@@ -169,8 +169,8 @@
             "title": "Basic",
             "description": "Basic component for displaying deals",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/global-nav.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json"
             ],
             "files": [
                 {
@@ -191,10 +191,10 @@
             "title": "Map View",
             "description": "Map view component for displaying deals",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/global-nav.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/deal-strip.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/header-planner.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/deal-strip.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/header-planner.json"
             ],
             "files": [
                 {
@@ -215,9 +215,9 @@
             "title": "Header Planner",
             "description": "A header component for the planner view.",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/tabs.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/button.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/tabs.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
                 {
@@ -234,7 +234,7 @@
             "description": "Tabs component for displaying tabs",
             "registryDependencies": [
                 "tabs",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
                 {
@@ -251,8 +251,8 @@
             "description": "A block for selecting dayparts in a schedule grid.",
             "registryDependencies": [
                 "select",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/button.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
             ],
             "files": [
                 {
@@ -269,7 +269,7 @@
             "description": "A panel for displaying actions",
             "registryDependencies": [
                 "card",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
                 {
@@ -285,9 +285,9 @@
             "title": "Daypart Action Panel",
             "description": "A panel for daypart selection actions",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/action-panel.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/daypart-picker.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/action-panel.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/daypart-picker.json"
             ],
             "files": [
                 {
@@ -303,10 +303,10 @@
             "title": "Daypart Picker",
             "description": "A picker for daypart selection",
             "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/dropdown-menu.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/tabs.json",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/button.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/dropdown-menu.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/tabs.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
             ],
             "files": [
                 {
@@ -323,7 +323,7 @@
             "description": "Dropdown menu component for displaying menu options",
             "registryDependencies": [
                 "dropdown-menu",
-                "https://shadcn-ui-registry-starter-git-shoppingcart-raulalgos-projects.vercel.app/r/theme.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
             ],
             "files": [
                 {
