@@ -3,7 +3,6 @@ import React, { type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
-import '@/app/globals.css'
 import '@/app/tailwind.css'
 
 const GeistSans = Geist({
