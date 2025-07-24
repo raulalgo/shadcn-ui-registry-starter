@@ -20,7 +20,7 @@
                 {
                     "path": "src/app/tailwind.css",
                     "type": "registry:file",
-                    "target": "tailwind.css"
+                    "target": "app/tailwind.css"
                 }
             ]
         },
