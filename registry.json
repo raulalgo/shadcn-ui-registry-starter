@@ -16,11 +16,6 @@
                     "path": "src/app/globals.css",
                     "type": "registry:file",
                     "target": "globals.css"
-                },
-                {
-                    "path": "src/app/starters/(minimal)/v0-layout.tsx",
-                    "type": "registry:file",
-                    "target": "app/layout.tsx"
                 }
             ]
         },
