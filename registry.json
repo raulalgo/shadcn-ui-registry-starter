@@ -193,7 +193,9 @@
                 "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
                 "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json",
                 "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/deal-strip.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/header-planner.json"
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/header-planner.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/action-panel.json",
+                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/daypart-action-panel.json"
             ],
             "files": [
                 {
