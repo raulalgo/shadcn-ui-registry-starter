@@ -6,7 +6,7 @@
 
 /* TAILWIND */
 @theme inline {
-  --color-background: var(--color-neutral-50);
+  /* --color-background: var(--color-neutral-50);
   --color-foreground: var(--color-neutral-950);
 
   --color-key: var(--color-primary-900);
@@ -44,7 +44,7 @@
   --color-sidebar-accent: var(--color-primary-900);
   --color-sidebar-accent-foreground: var(--color-primary-50);
   --color-sidebar-border: var(--color-primary-300);
-  --color-sidebar-ring: var(--color-primary-600);
+  --color-sidebar-ring: var(--color-primary-600); */
 
   /* Brand Color Scale */
   --color-primary-50: #F4F5FF;
