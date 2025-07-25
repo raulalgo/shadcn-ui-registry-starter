@@ -7,9 +7,3 @@
     text-wrap: balance;
   }
 }
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-}
