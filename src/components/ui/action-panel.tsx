@@ -48,7 +48,7 @@ export function ActionPanel({
       </div>
       {/* Content */}
       <div className="flex-1 p-2 flex flex-col gap-4 overflow-hidden">
-        <div className="flex-1 flex items-center justify-center text-neutral-400 text-lg">
+        <div className="flex-1 flex items-start justify-center text-neutral-400 text-lg">
           {children ?? "Content"}
         </div>
       </div>
