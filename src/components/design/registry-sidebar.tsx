@@ -141,12 +141,12 @@ export function RegistrySidebar() {
               <CollapsibleTrigger className="w-full">
                 <SidebarGroupLabel className="flex cursor-pointer items-center justify-between">
                   <div className="flex min-w-0 items-center">
-                    <Home className="size-4 flex-shrink-0" />
+                    <Home className="size-4 shrink-0" />
                     <span className="ml-2 opacity-100 transition-all duration-200">
                       Getting Started
                     </span>
                   </div>
-                  <ChevronDown className="size-4 flex-shrink-0 opacity-100 transition-all duration-200 group-data-[state=open]/collapsible:rotate-180" />
+                  <ChevronDown className="size-4 shrink-0 opacity-100 transition-all duration-200 group-data-[state=open]/collapsible:rotate-180" />
                 </SidebarGroupLabel>
               </CollapsibleTrigger>
 
@@ -179,12 +179,12 @@ export function RegistrySidebar() {
               <CollapsibleTrigger className="w-full">
                 <SidebarGroupLabel className="flex cursor-pointer items-center justify-between">
                   <div className="flex min-w-0 items-center">
-                    <ToyBrick className="size-4 flex-shrink-0" />
+                    <ToyBrick className="size-4 shrink-0" />
                     <span className="ml-2 transition-all duration-200">
                       Components
                     </span>
                   </div>
-                  <ChevronDown className="size-4 flex-shrink-0 transition-all duration-200 group-data-[state=open]/collapsible:rotate-180" />
+                  <ChevronDown className="size-4 shrink-0 transition-all duration-200 group-data-[state=open]/collapsible:rotate-180" />
                 </SidebarGroupLabel>
               </CollapsibleTrigger>
               <CollapsibleContent>
@@ -215,12 +215,12 @@ export function RegistrySidebar() {
               <CollapsibleTrigger className="w-full">
                 <SidebarGroupLabel className="flex cursor-pointer items-center justify-between">
                   <div className="flex min-w-0 items-center">
-                    <Blocks className="size-4 flex-shrink-0" />
+                    <Blocks className="size-4 shrink-0" />
                     <span className="ml-2 transition-all duration-200">
                       Blocks
                     </span>
                   </div>
-                  <ChevronDown className="size-4 flex-shrink-0 transition-all duration-200 group-data-[state=open]/collapsible:rotate-180" />
+                  <ChevronDown className="size-4 shrink-0 transition-all duration-200 group-data-[state=open]/collapsible:rotate-180" />
                 </SidebarGroupLabel>
               </CollapsibleTrigger>
 

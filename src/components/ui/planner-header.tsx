@@ -4,7 +4,7 @@ import { Button } from "./button";
 
 const HeaderPlanner = () => {
   return <div className="w-full flex items-center border-b border-neutral-200 gap-2 py-2">
-          <div className="w-96 border-r-1 border-neutral-300 px-2">Campaign name</div>
+          <div className="w-96 border-r border-neutral-300 px-2">Campaign name</div>
           <div className="flex-1 flex items-center gap-2">
             <Tabs>  
                 <TabsList>
