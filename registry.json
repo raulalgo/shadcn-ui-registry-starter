@@ -102,6 +102,11 @@
                     "path": "src/app/starters/(minimal)/v0-layout.tsx",
                     "type": "registry:file",
                     "target": "app/v0-layout.tsx"
+                },
+                {
+                    "path": "src/components/ui/button.tsx",
+                    "type": "registry:file",
+                    "target": "components/ui/button.tsx"
                 }
             ]
         },
