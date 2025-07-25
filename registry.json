@@ -20,7 +20,7 @@
                 {
                     "path": "src/app/tailwind.config.ts",
                     "type": "registry:file",
-                    "target": "tailwind.config.ts"
+                    "target": "app/tailwind.config.ts"
                 }
             ]
         },
