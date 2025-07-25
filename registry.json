@@ -99,9 +99,9 @@
             ],
             "files": [
                 {
-                    "path": "src/components/ui/button.tsx",
+                    "path": "src/app/starters/(minimal)/v0-layout.tsx",
                     "type": "registry:file",
-                    "target": "components/ui/button.tsx"
+                    "target": "app/v0-layout.tsx"
                 }
             ]
         },
