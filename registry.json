@@ -16,6 +16,11 @@
                     "path": "src/app/tailwind.css",
                     "type": "registry:file",
                     "target": "app/tailwind.css"
+                },
+                {
+                    "path": "src/app/tailwind.config.ts",
+                    "type": "registry:file",
+                    "target": "tailwind.config.ts"
                 }
             ]
         },
