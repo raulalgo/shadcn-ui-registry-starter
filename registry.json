@@ -290,6 +290,11 @@
             ],
             "files": [
                 {
+                    "path": "src/app/starters/(minimal)/v0-layout.tsx",
+                    "type": "registry:file",
+                    "target": "app/layout.tsx"
+                },
+                {
                     "path": "src/components/ui/daypart-action-panel.tsx",
                     "type": "registry:file",
                     "target": "components/ui/daypart-action-panel.tsx"
