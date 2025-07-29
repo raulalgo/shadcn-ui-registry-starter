@@ -52,10 +52,14 @@ export const componentItems = [
 export const blockItems = [
   { name: "Deal Strip", path: "/blocks/deal-strip" },
   { name: "Global Navigation", path: "/blocks/global-nav" },
-  { name: "Daypart Panel (Deprecated)", path: "/blocks/daypart-panel-deprecated" },
+  {
+    name: "Daypart Panel (Deprecated)",
+    path: "/blocks/daypart-panel-deprecated",
+  },
   { name: "Action Panel", path: "/blocks/action-panel" },
   { name: "Daypart Action Panel", path: "/blocks/daypart-action-panel" },
   { name: "Daypart Picker", path: "/blocks/daypart-picker" },
+  { name: "L1 Header", path: "/blocks/l1-header" },
 ];
 
 export const gettingStartedItems = [
