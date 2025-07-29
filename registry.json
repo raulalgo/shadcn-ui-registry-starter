@@ -1,354 +1,356 @@
-{ "name": "Registry Starter",
+{
+  "name": "Registry Starter",
   "homepage": "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/",
   "items": [
+    {
+      "name": "registry",
+      "type": "registry:style",
+      "files": []
+    },
+    {
+      "name": "theme",
+      "type": "registry:theme",
+      "title": "Viooh Theme",
+      "description": "Viooh themed styles using Tailwind and Shadcn/ui",
+      "files": [
         {
-        "name": "registry",
-        "type": "registry:style",
-        "files": []
-        },
-        {
-            "name": "theme",
-            "type": "registry:theme",
-            "title": "Viooh Theme",
-            "description": "Viooh themed styles using Tailwind and Shadcn/ui",
-            "files": [
-                {
-                    "path": "src/app/globals.css",
-                    "type": "registry:file",
-                    "target": "globals.css"
-                }
-            ]
-        },
-        {
-            "name": "navigation-item",
-            "type": "registry:ui",
-            "title": "Navigation Item",
-            "description": "Navigation item component for navigation menus",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/navigation-item.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/navigation-item.tsx"
-                }
-            ]
-        },
-        {
-            "name": "map",
-            "type": "registry:ui",
-            "title": "Map",
-            "description": "Map component for displaying deals",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/map.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/map.tsx"
-                }
-            ]
-        },
-        {
-            "name": "global-nav",
-            "type": "registry:block",
-            "title": "Global Navigation",
-            "description": "Global navigation bar with four icons and selection indicator",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/navigation-item.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/global-nav.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/global-nav.tsx"
-                }
-            ]
-        },
-        {
-            "name": "deal-strip",
-            "type": "registry:block",
-            "title": "Deal Strip",
-            "description": "Deal strip component for displaying deals",
-            "registryDependencies": [
-                "accordion",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/deal-card.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/badge.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/deal-strip.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/deal-strip.tsx"
-                }
-            ]
-        },
-        {
-            "name": "button",
-            "type": "registry:ui",
-            "title": "Button",
-            "description": "Basic set of buttons in our app",
-            "registryDependencies": [
-                "button",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/button.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/button.tsx"
-                }
-            ]
-        },
-        {
-            "name": "badge",
-            "type": "registry:ui",
-            "title": "Badge",
-            "description": "Basic set of badges in our app",
-            "registryDependencies": [
-                "badge",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/badge.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/badge.tsx"
-                }
-            ]
-        },
-        {
-            "name": "deal-card",
-            "type": "registry:ui",
-            "title": "Deal Card",
-            "description": "Deal card component for displaying deals",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/badge.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/deal-card.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/deal-card.tsx"
-                }
-            ]
-        },
-        {
-            "name": "blank",
-            "type": "registry:block",
-            "title": "Blank",
-            "description": "Blank component for displaying deals",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json"
-            ],
-            "files": [
-                {
-                    "path": "src/app/starters/(minimal)/v0-layout.tsx",
-                    "type": "registry:file",
-                    "target": "app/layout.tsx"
-                },
-                {
-                    "path": "src/app/starters/(minimal)/blank/page.tsx",
-                    "type": "registry:page",
-                    "target": "app/page.tsx"
-                }
-            ]
-        },
-        {
-            "name": "basic",
-            "type": "registry:block",
-            "title": "Basic",
-            "description": "Basic component for displaying deals",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json"
-            ],
-            "files": [
-                {
-                    "path": "src/app/starters/(minimal)/v0-layout.tsx",
-                    "type": "registry:file",
-                    "target": "app/layout.tsx"
-                },
-                {
-                    "path": "src/app/starters/(minimal)/basic/page.tsx",
-                    "type": "registry:page",
-                    "target": "app/page.tsx"
-                }
-            ]
-        },
-        {
-            "name": "map-view",
-            "type": "registry:block",
-            "title": "Map View",
-            "description": "Map view component for displaying deals",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/deal-strip.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/header-planner.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/action-panel.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/daypart-action-panel.json"
-            ],
-            "files": [
-                {
-                    "path": "src/app/starters/(minimal)/v0-layout.tsx",
-                    "type": "registry:file",
-                    "target": "app/layout.tsx"
-                },
-                {
-                    "path": "src/app/starters/(minimal)/map_view/page.tsx",
-                    "type": "registry:page",
-                    "target": "app/page.tsx"
-                }
-            ]
-        },
-        {
-            "name": "header-planner",
-            "type": "registry:ui",
-            "title": "Header Planner",
-            "description": "A header component for the planner view.",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/tabs.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/planner-header.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/planner-header.tsx"
-                }
-            ]
-        },
-        {
-            "name": "tabs",
-            "type": "registry:ui",
-            "title": "Tabs",
-            "description": "Tabs component for displaying tabs",
-            "registryDependencies": [
-                "tabs",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/tabs.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/tabs.tsx"
-                }
-            ]
-        },
-        {
-            "name": "daypart-panel-deprecated",
-            "type": "registry:block",
-            "title": "Daypart Panel",
-            "description": "A block for selecting dayparts in a schedule grid.",
-            "registryDependencies": [
-                "select",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/daypart-panel-deprecated.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/daypart-panel-deprecated.tsx"
-                }
-            ]
-        },
-        {
-            "name": "action-panel",
-            "type": "registry:block",
-            "title": "Action Panel",
-            "description": "A panel for displaying actions",
-            "registryDependencies": [
-                "card",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/action-panel.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/action-panel.tsx"
-                }
-            ]
-        },
-        {
-            "name": "daypart-action-panel",
-            "type": "registry:block",
-            "title": "Daypart Action Panel",
-            "description": "A panel for daypart selection actions",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/action-panel.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/daypart-picker.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/daypart-action-panel.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/daypart-action-panel.tsx"
-                }
-            ]
-        },
-        {
-            "name": "daypart-picker",
-            "type": "registry:block",
-            "title": "Daypart Picker",
-            "description": "A picker for daypart selection",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/dropdown-menu.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/tabs.json",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/daypart-picker.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/daypart-picker.tsx"
-                }
-            ]
-        },
-        {
-            "name": "dropdown-menu",
-            "type": "registry:ui",
-            "title": "Dropdown Menu",
-            "description": "Dropdown menu component for displaying menu options",
-            "registryDependencies": [
-                "dropdown-menu",
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/dropdown-menu.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/dropdown-menu.tsx"
-                }
-            ]
-        },
-        {
-            "name": "l1-header",
-            "type": "registry:ui",
-            "title": "L1 Header",
-            "description": "Level 1 header component for page titles",
-            "registryDependencies": [
-                "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/l1-header.tsx",
-                    "type": "registry:file",
-                    "target": "components/ui/l1-header.tsx"
-                }
-            ]
+          "path": "src/app/globals.css",
+          "type": "registry:file",
+          "target": "globals.css"
         }
-    ]
+      ]
+    },
+    {
+      "name": "navigation-item",
+      "type": "registry:ui",
+      "title": "Navigation Item",
+      "description": "Navigation item component for navigation menus",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/navigation-item.tsx",
+          "type": "registry:file",
+          "target": "components/ui/navigation-item.tsx"
+        }
+      ]
+    },
+    {
+      "name": "map",
+      "type": "registry:ui",
+      "title": "Map",
+      "description": "Map component for displaying deals",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/map.tsx",
+          "type": "registry:file",
+          "target": "components/ui/map.tsx"
+        }
+      ]
+    },
+    {
+      "name": "global-nav",
+      "type": "registry:block",
+      "title": "Global Navigation",
+      "description": "Global navigation bar with four icons and selection indicator",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/navigation-item.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/global-nav.tsx",
+          "type": "registry:file",
+          "target": "components/ui/global-nav.tsx"
+        }
+      ]
+    },
+    {
+      "name": "deal-strip",
+      "type": "registry:block",
+      "title": "Deal Strip",
+      "description": "Deal strip component for displaying deals",
+      "registryDependencies": [
+        "accordion",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/deal-card.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/badge.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/deal-strip.tsx",
+          "type": "registry:file",
+          "target": "components/ui/deal-strip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Basic set of buttons in our app",
+      "registryDependencies": [
+        "button",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:file",
+          "target": "components/ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Basic set of badges in our app",
+      "registryDependencies": [
+        "badge",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/badge.tsx",
+          "type": "registry:file",
+          "target": "components/ui/badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "deal-card",
+      "type": "registry:ui",
+      "title": "Deal Card",
+      "description": "Deal card component for displaying deals",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/badge.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/deal-card.tsx",
+          "type": "registry:file",
+          "target": "components/ui/deal-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "blank",
+      "type": "registry:block",
+      "title": "Blank",
+      "description": "Blank component for displaying deals",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json"
+      ],
+      "files": [
+        {
+          "path": "src/app/starters/(minimal)/v0-layout.tsx",
+          "type": "registry:file",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "src/app/starters/(minimal)/blank/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "basic",
+      "type": "registry:block",
+      "title": "Basic",
+      "description": "Basic component for displaying deals",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json"
+      ],
+      "files": [
+        {
+          "path": "src/app/starters/(minimal)/v0-layout.tsx",
+          "type": "registry:file",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "src/app/starters/(minimal)/basic/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "map-view",
+      "type": "registry:block",
+      "title": "Map View",
+      "description": "Map view component for displaying deals",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/deal-strip.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/header-planner.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/action-panel.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/daypart-action-panel.json"
+      ],
+      "files": [
+        {
+          "path": "src/app/starters/(minimal)/v0-layout.tsx",
+          "type": "registry:file",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "src/app/starters/(minimal)/map_view/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "header-planner",
+      "type": "registry:ui",
+      "title": "Header Planner",
+      "description": "A header component for the planner view.",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/tabs.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/planner-header.tsx",
+          "type": "registry:file",
+          "target": "components/ui/planner-header.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Tabs component for displaying tabs",
+      "registryDependencies": [
+        "tabs",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/tabs.tsx",
+          "type": "registry:file",
+          "target": "components/ui/tabs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "daypart-panel-deprecated",
+      "type": "registry:block",
+      "title": "Daypart Panel",
+      "description": "A block for selecting dayparts in a schedule grid.",
+      "registryDependencies": [
+        "select",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/daypart-panel-deprecated.tsx",
+          "type": "registry:file",
+          "target": "components/ui/daypart-panel-deprecated.tsx"
+        }
+      ]
+    },
+    {
+      "name": "action-panel",
+      "type": "registry:block",
+      "title": "Action Panel",
+      "description": "A panel for displaying actions",
+      "registryDependencies": [
+        "card",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/action-panel.tsx",
+          "type": "registry:file",
+          "target": "components/ui/action-panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "daypart-action-panel",
+      "type": "registry:block",
+      "title": "Daypart Action Panel",
+      "description": "A panel for daypart selection actions",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/action-panel.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/daypart-picker.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/daypart-action-panel.tsx",
+          "type": "registry:file",
+          "target": "components/ui/daypart-action-panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "daypart-picker",
+      "type": "registry:block",
+      "title": "Daypart Picker",
+      "description": "A picker for daypart selection",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/dropdown-menu.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/tabs.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/daypart-picker.tsx",
+          "type": "registry:file",
+          "target": "components/ui/daypart-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Dropdown menu component for displaying menu options",
+      "registryDependencies": [
+        "dropdown-menu",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/dropdown-menu.tsx",
+          "type": "registry:file",
+          "target": "components/ui/dropdown-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "l1-header",
+      "type": "registry:ui",
+      "title": "L1 Header",
+      "description": "Level 1 header component for page titles",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/l1-header.tsx",
+          "type": "registry:file",
+          "target": "components/ui/l1-header.tsx"
+        }
+      ]
+    }
+  ]
 }
