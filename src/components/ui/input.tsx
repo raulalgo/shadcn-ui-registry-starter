@@ -1,21 +1,40 @@
 import type * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+const inputVariants = cva(
+  "flex rounded-md border border-neutral-950/10 bg-neutral-50 shadow-xs transition-[color,box-shadow] outline-none file:text-neutral-800 placeholder:text-neutral-500 selection:bg-primary-200 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-primary-600 focus-visible:ring-[1px] aria-invalid:border-pinkred-600 aria-invalid:ring-pinkred-600/20 dark:aria-invalid:ring-pinkred-600/40",
+  {
+    variants: {
+      fit: {
+        default: "px-3 py-2 text-base",
+        sm: "px-2 py-1 text-sm",
+      },
+    },
+    defaultVariants: {
+      fit: "default",
+    },
+  },
+);
+
+function Input({
+  className,
+  type,
+  fit,
+  ...props
+}: React.ComponentProps<"input"> &
+  VariantProps<typeof inputVariants> & {
+    fit?: "default" | "sm";
+  }) {
   return (
     <input
       type={type}
       data-slot="input"
-      className={cn(
-        "selection:bg-primary-200 file:text-foreground placeholder:text-muted-foreground dark:bg-input/30 flex h-9 w-full min-w-0 rounded-md border border-neutral-950/10 bg-neutral-50 px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-        "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
-        className,
-      )}
+      className={cn(inputVariants({ fit, className }))}
       {...props}
     />
   );
 }
 
-export { Input };
+export { Input, inputVariants };
