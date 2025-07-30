@@ -9,7 +9,7 @@
       "cssVars": {
         "light": {
           "key": "oklch(0.52 0.13 144.17)",
-"key-foreground": "oklch(1.0 0 0)",
+          "key-foreground": "oklch(1.0 0 0)",
           "radius": "0.5rem"
         },
         "dark": {
@@ -392,9 +392,7 @@
       "type": "registry:ui",
       "title": "Button",
       "description": "Basic set of buttons in our app",
-      "registryDependencies": [
-        "button"
-      ],
+      "registryDependencies": ["button"],
       "files": [
         {
           "path": "src/components/ui/button.tsx",
@@ -532,9 +530,7 @@
       "type": "registry:ui",
       "title": "Deal Card",
       "description": "Containers for displaying content and actions about a single subject.",
-      "registryDependencies": [
-        "card"
-      ],
+      "registryDependencies": ["card"],
       "files": [
         {
           "path": "src/components/ui/deal-card.tsx",

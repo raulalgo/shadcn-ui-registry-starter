@@ -7,7 +7,6 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 
-
 const GeistSans = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -41,7 +40,7 @@ export default function RootLayout({
         <SidebarProvider>
           <BrandHeader />
           <BrandSidebar />
-            <div className="container">{children}</div>
+          <div className="container">{children}</div>
           <Toaster />
         </SidebarProvider>
       </body>

@@ -28,10 +28,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(
-        inter.variable,
-        "bg-background text-foreground",
-      )}
+      className={cn(inter.variable, "bg-background text-foreground")}
     >
       <meta
         name="robots"

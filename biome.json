@@ -10,7 +10,8 @@
       ".idea",
       "public/r",
       "components/ui"
-    ]
+    ],
+    "ignoreUnknown": true
   },
   "linter": {
     "enabled": true,
@@ -35,6 +36,11 @@
       "quoteProperties": "asNeeded",
       "semicolons": "always",
       "trailingCommas": "all"
+    }
+  },
+  "css": {
+    "formatter": {
+      "enabled": true
     }
   }
 }

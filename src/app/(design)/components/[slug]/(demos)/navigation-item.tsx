@@ -10,4 +10,4 @@ export const navigationItem = {
     "Profile Item": <NavigationItem label="Profile" />,
     "No Icon": <NavigationItem label="No Icon" />,
   },
-}; 
+};

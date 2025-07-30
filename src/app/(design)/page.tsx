@@ -34,7 +34,8 @@ export default function Home() {
             Viooh Registry
           </h1>
           <p className="text-muted-foreground">
-            We are going to try to build our own design system and registry for Viooh.
+            We are going to try to build our own design system and registry for
+            Viooh.
           </p>
         </div>
       </div>
@@ -45,7 +46,7 @@ export default function Home() {
             <div className="flex items-center justify-between">
               <CardTitle>Components</CardTitle>
               <div className="rounded-md bg-key p-1">
-<ToyBrick className="size-5 text-key-foreground" />
+                <ToyBrick className="size-5 text-key-foreground" />
               </div>
             </div>
             <CardDescription>

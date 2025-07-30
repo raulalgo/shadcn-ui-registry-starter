@@ -20,6 +20,11 @@ const starters = [
     name: "map-view",
     url: "/starters/map_view",
   },
+  {
+    title: "List View",
+    name: "list-view",
+    url: "/starters/list_view",
+  },
 ];
 
 export default function StartPage() {

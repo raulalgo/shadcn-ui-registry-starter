@@ -3,7 +3,7 @@ import React, { type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
-import '@/globals.css'
+import "@/globals.css";
 
 const GeistSans = Geist({
   subsets: ["latin"],
@@ -36,7 +36,7 @@ export default function RootLayout({
       )}
     >
       <body>
-          <div className="container">{children}</div>
+        <div className="container">{children}</div>
       </body>
     </html>
   );

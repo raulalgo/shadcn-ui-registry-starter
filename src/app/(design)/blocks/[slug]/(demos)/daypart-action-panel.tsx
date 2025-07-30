@@ -5,4 +5,4 @@ export const daypartActionPanelBlock = {
   components: {
     Default: <DaypartActionPanel />,
   },
-}; 
+};

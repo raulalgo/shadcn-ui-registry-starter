@@ -5,4 +5,4 @@ export const actionPanelBlock = {
   components: {
     Default: <ActionPanel>Action Panel Block Content</ActionPanel>,
   },
-}; 
+};

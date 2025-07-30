@@ -13,7 +13,6 @@ const badgeVariants = cva(
           "bg-primary-600/5 text-primary-700 [&>.badge-content]:bg-primary-700 [&>.badge-content]:text-primary-50",
         exclude:
           "bg-neutral-950/5 text-neutral-700 [&>.badge-content]:bg-neutral-700 [&>.badge-content]:text-neutral-50",
-        
       },
     },
     defaultVariants: {
@@ -34,18 +33,17 @@ function Badge({
   const Comp = asChild ? Slot : "span";
 
   return (
-      <Comp
-        data-slot="badge"
-        className={cn(badgeVariants({ variant }), className)}
-        {...props}
-      >
-        {label && <span className="pl-2">{label}</span>}
-        <span className="badge-content flex items-center justify-center">
-            {children}
-        </span>
-      </Comp>
+    <Comp
+      data-slot="badge"
+      className={cn(badgeVariants({ variant }), className)}
+      {...props}
+    >
+      {label && <span className="pl-2">{label}</span>}
+      <span className="badge-content flex items-center justify-center">
+        {children}
+      </span>
+    </Comp>
   );
 }
 
 export { Badge, badgeVariants };
-

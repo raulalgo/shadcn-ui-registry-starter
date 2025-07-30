@@ -5,4 +5,4 @@ export const dropdownMenu = {
   components: {
     Default: <DropdownMenu />,
   },
-}; 
+};

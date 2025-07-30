@@ -212,6 +212,29 @@
       ]
     },
     {
+      "name": "list-view",
+      "type": "registry:block",
+      "title": "List View",
+      "description": "List view component for displaying deals",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/l1-header.json"
+      ],
+      "files": [
+        {
+          "path": "src/app/starters/(minimal)/v0-layout.tsx",
+          "type": "registry:file",
+          "target": "app/layout.tsx"
+        },
+        {
+          "path": "src/app/starters/(minimal)/list_view/page.tsx",
+          "type": "registry:page",
+          "target": "app/page.tsx"
+        }
+      ]
+    },
+    {
       "name": "header-planner",
       "type": "registry:ui",
       "title": "Header Planner",

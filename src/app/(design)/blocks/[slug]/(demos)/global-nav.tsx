@@ -10,4 +10,4 @@ export const globalNav = {
     "Inventory Management Selected": <GlobalNav selectedPage="inventory" />,
     "Users Selected": <GlobalNav selectedPage="users" />,
   },
-}; 
+};

@@ -34,10 +34,7 @@ export default function TokensPage() {
           <ColorBlock name="Background" className="bg-background" />
           <ColorBlock name="Foreground" className="bg-foreground" />
           <ColorBlock name="Key" className="bg-key" />
-<ColorBlock
-name="Key Foreground"
-className="bg-key-foreground"
-/>
+          <ColorBlock name="Key Foreground" className="bg-key-foreground" />
         </div>
       </section>
 
@@ -139,10 +136,10 @@ className="bg-key-foreground"
             className="bg-sidebar-foreground"
           />
           <ColorBlock name="Sidebar Key" className="bg-sidebar-key" />
-<ColorBlock
-name="Sidebar Key Foreground"
-className="bg-sidebar-key-foreground"
-/>
+          <ColorBlock
+            name="Sidebar Key Foreground"
+            className="bg-sidebar-key-foreground"
+          />
           <ColorBlock name="Sidebar Accent" className="bg-sidebar-accent" />
           <ColorBlock
             name="Sidebar Accent Foreground"

@@ -1,10 +1,16 @@
 "use client";
 
+import { cn } from "@/lib/utils";
+import { Calendar, ChevronLeft, X } from "lucide-react";
 import * as React from "react";
 import { Button } from "./button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
-import { X, Calendar, ChevronLeft } from "lucide-react";
-import { cn } from "@/lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./select";
 
 interface DaypartPanelProps {
   onClose?: () => void;
@@ -13,31 +19,44 @@ interface DaypartPanelProps {
 }
 
 function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
-  const [selectedPattern, setSelectedPattern] = React.useState<"1week" | "2week" | "norepeat">("norepeat");
-  const [selectedCells, setSelectedCells] = React.useState<Set<string>>(new Set());
+  const [selectedPattern, setSelectedPattern] = React.useState<
+    "1week" | "2week" | "norepeat"
+  >("norepeat");
+  const [selectedCells, setSelectedCells] = React.useState<Set<string>>(
+    new Set(),
+  );
   const [isCustomDaypart, setIsCustomDaypart] = React.useState(false);
-  const [lastClickedCell, setLastClickedCell] = React.useState<string | null>(null);
+  const [lastClickedCell, setLastClickedCell] = React.useState<string | null>(
+    null,
+  );
   const [lastClickedHeader, setLastClickedHeader] = React.useState<{
-    type: 'day' | 'hour';
+    type: "day" | "hour";
     value: string;
   } | null>(null);
-  const [previewCells, setPreviewCells] = React.useState<Set<string>>(new Set());
+  const [previewCells, setPreviewCells] = React.useState<Set<string>>(
+    new Set(),
+  );
   const [isSelecting, setIsSelecting] = React.useState(false);
   const [selectionStart, setSelectionStart] = React.useState<{
-    type: 'cell' | 'day' | 'hour';
+    type: "cell" | "day" | "hour";
     day?: string;
     hour?: string;
   } | null>(null);
   const [isShiftPreview, setIsShiftPreview] = React.useState(false);
-  const [shiftPreviewCells, setShiftPreviewCells] = React.useState<Set<string>>(new Set());
+  const [shiftPreviewCells, setShiftPreviewCells] = React.useState<Set<string>>(
+    new Set(),
+  );
   const [shiftPreviewStart, setShiftPreviewStart] = React.useState<{
-    type: 'cell' | 'day' | 'hour',
-    day?: string,
-    hour?: string
+    type: "cell" | "day" | "hour";
+    day?: string;
+    hour?: string;
   } | null>(null);
 
   const days = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
-  const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, "0")}:00`);
+  const hours = Array.from(
+    { length: 24 },
+    (_, i) => `${i.toString().padStart(2, "0")}:00`,
+  );
   const indexRanges = [
     { range: "0-0.54", color: "bg-yellow-200", label: "0-0.54" },
     { range: "0.54-1.08", color: "bg-yellow-400", label: "0.54-1.08" },
@@ -74,38 +93,58 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
   // Listen for shift key up/down to manage preview state
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Shift') setIsShiftPreview(true);
+      if (e.key === "Shift") setIsShiftPreview(true);
     };
     const handleKeyUp = (e: KeyboardEvent) => {
-      if (e.key === 'Shift') {
+      if (e.key === "Shift") {
         setIsShiftPreview(false);
         setShiftPreviewCells(new Set());
         setShiftPreviewStart(null);
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
     };
   }, []);
 
-  const handleCellMouseOver = (day: string, hour: string, event?: React.MouseEvent) => {
-    if (isShiftPreview && shiftPreviewStart && shiftPreviewStart.type === 'cell') {
-      setShiftPreviewCells(getCellRange({ day: shiftPreviewStart.day!, hour: shiftPreviewStart.hour! }, { day, hour }));
+  const handleCellMouseOver = (
+    day: string,
+    hour: string,
+    event?: React.MouseEvent,
+  ) => {
+    if (
+      isShiftPreview &&
+      shiftPreviewStart &&
+      shiftPreviewStart.type === "cell"
+    ) {
+      setShiftPreviewCells(
+        getCellRange(
+          { day: shiftPreviewStart.day!, hour: shiftPreviewStart.hour! },
+          { day, hour },
+        ),
+      );
     }
   };
 
-  const handleCellClick = (day: string, hour: string, event?: React.MouseEvent) => {
+  const handleCellClick = (
+    day: string,
+    hour: string,
+    event?: React.MouseEvent,
+  ) => {
     if (event?.shiftKey) {
       if (!shiftPreviewStart) {
-        setShiftPreviewStart({ type: 'cell', day, hour });
+        setShiftPreviewStart({ type: "cell", day, hour });
         setShiftPreviewCells(new Set([`${day}-${hour}`]));
       } else {
-        const range = getCellRange({ day: shiftPreviewStart.day!, hour: shiftPreviewStart.hour! }, { day, hour });
+        const range = getCellRange(
+          { day: shiftPreviewStart.day!, hour: shiftPreviewStart.hour! },
+          { day, hour },
+        );
         const newSelected = new Set(selectedCells);
-        range.forEach(cell => newSelected.add(cell));
+        range.forEach((cell) => newSelected.add(cell));
         setSelectedCells(newSelected);
         setShiftPreviewCells(new Set());
         setShiftPreviewStart(null);
@@ -130,7 +169,11 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
   };
 
   const handleDayMouseOver = (day: string, event?: React.MouseEvent) => {
-    if (isShiftPreview && shiftPreviewStart && shiftPreviewStart.type === 'day') {
+    if (
+      isShiftPreview &&
+      shiftPreviewStart &&
+      shiftPreviewStart.type === "day"
+    ) {
       setShiftPreviewCells(getDayRange(shiftPreviewStart.day!, day));
     }
   };
@@ -138,34 +181,40 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
   const handleDayClick = (day: string, event?: React.MouseEvent) => {
     if (event?.shiftKey) {
       if (!shiftPreviewStart) {
-        setShiftPreviewStart({ type: 'day', day });
-        setShiftPreviewCells(new Set(hours.map(hour => `${day}-${hour}`)));
-      } else if (shiftPreviewStart.type === 'day') {
+        setShiftPreviewStart({ type: "day", day });
+        setShiftPreviewCells(new Set(hours.map((hour) => `${day}-${hour}`)));
+      } else if (shiftPreviewStart.type === "day") {
         const range = getDayRange(shiftPreviewStart.day!, day);
         const newSelected = new Set(selectedCells);
-        range.forEach(cell => newSelected.add(cell));
+        range.forEach((cell) => newSelected.add(cell));
         setSelectedCells(newSelected);
         setShiftPreviewCells(new Set());
         setShiftPreviewStart(null);
       }
-      setLastClickedHeader({ type: 'day', value: day });
+      setLastClickedHeader({ type: "day", value: day });
       return;
     }
     // Single click: toggle all or none for day column
     const dayColumnCells = hours.map((hour) => `${day}-${hour}`);
     const newSelected = new Set(selectedCells);
-    const allSelected = dayColumnCells.every((cellId) => newSelected.has(cellId));
+    const allSelected = dayColumnCells.every((cellId) =>
+      newSelected.has(cellId),
+    );
     if (allSelected) {
       dayColumnCells.forEach((cellId) => newSelected.delete(cellId));
     } else {
       dayColumnCells.forEach((cellId) => newSelected.add(cellId));
     }
     setSelectedCells(newSelected);
-    setLastClickedHeader({ type: 'day', value: day });
+    setLastClickedHeader({ type: "day", value: day });
   };
 
   const handleHourMouseOver = (hour: string, event?: React.MouseEvent) => {
-    if (isShiftPreview && shiftPreviewStart && shiftPreviewStart.type === 'hour') {
+    if (
+      isShiftPreview &&
+      shiftPreviewStart &&
+      shiftPreviewStart.type === "hour"
+    ) {
       setShiftPreviewCells(getHourRange(shiftPreviewStart.hour!, hour));
     }
   };
@@ -173,17 +222,17 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
   const handleHourClick = (hour: string, event?: React.MouseEvent) => {
     if (event?.shiftKey) {
       if (!shiftPreviewStart) {
-        setShiftPreviewStart({ type: 'hour', hour });
-        setShiftPreviewCells(new Set(days.map(day => `${day}-${hour}`)));
-      } else if (shiftPreviewStart.type === 'hour') {
+        setShiftPreviewStart({ type: "hour", hour });
+        setShiftPreviewCells(new Set(days.map((day) => `${day}-${hour}`)));
+      } else if (shiftPreviewStart.type === "hour") {
         const range = getHourRange(shiftPreviewStart.hour!, hour);
         const newSelected = new Set(selectedCells);
-        range.forEach(cell => newSelected.add(cell));
+        range.forEach((cell) => newSelected.add(cell));
         setSelectedCells(newSelected);
         setShiftPreviewCells(new Set());
         setShiftPreviewStart(null);
       }
-      setLastClickedHeader({ type: 'hour', value: hour });
+      setLastClickedHeader({ type: "hour", value: hour });
       return;
     }
     // Single click: toggle all or none for hour row
@@ -196,25 +245,44 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
       hourRowCells.forEach((cellId) => newSelected.add(cellId));
     }
     setSelectedCells(newSelected);
-    setLastClickedHeader({ type: 'hour', value: hour });
+    setLastClickedHeader({ type: "hour", value: hour });
   };
 
-  const handleCellKeyDown = (day: string, hour: string, event: React.KeyboardEvent) => {
+  const handleCellKeyDown = (
+    day: string,
+    hour: string,
+    event: React.KeyboardEvent,
+  ) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      handleCellClick(day, hour, event.shiftKey ? ({ shiftKey: true } as React.MouseEvent) : undefined);
+      handleCellClick(
+        day,
+        hour,
+        event.shiftKey ? ({ shiftKey: true } as React.MouseEvent) : undefined,
+      );
     }
   };
 
   // Helper to get range between two cells
-  const getCellRange = (start: {day: string, hour: string}, end: {day: string, hour: string}) => {
+  const getCellRange = (
+    start: { day: string; hour: string },
+    end: { day: string; hour: string },
+  ) => {
     const startDayIdx = days.indexOf(start.day);
     const endDayIdx = days.indexOf(end.day);
     const startHourIdx = hours.indexOf(start.hour);
     const endHourIdx = hours.indexOf(end.hour);
     const range = new Set<string>();
-    for (let d = Math.min(startDayIdx, endDayIdx); d <= Math.max(startDayIdx, endDayIdx); d++) {
-      for (let h = Math.min(startHourIdx, endHourIdx); h <= Math.max(startHourIdx, endHourIdx); h++) {
+    for (
+      let d = Math.min(startDayIdx, endDayIdx);
+      d <= Math.max(startDayIdx, endDayIdx);
+      d++
+    ) {
+      for (
+        let h = Math.min(startHourIdx, endHourIdx);
+        h <= Math.max(startHourIdx, endHourIdx);
+        h++
+      ) {
         range.add(`${days[d]}-${hours[h]}`);
       }
     }
@@ -225,8 +293,12 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
     const startIdx = days.indexOf(startDay);
     const endIdx = days.indexOf(endDay);
     const range = new Set<string>();
-    for (let d = Math.min(startIdx, endIdx); d <= Math.max(startIdx, endIdx); d++) {
-      hours.forEach(hour => range.add(`${days[d]}-${hour}`));
+    for (
+      let d = Math.min(startIdx, endIdx);
+      d <= Math.max(startIdx, endIdx);
+      d++
+    ) {
+      hours.forEach((hour) => range.add(`${days[d]}-${hour}`));
     }
     return range;
   };
@@ -235,44 +307,53 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
     const startIdx = hours.indexOf(startHour);
     const endIdx = hours.indexOf(endHour);
     const range = new Set<string>();
-    for (let h = Math.min(startIdx, endIdx); h <= Math.max(startIdx, endIdx); h++) {
-      days.forEach(day => range.add(`${day}-${hours[h]}`));
+    for (
+      let h = Math.min(startIdx, endIdx);
+      h <= Math.max(startIdx, endIdx);
+      h++
+    ) {
+      days.forEach((day) => range.add(`${day}-${hours[h]}`));
     }
     return range;
   };
 
   const handleCellMouseDown = (day: string, hour: string) => {
     setIsSelecting(true);
-    setSelectionStart({ type: 'cell', day, hour });
+    setSelectionStart({ type: "cell", day, hour });
     setPreviewCells(new Set([`${day}-${hour}`]));
   };
 
   const handleCellMouseEnter = (day: string, hour: string) => {
-    if (isSelecting && selectionStart && selectionStart.type === 'cell') {
-      setPreviewCells(getCellRange({ day: selectionStart.day!, hour: selectionStart.hour! }, { day, hour }));
+    if (isSelecting && selectionStart && selectionStart.type === "cell") {
+      setPreviewCells(
+        getCellRange(
+          { day: selectionStart.day!, hour: selectionStart.hour! },
+          { day, hour },
+        ),
+      );
     }
   };
 
   const handleDayMouseDown = (day: string) => {
     setIsSelecting(true);
-    setSelectionStart({ type: 'day', day });
-    setPreviewCells(new Set(hours.map(hour => `${day}-${hour}`)));
+    setSelectionStart({ type: "day", day });
+    setPreviewCells(new Set(hours.map((hour) => `${day}-${hour}`)));
   };
 
   const handleDayMouseEnter = (day: string) => {
-    if (isSelecting && selectionStart && selectionStart.type === 'day') {
+    if (isSelecting && selectionStart && selectionStart.type === "day") {
       setPreviewCells(getDayRange(selectionStart.day!, day));
     }
   };
 
   const handleHourMouseDown = (hour: string) => {
     setIsSelecting(true);
-    setSelectionStart({ type: 'hour', hour });
-    setPreviewCells(new Set(days.map(day => `${day}-${hour}`)));
+    setSelectionStart({ type: "hour", hour });
+    setPreviewCells(new Set(days.map((day) => `${day}-${hour}`)));
   };
 
   const handleHourMouseEnter = (hour: string) => {
-    if (isSelecting && selectionStart && selectionStart.type === 'hour') {
+    if (isSelecting && selectionStart && selectionStart.type === "hour") {
       setPreviewCells(getHourRange(selectionStart.hour!, hour));
     }
   };
@@ -283,38 +364,52 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
     const handleGlobalMouseUp = () => {
       if (previewCells.size > 0) {
         const newSelected = new Set(selectedCells);
-        previewCells.forEach(cell => newSelected.add(cell));
+        previewCells.forEach((cell) => newSelected.add(cell));
         setSelectedCells(newSelected);
       }
       setPreviewCells(new Set());
       setIsSelecting(false);
       setSelectionStart(null);
     };
-    window.addEventListener('mouseup', handleGlobalMouseUp);
-    return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
+    window.addEventListener("mouseup", handleGlobalMouseUp);
+    return () => window.removeEventListener("mouseup", handleGlobalMouseUp);
   }, [isSelecting, previewCells, selectedCells]);
 
   return (
-    <div className="flex flex-col h-full bg-neutral-50 max-w-96 border border-neutral-900/10 rounded-lg shadow">
+    <div className="flex h-full max-w-96 flex-col rounded-lg border border-neutral-900/10 bg-neutral-50 shadow">
       {/* Header */}
-      <div className="flex items-center justify-between p-6 border-b border-neutral-900/10 pl-4 pt-4 pb-3">
-        <div className="flex items-center justify-between w-full">
+      <div className="flex items-center justify-between border-neutral-900/10 border-b p-6 pt-4 pb-3 pl-4">
+        <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-2">
             {onBack && (
-              <Button variant="ghost" size="icon" onClick={onBack} className="h-6 w-6">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={onBack}
+                className="h-6 w-6"
+              >
                 <ChevronLeft className="h-4 w-4" />
               </Button>
             )}
-            <span className="font-semibold text-neutral-900 text-base">Pattern</span>
+            <span className="font-semibold text-base text-neutral-900">
+              Pattern
+            </span>
           </div>
-          <span className="text-sm text-neutral-500">London_Billboards_Digital</span>
-          <Button variant="ghost" size="icon" onClick={onClose} className="h-6 w-6">
+          <span className="text-neutral-500 text-sm">
+            London_Billboards_Digital
+          </span>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClose}
+            className="h-6 w-6"
+          >
             <X className="h-4 w-4" />
           </Button>
         </div>
       </div>
       {/* Content */}
-      <div className="flex-1 p-6 flex flex-col gap-4 overflow-hidden px-4 py-3">
+      <div className="flex flex-1 flex-col gap-4 overflow-hidden p-6 px-4 py-3">
         {/* Pattern Selection */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -343,18 +438,28 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
               No repeat
             </Button>
           </div>
-          <Button variant="ghost" onClick={handleClear} className="text-primary-600">
-            <X className="h-4 w-4 mr-1" />
+          <Button
+            variant="ghost"
+            onClick={handleClear}
+            className="text-primary-600"
+          >
+            <X className="mr-1 h-4 w-4" />
             Clear
           </Button>
         </div>
         {/* Date Range Selector */}
         <div className="relative">
-          <Select defaultValue="jun24-29" disabled={selectedPattern === "1week" || selectedPattern === "2week"}>
+          <Select
+            defaultValue="jun24-29"
+            disabled={
+              selectedPattern === "1week" || selectedPattern === "2week"
+            }
+          >
             <SelectTrigger
               className={cn(
                 "w-full",
-                (selectedPattern === "1week" || selectedPattern === "2week") && "opacity-50 cursor-not-allowed",
+                (selectedPattern === "1week" || selectedPattern === "2week") &&
+                  "cursor-not-allowed opacity-50",
               )}
             >
               <div className="flex items-center gap-2">
@@ -363,9 +468,13 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
               </div>
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="jun24-29">Jun 24, 2025 - Jun 29, 2025</SelectItem>
+              <SelectItem value="jun24-29">
+                Jun 24, 2025 - Jun 29, 2025
+              </SelectItem>
               <SelectItem value="jul1-6">Jul 1, 2025 - Jul 6, 2025</SelectItem>
-              <SelectItem value="jul8-13">Jul 8, 2025 - Jul 13, 2025</SelectItem>
+              <SelectItem value="jul8-13">
+                Jul 8, 2025 - Jul 13, 2025
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -373,8 +482,8 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
         <div className="flex items-center gap-4">
           {indexRanges.map((range) => (
             <div key={range.range} className="flex items-center gap-2">
-              <div className={cn("w-4 h-4 rounded-full", range.color)} />
-              <span className="text-xs text-neutral-600">{range.label}</span>
+              <div className={cn("h-4 w-4 rounded-full", range.color)} />
+              <span className="text-neutral-600 text-xs">{range.label}</span>
             </div>
           ))}
         </div>
@@ -382,12 +491,12 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
         <div className="flex-1 overflow-auto">
           <div className="min-w-full">
             {/* Header Row */}
-            <div className="grid grid-cols-8 gap-1 mb-2">
-              <div className="w-12"></div>
+            <div className="mb-2 grid grid-cols-8 gap-1">
+              <div className="w-12" />
               {days.map((day) => (
                 <button
                   key={day}
-                  className="text-center font-medium text-xs py-1 text-neutral-600 hover:bg-neutral-200 rounded-sm cursor-pointer transition-colors"
+                  className="cursor-pointer rounded-sm py-1 text-center font-medium text-neutral-600 text-xs transition-colors hover:bg-neutral-200"
                   onClick={(e) => handleDayClick(day, e)}
                   onMouseDown={() => handleDayMouseDown(day)}
                   onMouseEnter={() => handleDayMouseEnter(day)}
@@ -402,7 +511,7 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
               {hours.map((hour) => (
                 <div key={hour} className="grid grid-cols-8 gap-1">
                   <button
-                    className="w-12 text-xs text-neutral-600 py-1 text-right pr-2 pt-0 pb-0 hover:bg-neutral-200 rounded-sm cursor-pointer transition-colors"
+                    className="w-12 cursor-pointer rounded-sm py-1 pt-0 pr-2 pb-0 text-right text-neutral-600 text-xs transition-colors hover:bg-neutral-200"
                     onClick={(e) => handleHourClick(hour, e)}
                     onMouseDown={() => handleHourMouseDown(hour)}
                     onMouseEnter={() => handleHourMouseEnter(hour)}
@@ -418,11 +527,17 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                       <button
                         key={cellId}
                         className={cn(
-                          "w-full transition-all hover:opacity-80 hover:scale-105 rounded-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-1 box-border",
+                          "box-border w-full cursor-pointer rounded-sm transition-all hover:scale-105 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-1",
                           getCellColor(intensity),
-                          isSelected ? "border-2 border-primary-600" : "border border-neutral-300",
-                          previewCells.has(cellId) && !isSelected ? "opacity-40" : "",
-                          shiftPreviewCells.has(cellId) && !isSelected ? "opacity-40" : ""
+                          isSelected
+                            ? "border-2 border-primary-600"
+                            : "border border-neutral-300",
+                          previewCells.has(cellId) && !isSelected
+                            ? "opacity-40"
+                            : "",
+                          shiftPreviewCells.has(cellId) && !isSelected
+                            ? "opacity-40"
+                            : "",
                         )}
                         style={{ height: "20px" }}
                         onClick={(e) => handleCellClick(day, hour, e)}
@@ -441,7 +556,7 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
           </div>
         </div>
         {/* Footer */}
-        <div className="flex justify-between pt-4 border-t border-neutral-900/10">
+        <div className="flex justify-between border-neutral-900/10 border-t pt-4">
           <Button>Cancel</Button>
           <Button variant="primary">Confirm</Button>
         </div>
@@ -450,4 +565,4 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
   );
 }
 
-export { DaypartPanel }; 
+export { DaypartPanel };

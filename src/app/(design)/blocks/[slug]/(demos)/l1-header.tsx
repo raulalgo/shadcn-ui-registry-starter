@@ -5,4 +5,4 @@ export const l1Header = {
   components: {
     Default: <L1Header h1="Main Heading" />,
   },
-}; 
+};

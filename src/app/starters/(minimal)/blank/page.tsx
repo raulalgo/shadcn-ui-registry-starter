@@ -2,9 +2,9 @@ import { GlobalNav } from "@/components/ui/global-nav";
 
 export default function Page() {
   return (
-    <div className="flex flex-row bg-primary-900 min-h-full">
+    <div className="flex min-h-full flex-row bg-primary-900">
       <GlobalNav />
-      <div className="w-full h-screen bg-neutral-50"></div>
+      <div className="h-screen w-full bg-neutral-50" />
     </div>
   );
 }

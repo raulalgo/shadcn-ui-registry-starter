@@ -11,9 +11,9 @@ export function Logo() {
         role="graphics-symbol"
       >
         <circle className="fill-key" cx="13.5" cy="6.5" r="2.5" />
-<circle className="fill-key" cx="19" cy="13" r="2.5" />
-<circle className="fill-key" cx="13.5" cy="19.5" r="2.5" />
-<circle className="fill-key" cx="6.5" cy="13" r="2.5" />
+        <circle className="fill-key" cx="19" cy="13" r="2.5" />
+        <circle className="fill-key" cx="13.5" cy="19.5" r="2.5" />
+        <circle className="fill-key" cx="6.5" cy="13" r="2.5" />
       </svg>
 
       <h1 className="font-bold">Brand Name</h1>

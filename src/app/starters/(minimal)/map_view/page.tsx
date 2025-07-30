@@ -1,20 +1,20 @@
-import { GlobalNav } from "@/components/ui/global-nav";
 import { DealStrip } from "@/components/ui/deal-strip";
+import { GlobalNav } from "@/components/ui/global-nav";
 import { HeaderPlanner } from "@/components/ui/planner-header";
 
 export default async function MapView() {
   return (
-    <div className="flex flex-row h-screen w-screen bg-primary-900">
+    <div className="flex h-screen w-screen flex-row bg-primary-900">
       <GlobalNav className="h-full" />
-      <main className="p-2 w-full h-full">
-        <div className="flex flex-col bg-neutral-50 w-full h-full rounded-md overflow-hidden">
-        <HeaderPlanner />
-        <div className="flex flex-row rounded-md shadow-md overflow-hidden w-full h-full">
-          <DealStrip className="w-96 h-full overflow-y-auto" />
-          <div className="flex-1 h-full w-full bg-neutral-100">
-            {/* Content here */}
+      <main className="h-full w-full p-2">
+        <div className="flex h-full w-full flex-col overflow-hidden rounded-md bg-neutral-50">
+          <HeaderPlanner />
+          <div className="flex h-full w-full flex-row overflow-hidden rounded-md shadow-md">
+            <DealStrip className="h-full w-96 overflow-y-auto" />
+            <div className="h-full w-full flex-1 bg-neutral-100">
+              {/* Content here */}
+            </div>
           </div>
-        </div>
         </div>
       </main>
     </div>
