@@ -15,10 +15,8 @@ const buttonVariants = cva(
           "bg-pinkred-700 text-white shadow-xs hover:bg-pinkred-800 focus-visible:ring-pinkred-700",
         default:
           "border bg-neutral-50 border-neutral-800/10 shadow-xs text-primary-600 hover:bg-neutral-100 ",
-        medium:
-          "bg-primary-600/5 text-primary-600 hover:bg-primary-600/10",
-        ghost:
-          "bg-transparent text-primary-600 hover:bg-primary-600/5",
+        medium: "bg-primary-600/5 text-primary-600 hover:bg-primary-600/10",
+        ghost: "bg-transparent text-primary-600 hover:bg-primary-600/5",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -59,13 +57,17 @@ function Button({
   if (iconOnly) {
     // Prefer leftIcon, then rightIcon, fallback to children if it's a single icon
     const icon = leftIcon || rightIcon || children;
-    contents = <span className="flex items-center justify-center w-full h-full">{icon}</span>;
+    contents = (
+      <span className="flex h-full w-full items-center justify-center">
+        {icon}
+      </span>
+    );
   } else {
     contents = (
       <>
-        {leftIcon && <span className="shrink-0 mr-1.5">{leftIcon}</span>}
+        {leftIcon && <span className="mr-1.5 shrink-0">{leftIcon}</span>}
         {children}
-        {rightIcon && <span className="shrink-0 ml-1.5">{rightIcon}</span>}
+        {rightIcon && <span className="ml-1.5 shrink-0">{rightIcon}</span>}
       </>
     );
   }
@@ -76,11 +78,22 @@ function Button({
   return (
     <Comp
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }), iconOnlyClass)}
-      aria-label={iconOnly && typeof children === "string" ? children : undefined}
+      className={cn(
+        buttonVariants({ variant, size, className }),
+        iconOnlyClass,
+      )}
+      aria-label={
+        iconOnly && typeof children === "string" ? children : undefined
+      }
       {...props}
     >
-      {asChild ? <span className="inline-flex items-center w-full h-full">{contents}</span> : contents}
+      {asChild ? (
+        <span className="inline-flex h-full w-full items-center">
+          {contents}
+        </span>
+      ) : (
+        contents
+      )}
     </Comp>
   );
 }

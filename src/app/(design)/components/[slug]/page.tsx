@@ -38,7 +38,7 @@ export default async function ComponentPage({
               Back to Home
             </Link>
           </Button>
-          <h1 className="font-bold text-3xl tracking-tight">
+          <h1 className="text-3xl font-bold tracking-tight">
             {component.title}
           </h1>
         </div>

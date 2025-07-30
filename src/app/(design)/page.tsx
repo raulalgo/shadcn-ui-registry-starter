@@ -30,7 +30,7 @@ export default function Home() {
     <main className="container mt-4 p-5 md:mt-8 md:p-10">
       <div className="mb-8">
         <div className="space-y-2">
-          <h1 className="font-bold text-3xl tracking-tight md:text-4xl">
+          <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
             Viooh Registry
           </h1>
           <p className="text-muted-foreground">
@@ -45,8 +45,8 @@ export default function Home() {
           <CardHeader className="space-y-1">
             <div className="flex items-center justify-between">
               <CardTitle>Components</CardTitle>
-              <div className="rounded-md bg-key p-1">
-                <ToyBrick className="size-5 text-key-foreground" />
+              <div className="bg-key rounded-md p-1">
+                <ToyBrick className="text-key-foreground size-5" />
               </div>
             </div>
             <CardDescription>
@@ -64,7 +64,7 @@ export default function Home() {
                   <Link href={item.path} className="text-sm hover:underline">
                     {item.name}
                   </Link>
-                  <ArrowRight className="size-4 text-muted-foreground" />
+                  <ArrowRight className="text-muted-foreground size-4" />
                 </div>
               ))}
             </div>
@@ -75,8 +75,8 @@ export default function Home() {
           <CardHeader className="space-y-1">
             <div className="flex items-center justify-between">
               <CardTitle>Blocks</CardTitle>
-              <div className="rounded-md bg-foreground p-1">
-                <Blocks className="size-5 text-key-foreground" />
+              <div className="bg-foreground rounded-md p-1">
+                <Blocks className="text-key-foreground size-5" />
               </div>
             </div>
             <CardDescription>
@@ -94,7 +94,7 @@ export default function Home() {
                   <Link href={item.path} className="text-sm hover:underline">
                     {item.name}
                   </Link>
-                  <ArrowRight className="size-4 text-muted-foreground" />
+                  <ArrowRight className="text-muted-foreground size-4" />
                 </div>
               ))}
             </div>
@@ -102,9 +102,9 @@ export default function Home() {
         </Card>
       </div>
 
-      <div className="mb-4 rounded-lg border bg-card p-6">
+      <div className="bg-card mb-4 rounded-lg border p-6">
         <div className="flex flex-col gap-2">
-          <h2 className="font-semibold text-xl">About</h2>
+          <h2 className="text-xl font-semibold">About</h2>
           <p className="text-muted-foreground">
             This registry serves as a central repository for all UI components
             and blocks used in your applications. It helps maintain consistency
@@ -114,7 +114,7 @@ export default function Home() {
             components, and view examples of how they are used in different
             contexts.
           </p>
-          <p className="mt-2 text-muted-foreground">
+          <p className="text-muted-foreground mt-2">
             To get begin, select a{" "}
             <a href="/starters" className="underline">
               starter
@@ -145,10 +145,10 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="rounded-lg border bg-card p-6">
+      <div className="bg-card rounded-lg border p-6">
         <div className="flex flex-col gap-2">
-          <h2 className="font-semibold text-xl">MCP</h2>
-          <p className="mb-4 text-muted-foreground">
+          <h2 className="text-xl font-semibold">MCP</h2>
+          <p className="text-muted-foreground mb-4">
             Integrate this registry with AI IDEs using Model Context Protocol
             (MCP) using the following configuration. This utilizes this
             Registry's style tokens and the Shadcn CLI. To ensure this works,

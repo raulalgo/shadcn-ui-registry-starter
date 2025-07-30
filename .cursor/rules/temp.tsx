@@ -378,7 +378,7 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
   return (
     <div className="flex h-full max-w-96 flex-col rounded-lg border border-neutral-900/10 bg-neutral-50 shadow">
       {/* Header */}
-      <div className="flex items-center justify-between border-neutral-900/10 border-b p-6 pt-4 pb-3 pl-4">
+      <div className="flex items-center justify-between border-b border-neutral-900/10 p-6 pt-4 pb-3 pl-4">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-2">
             {onBack && (
@@ -391,11 +391,11 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                 <ChevronLeft className="h-4 w-4" />
               </Button>
             )}
-            <span className="font-semibold text-base text-neutral-900">
+            <span className="text-base font-semibold text-neutral-900">
               Pattern
             </span>
           </div>
-          <span className="text-neutral-500 text-sm">
+          <span className="text-sm text-neutral-500">
             London_Billboards_Digital
           </span>
           <Button
@@ -483,7 +483,7 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
           {indexRanges.map((range) => (
             <div key={range.range} className="flex items-center gap-2">
               <div className={cn("h-4 w-4 rounded-full", range.color)} />
-              <span className="text-neutral-600 text-xs">{range.label}</span>
+              <span className="text-xs text-neutral-600">{range.label}</span>
             </div>
           ))}
         </div>
@@ -496,7 +496,7 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
               {days.map((day) => (
                 <button
                   key={day}
-                  className="cursor-pointer rounded-sm py-1 text-center font-medium text-neutral-600 text-xs transition-colors hover:bg-neutral-200"
+                  className="cursor-pointer rounded-sm py-1 text-center text-xs font-medium text-neutral-600 transition-colors hover:bg-neutral-200"
                   onClick={(e) => handleDayClick(day, e)}
                   onMouseDown={() => handleDayMouseDown(day)}
                   onMouseEnter={() => handleDayMouseEnter(day)}
@@ -511,7 +511,7 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
               {hours.map((hour) => (
                 <div key={hour} className="grid grid-cols-8 gap-1">
                   <button
-                    className="w-12 cursor-pointer rounded-sm py-1 pt-0 pr-2 pb-0 text-right text-neutral-600 text-xs transition-colors hover:bg-neutral-200"
+                    className="w-12 cursor-pointer rounded-sm py-1 pt-0 pr-2 pb-0 text-right text-xs text-neutral-600 transition-colors hover:bg-neutral-200"
                     onClick={(e) => handleHourClick(hour, e)}
                     onMouseDown={() => handleHourMouseDown(hour)}
                     onMouseEnter={() => handleHourMouseEnter(hour)}
@@ -527,10 +527,10 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
                       <button
                         key={cellId}
                         className={cn(
-                          "box-border w-full cursor-pointer rounded-sm transition-all hover:scale-105 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-1",
+                          "focus:ring-primary-600 box-border w-full cursor-pointer rounded-sm transition-all hover:scale-105 hover:opacity-80 focus:ring-2 focus:ring-offset-1 focus:outline-none",
                           getCellColor(intensity),
                           isSelected
-                            ? "border-2 border-primary-600"
+                            ? "border-primary-600 border-2"
                             : "border border-neutral-300",
                           previewCells.has(cellId) && !isSelected
                             ? "opacity-40"
@@ -556,7 +556,7 @@ function DaypartPanel({ onClose, onCustomDaypart, onBack }: DaypartPanelProps) {
           </div>
         </div>
         {/* Footer */}
-        <div className="flex justify-between border-neutral-900/10 border-t pt-4">
+        <div className="flex justify-between border-t border-neutral-900/10 pt-4">
           <Button>Cancel</Button>
           <Button variant="primary">Confirm</Button>
         </div>

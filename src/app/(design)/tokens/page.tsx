@@ -17,16 +17,16 @@ export default function TokensPage() {
           </Link>
         </Button>
 
-        <h1 className="font-bold text-3xl tracking-tight">Design Tokens</h1>
-        <p className="mt-1 text-muted-foreground">
+        <h1 className="text-3xl font-bold tracking-tight">Design Tokens</h1>
+        <p className="text-muted-foreground mt-1">
           A comprehensive overview of all color tokens used in the design system
         </p>
       </div>
 
       {/* Key Theme */}
       <section className="mb-12">
-        <h2 className="mb-4 font-semibold text-xl">Key Theme</h2>
-        <p className="mb-6 text-muted-foreground">
+        <h2 className="mb-4 text-xl font-semibold">Key Theme</h2>
+        <p className="text-muted-foreground mb-6">
           The core colors that define the key theme and overall look of the
           interface.
         </p>
@@ -40,8 +40,8 @@ export default function TokensPage() {
 
       {/* Secondary & Accent */}
       <section className="mb-12">
-        <h2 className="mb-4 font-semibold text-xl">Secondary & Accent</h2>
-        <p className="mb-6 text-muted-foreground">
+        <h2 className="mb-4 text-xl font-semibold">Secondary & Accent</h2>
+        <p className="text-muted-foreground mb-6">
           Colors used for secondary elements and accents throughout the
           interface.
         </p>
@@ -61,8 +61,8 @@ export default function TokensPage() {
 
       {/* UI Component */}
       <section className="mb-12">
-        <h2 className="mb-4 font-semibold text-xl">UI Component</h2>
-        <p className="mb-6 text-muted-foreground">
+        <h2 className="mb-4 text-xl font-semibold">UI Component</h2>
+        <p className="text-muted-foreground mb-6">
           Colors used for specific UI components like cards, popovers, and muted
           elements.
         </p>
@@ -81,8 +81,8 @@ export default function TokensPage() {
 
       {/* Utility & Form */}
       <section className="mb-12">
-        <h2 className="mb-4 font-semibold text-xl">Utility & Form</h2>
-        <p className="mb-6 text-muted-foreground">
+        <h2 className="mb-4 text-xl font-semibold">Utility & Form</h2>
+        <p className="text-muted-foreground mb-6">
           Colors used for borders, inputs, and other utility elements.
         </p>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -94,8 +94,8 @@ export default function TokensPage() {
 
       {/* Status & Feedback */}
       <section className="mb-12">
-        <h2 className="mb-4 font-semibold text-xl">Status & Feedback</h2>
-        <p className="mb-6 text-muted-foreground">
+        <h2 className="mb-4 text-xl font-semibold">Status & Feedback</h2>
+        <p className="text-muted-foreground mb-6">
           Colors used to indicate different states and provide feedback to
           users.
         </p>
@@ -110,8 +110,8 @@ export default function TokensPage() {
 
       {/* Chart & Visualization */}
       <section className="mb-12">
-        <h2 className="mb-4 font-semibold text-xl">Chart & Visualization</h2>
-        <p className="mb-6 text-muted-foreground">
+        <h2 className="mb-4 text-xl font-semibold">Chart & Visualization</h2>
+        <p className="text-muted-foreground mb-6">
           Colors used for data visualization and charts.
         </p>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5">
@@ -125,8 +125,8 @@ export default function TokensPage() {
 
       {/* Sidebar & Navigation */}
       <section className="mb-12">
-        <h2 className="mb-4 font-semibold text-xl">Sidebar & Navigation</h2>
-        <p className="mb-6 text-muted-foreground">
+        <h2 className="mb-4 text-xl font-semibold">Sidebar & Navigation</h2>
+        <p className="text-muted-foreground mb-6">
           Colors specific to the sidebar and navigation components.
         </p>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

@@ -229,7 +229,7 @@ function getHex(color: string, shade: number) {
 export default function ColorsPage() {
   return (
     <div className="mx-auto max-w-5xl py-10">
-      <h1 className="mb-8 font-bold text-3xl">Colors</h1>
+      <h1 className="mb-8 text-3xl font-bold">Colors</h1>
       <div className="space-y-10">
         {colorRamps.map((ramp) => (
           <div key={ramp.key}>
@@ -243,10 +243,10 @@ export default function ColorsPage() {
                       className="mb-1 h-10 w-16 rounded-lg border border-neutral-200"
                       style={{ backgroundColor: hex }}
                     />
-                    <div className="font-mono text-neutral-500 text-xs">
+                    <div className="font-mono text-xs text-neutral-500">
                       {shade}
                     </div>
-                    <div className="font-mono text-neutral-400 text-xs">
+                    <div className="font-mono text-xs text-neutral-400">
                       {hex}
                     </div>
                   </div>

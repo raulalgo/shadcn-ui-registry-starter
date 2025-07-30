@@ -80,7 +80,7 @@ export function ComponentCard({
       <Card id="starting-kit" className="border-foreground/25">
         <CardHeader>
           <div className="flex flex-col gap-4">
-            <CardTitle className="font-medium text-lg">{title}</CardTitle>
+            <CardTitle className="text-lg font-medium">{title}</CardTitle>
 
             <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-16">
               <CardDescription>
@@ -132,7 +132,7 @@ export function ComponentCard({
             {previewUrl && (
               <div
                 className={
-                  "h-[800px] w-full overflow-hidden rounded-md border border-border"
+                  "border-border h-[800px] w-full overflow-hidden rounded-md border"
                 }
               >
                 <iframe

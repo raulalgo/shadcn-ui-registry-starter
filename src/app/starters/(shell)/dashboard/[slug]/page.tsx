@@ -1,6 +1,8 @@
 export default async function StarterSlugPage({
   params,
-}: { params: Promise<{ slug: string }> }) {
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
 
   return (

@@ -38,7 +38,7 @@ export default function StartPage() {
               Back to Home
             </Link>
           </Button>
-          <h1 className="font-bold text-3xl tracking-tight">Starters</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Starters</h1>
         </div>
       </div>
 

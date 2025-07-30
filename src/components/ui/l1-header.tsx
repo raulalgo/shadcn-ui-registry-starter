@@ -9,13 +9,20 @@ interface L1HeaderProps {
 
 export function L1Header({ h1, className }: L1HeaderProps) {
   return (
-    <header className={cn("w-full border-b p-2 flex justify-between items-center", className)}>
-        <span>
-          <h1 className="text-xl font-semibold leading-7tracking-tight text">{h1}</h1>
-        </span>
-        <Button variant="primary" size="sm">
-            Create Campaign
-        </Button>
+    <header
+      className={cn(
+        "flex w-full items-center justify-between border-b p-4",
+        className,
+      )}
+    >
+      <span>
+        <h1 className="leading-7tracking-tight text text-xl font-semibold">
+          {h1}
+        </h1>
+      </span>
+      <Button variant="primary" size="sm">
+        Create Campaign
+      </Button>
     </header>
   );
-} 
+}

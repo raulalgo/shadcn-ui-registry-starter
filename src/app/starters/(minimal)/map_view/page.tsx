@@ -4,7 +4,7 @@ import { HeaderPlanner } from "@/components/ui/planner-header";
 
 export default async function MapView() {
   return (
-    <div className="flex h-screen w-screen flex-row bg-primary-900">
+    <div className="bg-primary-900 flex h-screen w-screen flex-row">
       <GlobalNav className="h-full" />
       <main className="h-full w-full p-2">
         <div className="flex h-full w-full flex-col overflow-hidden rounded-md bg-neutral-50">

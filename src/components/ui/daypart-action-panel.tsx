@@ -8,11 +8,8 @@ export interface DaypartActionPanelProps extends ActionPanelProps {
 
 export function DaypartActionPanel(props: DaypartActionPanelProps) {
   return (
-    <ActionPanel
-      title="Daypart Selection"
-      {...props}
-    >
+    <ActionPanel title="Daypart Selection" {...props}>
       <DaypartPicker />
     </ActionPanel>
   );
-} 
+}
