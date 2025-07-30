@@ -417,6 +417,22 @@
           "target": "components/ui/input.tsx"
         }
       ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Select component for displaying select fields",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:file",
+          "target": "components/ui/select.tsx"
+        }
+      ]
     }
   ]
 }
