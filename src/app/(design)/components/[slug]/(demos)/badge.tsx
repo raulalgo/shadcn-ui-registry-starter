@@ -73,5 +73,40 @@ export const badge = {
         Content
       </Badge>
     ),
+    inverted: (
+      <Badge variant="include" label="Include" inverted>
+        Content
+      </Badge>
+    ),
+    inverted2: (
+      <Badge variant="exclude" label="PinkRed" inverted>
+        Content
+      </Badge>
+    ),
+    inverted3: (
+      <Badge variant="pinkred" label="PinkRed" inverted>
+        Content
+      </Badge>
+    ),
+    inverted4: (
+      <Badge variant="sky" label="Sky" inverted>
+        Content
+      </Badge>
+    ),
+    inverted5: (
+      <Badge variant="green" label="Green" inverted>
+        Content
+      </Badge>
+    ),
+    inverted6: (
+      <Badge variant="yellow" label="Yellow" inverted>
+        Content
+      </Badge>
+    ),
+    inverted7: (
+      <Badge variant="lime" label="Lime" inverted>
+        Content
+      </Badge>
+    ),
   },
 };
