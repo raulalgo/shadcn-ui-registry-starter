@@ -5,6 +5,22 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import type * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { cva } from "class-variance-authority";
+
+const selectVariants = cva(
+  "flex rounded-md border border-neutral-950/10 bg-neutral-50 shadow-xs transition-[color,box-shadow] outline-none file:text-neutral-800 placeholder:text-neutral-500 selection:bg-primary-200 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-primary-600 focus-visible:ring-[1px] aria-invalid:border-pinkred-600 aria-invalid:ring-pinkred-600/20 dark:aria-invalid:ring-pinkred-600/40",
+  {
+    variants: {
+      fit: {
+        default: "px-3 py-2 text-base",
+        sm: "px-2 py-1 text-sm",
+      },
+    },
+    defaultVariants: {
+      fit: "default",
+    },
+  },
+);
 
 function Select({
   ...props
@@ -27,17 +43,20 @@ function SelectValue({
 function SelectTrigger({
   className,
   size = "default",
+  fit,
   children,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
   size?: "sm" | "default";
+  fit?: "default" | "sm";
 }) {
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 data-[placeholder]:text-muted-foreground dark:bg-input/30 dark:aria-invalid:ring-destructive/40 dark:hover:bg-input/50 [&_svg:not([class*='text-'])]:text-muted-foreground flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        selectVariants({ fit: fit || (size === "sm" ? "sm" : "default") }),
+        "flex w-fit items-center justify-between gap-2 whitespace-nowrap *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}
