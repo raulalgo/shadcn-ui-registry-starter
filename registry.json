@@ -212,6 +212,26 @@
       ]
     },
     {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Data table component for displaying data",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/badge.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/dropdown-menu.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/data-table.tsx",
+          "type": "registry:file",
+          "target": "components/ui/data-table.tsx"
+        }
+      ]
+    },
+    {
       "name": "list-view",
       "type": "registry:block",
       "title": "List View",
@@ -219,7 +239,8 @@
       "registryDependencies": [
         "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
         "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json",
-        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/l1-header.json"
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/l1-header.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/data-table.json"
       ],
       "files": [
         {
@@ -372,6 +393,22 @@
           "path": "src/components/ui/l1-header.tsx",
           "type": "registry:file",
           "target": "components/ui/l1-header.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Input component for displaying input fields",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:file",
+          "target": "components/ui/input.tsx"
         }
       ]
     }

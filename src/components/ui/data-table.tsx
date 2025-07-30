@@ -12,8 +12,9 @@ import {
   SortingState,
   useReactTable,
   VisibilityState,
+  FilterFn,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, ChevronDown, MoreHorizontal, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -27,6 +28,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -138,6 +146,7 @@ export const columns: ColumnDef<Campaign>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => <StatusBadge status={row.getValue("status")} />,
+    filterFn: "equals",
   },
   {
     accessorKey: "campaignName",
@@ -163,6 +172,7 @@ export const columns: ColumnDef<Campaign>[] = [
     accessorKey: "typeOfCampaign",
     header: "Type",
     cell: ({ row }) => <div>{row.getValue("typeOfCampaign")}</div>,
+    filterFn: "equals",
   },
   {
     accessorKey: "startDate",
@@ -223,6 +233,50 @@ export const columns: ColumnDef<Campaign>[] = [
     },
   },
   {
+    accessorKey: "userOfLastStatusUpdate",
+    header: "Last Updated By",
+    cell: ({ row }) => <div>{row.getValue("userOfLastStatusUpdate")}</div>,
+  },
+  {
+    accessorKey: "dateTimeOfLastStatusUpdate",
+    header: "Last Updated",
+    cell: ({ row }) => {
+      const dateTime = row.getValue("dateTimeOfLastStatusUpdate") as string;
+      return <div className="text-sm text-gray-500">{dateTime}</div>;
+    },
+  },
+  {
+    accessorKey: "createdBy",
+    header: "Created By",
+    cell: ({ row }) => <div>{row.getValue("createdBy")}</div>,
+  },
+  {
+    accessorKey: "creationDate",
+    header: "Creation Date",
+    cell: ({ row }) => {
+      const date = new Date(row.getValue("creationDate"));
+      return <div>{date.toLocaleDateString()}</div>;
+    },
+  },
+  {
+    accessorKey: "dropDate",
+    header: "Drop Date",
+    cell: ({ row }) => {
+      const date = new Date(row.getValue("dropDate"));
+      return <div>{date.toLocaleDateString()}</div>;
+    },
+  },
+  {
+    accessorKey: "adminPerson",
+    header: "Admin",
+    cell: ({ row }) => <div>{row.getValue("adminPerson")}</div>,
+  },
+  {
+    accessorKey: "salesPerson",
+    header: "Sales Person",
+    cell: ({ row }) => <div>{row.getValue("salesPerson")}</div>,
+  },
+  {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
@@ -261,6 +315,8 @@ export function DataTableDemo() {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+  const [columnsDropdownOpen, setColumnsDropdownOpen] = React.useState(false);
+  const [filterDropdownOpen, setFilterDropdownOpen] = React.useState(false);
 
   const table = useReactTable({
     data,
@@ -273,6 +329,7 @@ export function DataTableDemo() {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+
     initialState: {
       pagination: {
         pageSize: 50,
@@ -288,7 +345,7 @@ export function DataTableDemo() {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="flex items-center gap-2 pb-4">
         <Input
           placeholder="Filter campaigns..."
           value={
@@ -298,10 +355,77 @@ export function DataTableDemo() {
             table.getColumn("campaignName")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
+          fit="sm"
         />
-        <DropdownMenu>
+        <Select
+          value={(table.getColumn("status")?.getFilterValue() as string) ?? ""}
+          onValueChange={(value) => {
+            table
+              .getColumn("status")
+              ?.setFilterValue(value === "all" ? "" : value);
+          }}
+        >
+          <SelectTrigger className="w-[180px]" fit="sm">
+            <SelectValue placeholder="Select Status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Statuses</SelectItem>
+            <SelectItem value="Draft">Draft</SelectItem>
+            <SelectItem value="Pending">Pending</SelectItem>
+            <SelectItem value="Booked">Booked</SelectItem>
+            <SelectItem value="Live">Live</SelectItem>
+            <SelectItem value="Ended">Ended</SelectItem>
+            <SelectItem value="Cancelled">Cancelled</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select
+          value={
+            (table.getColumn("typeOfCampaign")?.getFilterValue() as string) ??
+            ""
+          }
+          onValueChange={(value) => {
+            table
+              .getColumn("typeOfCampaign")
+              ?.setFilterValue(value === "all" ? "" : value);
+          }}
+        >
+          <SelectTrigger className="w-[180px]" fit="sm">
+            <SelectValue placeholder="Type" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Types</SelectItem>
+            <SelectItem value="Direct">Direct</SelectItem>
+            <SelectItem value="Guaranteed">Guaranteed</SelectItem>
+            <SelectItem value="Non-Guaranteed">Non-Guaranteed</SelectItem>
+          </SelectContent>
+        </Select>
+        <DropdownMenu
+          open={filterDropdownOpen}
+          onOpenChange={setFilterDropdownOpen}
+        >
           <DropdownMenuTrigger asChild>
-            <Button variant="default" className="ml-auto">
+            <Button variant="default" size="sm">
+              <Plus /> Filter
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Add Filter</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Advertiser</DropdownMenuItem>
+            <DropdownMenuItem>Brand</DropdownMenuItem>
+            <DropdownMenuItem>Product Category</DropdownMenuItem>
+            <DropdownMenuItem>Agency</DropdownMenuItem>
+            <DropdownMenuItem>Revenue Range</DropdownMenuItem>
+            <DropdownMenuItem>Start Date Range</DropdownMenuItem>
+            <DropdownMenuItem>End Date Range</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <DropdownMenu
+          open={columnsDropdownOpen}
+          onOpenChange={setColumnsDropdownOpen}
+        >
+          <DropdownMenuTrigger asChild>
+            <Button variant="default" className="ml-auto" size="sm">
               Columns <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -315,9 +439,11 @@ export function DataTableDemo() {
                     key={column.id}
                     className="capitalize"
                     checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
+                    onCheckedChange={(value) => {
+                      column.toggleVisibility(!!value);
+                      // Keep dropdown open after checkbox interaction
+                      setColumnsDropdownOpen(true);
+                    }}
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
@@ -326,7 +452,7 @@ export function DataTableDemo() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="overflow-hidden rounded-md border">
+      <div className="overflow-hidden rounded-md border bg-neutral-50 text-neutral-700">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
