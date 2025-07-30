@@ -228,6 +228,11 @@
           "path": "src/components/ui/data-table.tsx",
           "type": "registry:file",
           "target": "components/ui/data-table.tsx"
+        },
+        {
+          "path": "src/campaigns.json",
+          "type": "registry:file",
+          "target": "campaigns.json"
         }
       ]
     },

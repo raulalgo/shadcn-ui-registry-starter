@@ -47,7 +47,7 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 
 // Import campaigns data from campaigns.json
-import campaignsData from "../../../campaigns.json";
+import campaignsData from "../../campaigns.json";
 
 // Transform the campaigns data to match our Campaign type
 const data: Campaign[] = campaignsData.map((campaign, index) => ({
