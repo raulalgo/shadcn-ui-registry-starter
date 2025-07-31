@@ -7,7 +7,7 @@ import { CampaignInfoPanel } from "@/components/ui/campaign-info-panel";
 import { useState } from "react";
 
 export default function MapView() {
-  const [isPanelOpen, setIsPanelOpen] = useState(true);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
 
   const togglePanel = () => {
     setIsPanelOpen(!isPanelOpen);
