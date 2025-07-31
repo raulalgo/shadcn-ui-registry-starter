@@ -6,6 +6,7 @@ import { daypartPickerBlock } from "./daypart-picker";
 import { dealStrip } from "./deal-strip";
 import { globalNav } from "./global-nav";
 import { l1Header } from "./l1-header";
+import { campaignInfoPanel } from "./campaign-info-panel";
 
 interface Block {
   name: string; // this must match the `registry.json` name
@@ -22,4 +23,5 @@ export const demos: { [name: string]: Block } = {
   "daypart-action-panel": daypartActionPanelBlock,
   "daypart-picker": daypartPickerBlock,
   "l1-header": l1Header,
+  "campaign-info-panel": campaignInfoPanel,
 };

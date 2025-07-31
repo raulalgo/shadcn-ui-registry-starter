@@ -403,6 +403,38 @@
       ]
     },
     {
+      "name": "campaign-info-panel",
+      "type": "registry:block",
+      "title": "Campaign Info Panel",
+      "description": "Information panel for displaying campaign details",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/campaign-info-panel.tsx",
+          "type": "registry:file",
+          "target": "components/ui/campaign-info-panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "seamless-input",
+      "type": "registry:ui",
+      "title": "Seamless Input",
+      "description": "A borderless input component for seamless integration",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/seamless-input.tsx",
+          "type": "registry:file",
+          "target": "components/ui/seamless-input.tsx"
+        }
+      ]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",

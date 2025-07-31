@@ -8,6 +8,7 @@ import { dropdownMenu } from "@/app/(design)/components/[slug]/(demos)/dropdown-
 import { map } from "@/app/(design)/components/[slug]/(demos)/map";
 import { navigationItem } from "@/app/(design)/components/[slug]/(demos)/navigation-item";
 import { headerPlanner } from "@/app/(design)/components/[slug]/(demos)/planner-header";
+import { seamlessInput } from "@/app/(design)/components/[slug]/(demos)/seamless-input";
 import { tabs } from "@/app/(design)/components/[slug]/(demos)/tabs";
 
 interface Demo {
@@ -27,4 +28,5 @@ export const demos: { [name: string]: Demo } = {
   "header-planner": headerPlanner,
   tabs: tabs,
   "dropdown-menu": dropdownMenu,
+  "seamless-input": seamlessInput,
 };

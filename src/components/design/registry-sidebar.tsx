@@ -47,6 +47,7 @@ export const componentItems = [
   { name: "Header Planner", path: "/components/header-planner" },
   { name: "Tabs", path: "/components/tabs" },
   { name: "Dropdown Menu", path: "/components/dropdown-menu" },
+  { name: "Seamless Input", path: "/components/seamless-input" },
 ];
 
 export const blockItems = [
@@ -60,6 +61,7 @@ export const blockItems = [
   { name: "Daypart Action Panel", path: "/blocks/daypart-action-panel" },
   { name: "Daypart Picker", path: "/blocks/daypart-picker" },
   { name: "L1 Header", path: "/blocks/l1-header" },
+  { name: "Campaign Info Panel", path: "/blocks/campaign-info-panel" },
 ];
 
 export const gettingStartedItems = [
