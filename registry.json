@@ -408,7 +408,10 @@
       "title": "Campaign Info Panel",
       "description": "Information panel for displaying campaign details",
       "registryDependencies": [
-        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/seamless-input.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/input.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/button.json"
       ],
       "files": [
         {
@@ -424,7 +427,8 @@
       "title": "Seamless Input",
       "description": "A borderless input component for seamless integration",
       "registryDependencies": [
-        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/input.json"
       ],
       "files": [
         {

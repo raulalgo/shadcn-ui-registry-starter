@@ -1,11 +1,31 @@
 import React from "react";
 import { Tabs, TabsList, TabsTrigger } from "./tabs";
 import { Button } from "./button";
+import { Sidebar } from "lucide-react";
 
-const HeaderPlanner = () => {
+interface HeaderPlannerProps {
+  isPanelOpen?: boolean;
+  onToggle?: () => void;
+}
+
+const HeaderPlanner = ({
+  isPanelOpen = false,
+  onToggle,
+}: HeaderPlannerProps) => {
   return (
     <div className="flex w-full items-center gap-2 border-b border-neutral-200 py-2">
-      <div className="w-96 border-r border-neutral-300 px-2">Campaign name</div>
+      {!isPanelOpen && (
+        <div
+          id="campaign-name"
+          className="flex w-96 items-center justify-between border-r border-neutral-300"
+        >
+          <div className="px-2">Campaign name</div>
+          <Button size="icon" variant="ghost" onClick={onToggle}>
+            <Sidebar className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
+
       <div className="flex flex-1 items-center gap-2">
         <Tabs>
           <TabsList>

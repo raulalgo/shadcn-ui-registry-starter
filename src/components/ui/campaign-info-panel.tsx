@@ -4,10 +4,13 @@ import { cn } from "@/lib/utils";
 import { SeamlessInput } from "./seamless-input";
 import { Input } from "./input";
 import { useState } from "react";
+import { Button } from "./button";
+import { Sidebar } from "lucide-react";
 
 interface CampaignInfoPanelProps {
   className?: string;
   children?: React.ReactNode;
+  onToggle?: () => void;
 }
 
 function PanelInput({ className, ...props }: React.ComponentProps<"input">) {
@@ -71,13 +74,19 @@ function AdvertiserInput() {
 export function CampaignInfoPanel({
   className,
   children,
+  onToggle,
 }: CampaignInfoPanelProps) {
   return (
     <div className={cn("w-md border-r bg-neutral-50 p-2", className)}>
       <div className="space-y-6">
         {/* New Campaign Header */}
         <div className="space-y-2">
-          <SeamlessInput fit="large" placeholder="New Campaign" />
+          <div className="flex items-center justify-between gap-2">
+            <SeamlessInput fit="large" placeholder="New Campaign" />
+            <Button size="icon" variant="ghost" onClick={onToggle}>
+              <Sidebar />
+            </Button>
+          </div>
           <div className="px-2 text-sm text-neutral-600">Campaign ID</div>
         </div>
 
