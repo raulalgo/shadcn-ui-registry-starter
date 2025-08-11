@@ -26,7 +26,7 @@ const HeaderPlanner = ({
         </div>
       )}
 
-      <div className="flex flex-1 items-center gap-2">
+      <div className="flex flex-1 items-center gap-2 px-2">
         <Tabs>
           <TabsList>
             <TabsTrigger value="dealline1">Deal Line 1</TabsTrigger>

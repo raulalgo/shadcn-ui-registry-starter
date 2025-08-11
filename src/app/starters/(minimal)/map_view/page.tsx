@@ -15,8 +15,15 @@ export default function MapView() {
   return (
     <div className="bg-primary-900 flex h-screen w-screen flex-row p-2">
       <GlobalNav className="h-full" />
-      <main className="flex h-full w-full flex-row overflow-hidden rounded-md">
-        {isPanelOpen && <CampaignInfoPanel onToggle={togglePanel} />}
+      <main className="relative flex h-full w-full flex-row overflow-hidden rounded-md">
+        <div
+          id="drawerWrapper"
+          className={`flex h-full flex-col items-end justify-end transition-all duration-200 ${
+            isPanelOpen ? "w-md ease-out" : "w-0 ease-in"
+          }`}
+        >
+          <CampaignInfoPanel onToggle={togglePanel} />
+        </div>
         <div className="flex h-full w-full flex-col bg-neutral-50">
           <HeaderPlanner isPanelOpen={isPanelOpen} onToggle={togglePanel} />
           <div className="flex h-full w-full flex-row overflow-hidden rounded-md shadow-md">

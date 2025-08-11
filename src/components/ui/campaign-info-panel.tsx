@@ -77,7 +77,7 @@ export function CampaignInfoPanel({
   onToggle,
 }: CampaignInfoPanelProps) {
   return (
-    <div className={cn("w-md border-r bg-neutral-50 p-2", className)}>
+    <div className={cn("h-full w-md border-r bg-neutral-50 p-2", className)}>
       <div className="space-y-6">
         {/* New Campaign Header */}
         <div className="space-y-2">
