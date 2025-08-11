@@ -15,7 +15,7 @@ export default function MapView() {
   return (
     <div className="bg-primary-900 flex h-screen w-screen flex-row p-2">
       <GlobalNav className="h-full" />
-      <main className="flex h-full w-full flex-row overflow-hidden rounded-md">
+      <main className="relative flex h-full w-full flex-row overflow-hidden rounded-md">
         {isPanelOpen && <CampaignInfoPanel onToggle={togglePanel} />}
         <div className="flex h-full w-full flex-col bg-neutral-50">
           <HeaderPlanner isPanelOpen={isPanelOpen} onToggle={togglePanel} />
