@@ -245,6 +245,7 @@
       "description": "AG Grid demo with employee management data",
       "registryDependencies": [
         "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/l1-header.json",
         "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json"
       ],
       "files": [
