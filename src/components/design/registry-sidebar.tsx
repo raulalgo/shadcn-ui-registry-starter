@@ -62,7 +62,6 @@ export const blockItems = [
   { name: "Daypart Picker", path: "/blocks/daypart-picker" },
   { name: "L1 Header", path: "/blocks/l1-header" },
   { name: "Campaign Info Panel", path: "/blocks/campaign-info-panel" },
-  { name: "New List", path: "/blocks/new_list" },
 ];
 
 export const gettingStartedItems = [

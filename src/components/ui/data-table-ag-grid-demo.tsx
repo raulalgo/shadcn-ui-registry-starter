@@ -259,7 +259,7 @@ const AgGridReact = dynamic(
   },
 );
 
-const columnDefs: ColDef<Campaign>[] = [
+const columnDefs: ColDef[] = [
   {
     field: "id",
     headerName: "",
