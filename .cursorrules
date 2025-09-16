@@ -1,0 +1,126 @@
+# Cursor Rules for shadcn-ui-registry-starter
+
+## TypeScript and AG Grid Best Practices
+
+### AG Grid Type Safety
+
+- When using AG Grid with TypeScript, always use `ColDef[]` instead of `ColDef<DataType>[]` for column definitions to avoid type compatibility issues
+- For AgGridReact components, avoid using generic type parameters directly on the component (e.g., `<AgGridReact<DataType>`)
+- Use proper typing for row data: `rowData={data as DataType[]}` if needed, but prefer keeping columnDefs as `ColDef[]`
+
+### Component Refactoring Rules
+
+- When replacing/refactoring components, always check for references in:
+  - Registry files (`registry.json`)
+  - Block demos (`src/app/(design)/blocks/[slug]/(demos)/`)
+  - Component demos (`src/app/(design)/components/[slug]/(demos)/`)
+  - Sidebar navigation (`src/components/design/registry-sidebar.tsx`)
+  - Starter pages (`src/app/(design)/starters/page.tsx`)
+- Remove old component files and their references completely before adding new ones
+- Update all import statements and exports when moving/renaming components
+
+## Registry Management
+
+### Registry.json Updates
+
+- When updating registry entries, ensure all `registryDependencies` are valid and point to existing components
+- Remove trailing commas in JSON arrays and objects
+- When replacing a component, update the description and dependencies to match the new implementation
+- Include all necessary files in the `files` array, including component files and data files
+
+### Component Dependencies
+
+- Always include the component file itself in the registry `files` array when it's used in a block
+- For AG Grid components, include the data-table-ag-grid-demo.tsx file in the registry
+- Ensure all UI components have proper registry entries before using them in blocks
+
+## File Organization
+
+### Component Structure
+
+- Keep component files in `/src/components/ui/` for UI components
+- Keep block demos in `/src/app/(design)/blocks/[slug]/(demos)/`
+- Keep component demos in `/src/app/(design)/components/[slug]/(demos)/`
+- Use consistent naming: kebab-case for files, camelCase for variables
+
+### Import/Export Patterns
+
+- Always use absolute imports with `@/` prefix
+- Export components as default exports from their files
+- Import components using destructuring when possible
+- Keep import statements organized: external libraries first, then internal components
+
+## Build and Type Safety
+
+### Pre-build Checks
+
+- Always run `npm run build` after making registry or component changes
+- Check for TypeScript errors before committing
+- Verify all referenced components exist and are properly exported
+- Ensure no orphaned files or references remain after refactoring
+- Verify all external dependencies are installed in package.json before using them
+
+### Type Definitions
+
+- Define clear interfaces for data types used in components
+- Use proper typing for props and state
+- Avoid `any` types unless absolutely necessary
+- Use type assertions carefully and only when you're certain about the type
+
+### Dependency Management
+
+- Always install external dependencies before using them in components
+- Check package.json to ensure all imports have corresponding dependencies
+- Use `pnpm add <package-name>` for adding new dependencies
+- Verify that peer dependencies are compatible with your React/Next.js versions
+- Test builds locally before deploying to catch missing dependencies early
+
+## Refactoring Workflow
+
+### Before Starting
+
+1. Identify all files that reference the component being changed
+2. Plan the migration path (what gets moved where)
+3. Check registry dependencies and update them
+4. Prepare new component structure
+
+### During Refactoring
+
+1. Update the main component file first
+2. Update all references in registry files
+3. Update demo files and navigation
+4. Remove old files and references
+5. Test build immediately after changes
+
+### After Refactoring
+
+1. Run full build to ensure no errors
+2. Check that all routes work correctly
+3. Verify registry entries are complete
+4. Test that components render properly
+
+## Common Pitfalls to Avoid
+
+- Don't mix old and new component references
+- Don't forget to update sidebar navigation
+- Don't leave orphaned import statements
+- Don't use generic types on AgGridReact component
+- Don't forget to include component files in registry
+- Don't leave trailing commas in JSON files
+- Don't skip the build test after changes
+
+## Code Quality
+
+### Consistency
+
+- Use consistent naming conventions across all files
+- Maintain consistent import/export patterns
+- Keep component structure consistent with existing patterns
+- Use consistent TypeScript typing approaches
+
+### Documentation
+
+- Update component descriptions in registry.json
+- Keep README files updated with new components
+- Document any breaking changes or migration steps
+- Comment complex TypeScript type definitions
