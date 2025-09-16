@@ -475,7 +475,7 @@
           "target": "components/ui/select.tsx"
         }
       ]
-    }
+    },
     {
       "name": "sonner",
       "type": "registry:ui",
