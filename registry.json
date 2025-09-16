@@ -264,6 +264,11 @@
           "path": "src/components/ui/data-table-ag-grid-demo.tsx",
           "type": "registry:file",
           "target": "components/ui/data-table-ag-grid-demo.tsx"
+        },
+        {
+          "path": "src/campaigns.json",
+          "type": "registry:file",
+          "target": "campaigns.json"
         }
       ]
     },
