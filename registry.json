@@ -246,7 +246,8 @@
       "registryDependencies": [
         "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json",
         "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/l1-header.json",
-        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json"
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/global-nav.json",
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/sonner.json"
       ],
       "files": [
         {
@@ -472,6 +473,22 @@
           "path": "src/components/ui/select.tsx",
           "type": "registry:file",
           "target": "components/ui/select.tsx"
+        }
+      ]
+    }
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "Sonner",
+      "description": "Sonner component for displaying notifications",
+      "registryDependencies": [
+        "https://shadcn-ui-registry-starter-git-main-raulalgos-projects.vercel.app/r/theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/sonner.tsx",
+          "type": "registry:file",
+          "target": "components/ui/sonner.tsx"
         }
       ]
     }
